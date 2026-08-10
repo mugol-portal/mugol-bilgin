@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MuGöl BİLGİN</title>
+
+    <!-- PWA: Manifest ve İkonlar -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0620">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <!-- iOS PWA desteği -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MuGöl BİLGİN">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1880946354382681" crossorigin="anonymous"></script>
     <!-- AMP Otomatik Reklamlar -->
@@ -112,6 +122,18 @@
             background: linear-gradient(120deg, var(--app-accent2, #ff8a3d) 0%, var(--app-accent, #f4c542) 45%, var(--app-primary, #7c3aed) 100%);
             padding: 26px 20px 34px;
             position: relative;
+        }
+
+        .logo-img {
+            width: clamp(64px, 18vw, 96px);
+            height: clamp(64px, 18vw, 96px);
+            object-fit: contain;
+            border-radius: 20px;
+            margin: 0 auto 10px;
+            display: block;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+            background: rgba(255,255,255,0.15);
+            padding: 6px;
         }
 
         .logo-title {
@@ -1263,6 +1285,7 @@ body.modal-open { animation-play-state: paused; }
     <div id="start-screen" class="screen active">
         <div class="glass-card">
             <div class="home-header-band">
+                <img src="logo.png" alt="MuGöl BİLGİN Logo" class="logo-img">
                 <h1 class="logo-title">MuGöl BİLGİN</h1>
                 <p class="subtitle">Milyoner Bilgi Yarışması</p>
                 <p class="subtitle">Sorular Yapay Zeka Tarafından Hazırlanmıştır</p>
@@ -1303,7 +1326,7 @@ body.modal-open { animation-play-state: paused; }
             <button class="hf-tab" id="hf-indir" onclick="uygulamayiIndir()">
                 <span class="hf-icon">⬇️</span>
                 <span>İndir</span>
-                <span class="hf-badge">Yakında</span>
+                <span class="hf-badge" style="display:none;">Yakında</span>
             </button>
 
             <input type="file" id="kasa-upload" style="display:none;" accept=".mgy" onchange="kasaYukle(event)">
@@ -1622,7 +1645,60 @@ body.modal-open { animation-play-state: paused; }
 
         function hakkindaKapat() { sesCal('tiklama'); document.getElementById("about-modal").style.display = "none"; document.body.classList.remove('modal-open'); }
 
-        function uygulamayiIndir() { sesCal('tiklama'); alert("📱 Uygulamayı indirme özelliği çok yakında aktif olacak!"); }
+        // ===== PWA: UYGULAMAYI YÜKLE (İNDİR) =====
+        let ertelenenYuklemeOlayi = null;
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+            e.preventDefault();
+            ertelenenYuklemeOlayi = e;
+            let indirBtn = document.getElementById('hf-indir');
+            let indirBadge = indirBtn ? indirBtn.querySelector('.hf-badge') : null;
+            if (indirBadge) indirBadge.style.display = 'none';
+        });
+
+        window.addEventListener('appinstalled', function () {
+            ertelenenYuklemeOlayi = null;
+            let indirBtn = document.getElementById('hf-indir');
+            if (indirBtn) indirBtn.style.display = 'none';
+        });
+
+        function uygulamayiIndir() {
+            sesCal('tiklama');
+
+            // Zaten yüklü modda (standalone) çalışıyorsa
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+                alert('✅ Uygulama zaten yüklü görünüyor!');
+                return;
+            }
+
+            // Chrome/Android/Edge: tarayıcı yükleme istemini göster
+            if (ertelenenYuklemeOlayi) {
+                ertelenenYuklemeOlayi.prompt();
+                ertelenenYuklemeOlayi.userChoice.then(function (secim) {
+                    ertelenenYuklemeOlayi = null;
+                });
+                return;
+            }
+
+            // iOS Safari: otomatik prompt desteklenmiyor, kullanıcıya manuel yol gösterilir
+            let iOS = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+            if (iOS) {
+                alert('📱 iPhone/iPad\'de yüklemek için:\n\n1) Alt menüdeki Paylaş simgesine dokun 🔗\n2) "Ana Ekrana Ekle" seçeneğini seç\n3) "Ekle" ye dokun');
+                return;
+            }
+
+            // Diğer durumlarda (yükleme istemi henüz hazır değilse ya da desteklenmiyorsa)
+            alert('📱 Uygulamayı yüklemek için tarayıcı menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle" seçeneğini kullanabilirsin.');
+        }
+
+        // Service Worker kaydı
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('service-worker.js').catch(function (err) {
+                    console.log('Service worker kaydı başarısız:', err);
+                });
+            });
+        }
         function ayarlariAc() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "flex"; document.body.classList.add('modal-open'); }
         function ayarlariKapat() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "none"; document.body.classList.remove('modal-open'); }
 
