@@ -1665,30 +1665,19 @@ body.modal-open { animation-play-state: paused; }
         function uygulamayiIndir() {
             sesCal('tiklama');
 
-            // Zaten yüklü modda (standalone) çalışıyorsa
+            // Zaten yüklü modda (standalone) çalışıyorsa hiçbir şey yapma
             if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-                alert('✅ Uygulama zaten yüklü görünüyor!');
                 return;
             }
 
-            // Chrome/Android/Edge: tarayıcı yükleme istemini göster
+            // Chrome/Android/Edge: tarayıcının native "Uygulamayı yükle" penceresini göster
             if (ertelenenYuklemeOlayi) {
                 ertelenenYuklemeOlayi.prompt();
                 ertelenenYuklemeOlayi.userChoice.then(function (secim) {
                     ertelenenYuklemeOlayi = null;
                 });
-                return;
             }
-
-            // iOS Safari: otomatik prompt desteklenmiyor, kullanıcıya manuel yol gösterilir
-            let iOS = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
-            if (iOS) {
-                alert('📱 iPhone/iPad\'de yüklemek için:\n\n1) Alt menüdeki Paylaş simgesine dokun 🔗\n2) "Ana Ekrana Ekle" seçeneğini seç\n3) "Ekle" ye dokun');
-                return;
-            }
-
-            // Diğer durumlarda (yükleme istemi henüz hazır değilse ya da desteklenmiyorsa)
-            alert('📱 Uygulamayı yüklemek için tarayıcı menüsünden "Ana ekrana ekle" ya da "Uygulamayı yükle" seçeneğini kullanabilirsin.');
+            // Prompt henüz hazır değilse (örn. tarayıcı koşulları henüz sağlamadıysa) sessizce geç
         }
 
         // Service Worker kaydı
