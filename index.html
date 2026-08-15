@@ -1128,7 +1128,7 @@ body::before, body::after { content: none !important; display: none !important; 
 
 /* Alt bilgi bandı — site linki tarzı, beyaz */
 .capturing-mode .capture-watermark {
-    display: block !important; color: #ffffff !important; opacity: 0.95 !important;
+    display: flex !important; color: #ffffff !important; opacity: 0.95 !important;
     font-family: 'Nunito', sans-serif !important; letter-spacing: 0.5px !important; font-size: 0.88rem !important;
     font-weight: 700 !important;
     text-shadow: 0 2px 4px rgba(0,0,0,0.18) !important;
@@ -1153,6 +1153,168 @@ body::before, body::after { content: none !important; display: none !important; 
 }
 .capturing-mode[data-tema="yesil"] {
     --tema-bg: #1e8a57; --tema-baslik: #fff176; --tema-buton: #ffe066; --tema-rozet: #0e4a2a; --tema-metin: #0e4a2a;
+}
+.capturing-mode[data-tema="sari-quiz"] {
+    --tema-bg: #ffb100; --tema-baslik: #14091f; --tema-buton: #ffb700; --tema-rozet: #14091f; --tema-metin: #14091f;
+}
+
+/* --- GENEL "Günün Sorusu" TASARIMI (tüm arka plan renklerinde geçerli) --- */
+.capturing-mode {
+    background: linear-gradient(135deg, #4dd6d0 0%, #2f6fe0 60%, #1a3fb0 100%) !important;
+    background-image: none !important;
+    padding: 40px 6px 50px !important;
+}
+/* Üst logo/başlık bloğu kullanılmıyor — tamamen gizli */
+.capturing-mode .capture-deco {
+    display: none !important;
+}
+.capturing-mode .capture-card {
+    padding: 0 !important;
+    margin: 0 0 40px !important;
+    position: relative !important;
+    width: 100% !important;
+}
+/* Büyük beyaz "GÜNÜN SORUSU" başlığı — kartın üstünde */
+.capturing-mode .capture-card::before {
+    content: 'Günün Sorusu' !important;
+    display: block !important;
+    text-align: center !important;
+    font-weight: 900 !important;
+    font-size: 2.3rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: #ffffff !important;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.25) !important;
+    margin: 0 0 46px !important;
+    line-height: 1.15 !important;
+}
+/* Koyu mavi soru kutusu — ? ikonu + soru metni */
+.capturing-mode .capture-cream-box {
+    background: linear-gradient(160deg, #241fb0, #150f7a) !important;
+    border-radius: 26px !important;
+    padding: 56px 26px 66px !important;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.35) !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+/* "?" ikonu — kutunun üst ortasında beyaz daire */
+.capturing-mode .capture-cream-box::before {
+    content: '?' !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    top: -30px !important; left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 68px !important; height: 68px !important;
+    border-radius: 50% !important;
+    background: #ffffff !important;
+    color: #241fb0 !important;
+    font-size: 2.1rem !important;
+    font-weight: 900 !important;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.3) !important;
+}
+/* Soru metni — koyu mavi kutunun içinde, beyaz yazı */
+.capturing-mode .question-box {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 12px 0 30px !important;
+    text-align: center !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+.capturing-mode .question-box::before { content: none !important; display: none !important; }
+.capturing-mode span#q-text-span,
+.capturing-mode .question-box span {
+    display: block !important;
+    text-align: center !important;
+    font-weight: 800 !important;
+    font-size: 1.42rem !important;
+    line-height: 1.35 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+/* Şık kutusu — koyu mavi kutunun içinde en altta, beyaz panel, hafif taşma efekti */
+.capturing-mode .options-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    background: #ffffff !important;
+    border-radius: 22px !important;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25) !important;
+    padding: 24px !important;
+    position: relative !important;
+    margin: 0 auto -46px !important;
+    width: calc(100% - 28px) !important;
+    align-self: center !important;
+}
+.capturing-mode .option-btn {
+    background: var(--sik-buton, #4ec9ea) !important;
+    border-radius: 50px !important;
+    box-shadow: none !important;
+    min-height: 64px !important;
+    padding: 0 22px 0 6px !important;
+    justify-content: flex-start !important;
+    display: flex !important;
+    align-items: center !important;
+}
+.capturing-mode .letter-box {
+    background: #a742d1 !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 50% !important;
+    font-size: 1.2rem !important;
+    font-weight: 900 !important;
+    min-width: 50px !important; width: 50px !important; height: 50px !important;
+    margin-left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+.capturing-mode .text-box {
+    padding: 0 0 0 14px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    align-items: center !important;
+}
+.capturing-mode .text-box .text,
+.capturing-mode .text {
+    color: #14091f !important;
+    -webkit-text-fill-color: #14091f !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    word-spacing: 2px !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+}
+.capturing-mode .capture-watermark {
+    color: #ffffff !important;
+    opacity: 0.9 !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    margin-top: 22px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+}
+.capturing-mode .capture-watermark-logo {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 8px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+.capturing-mode .capture-watermark span {
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.3px !important;
+    color: #ffffff !important;
 }
 
 /* --- PAYLAŞIM ÖNİZLEME MODALI --- */
@@ -1439,7 +1601,10 @@ body.modal-open { animation-play-state: paused; }
                     </div>
                 </div>
 
-                <div class="capture-watermark" id="watermark">MuGöl BİLGİN ile Sen de Bil Bakalım</div>
+                <div class="capture-watermark" id="watermark">
+                    <img src="logo.png" alt="MuGöl BİLGİN Logo" class="capture-watermark-logo">
+                    <span>MuGöl BİLGİN</span>
+                </div>
             </div>
         </div>
 
@@ -1457,12 +1622,8 @@ body.modal-open { animation-play-state: paused; }
                 <button class="share-modal-close" onclick="paylasimOnizlemeKapat()">✕</button>
             </div>
             <div class="share-modal-preview-wrap" id="share-preview-wrap"></div>
-            <div class="share-theme-label" style="padding: 8px 18px 0; color:#ffe066; font-size:0.75rem; font-weight:800; letter-spacing:1px;">ARKA PLAN</div>
+            <div class="share-theme-label" style="padding: 8px 18px 0; color:#ffe066; font-size:0.75rem; font-weight:800; letter-spacing:1px;">TEMA SEÇ</div>
             <div class="share-theme-row" id="share-theme-row"></div>
-            <div class="share-theme-label" style="padding: 8px 18px 0; color:#ffe066; font-size:0.75rem; font-weight:800; letter-spacing:1px;">BAŞLIK RENGİ</div>
-            <div class="share-theme-row" id="share-baslik-row"></div>
-            <div class="share-theme-label" style="padding: 8px 18px 0; color:#ffe066; font-size:0.75rem; font-weight:800; letter-spacing:1px;">ŞIK RENGİ</div>
-            <div class="share-theme-row" id="share-sik-row"></div>
             <div class="share-modal-actions">
                 <button class="btn-share-cancel" onclick="paylasimOnizlemeKapat()">Vazgeç</button>
                 <button class="btn-share-download" onclick="paylasimIndirOnizlemeden()">⬇️ İndir</button>
@@ -1931,14 +2092,18 @@ body.modal-open { animation-play-state: paused; }
         }
 
         // ===== PAYLAŞIM ÖNİZLEME SİSTEMİ =====
-        const PAYLASIM_TEMALARI = [
-            { key: 'turkuaz',  renk: '#1ecbe1' },
-            { key: 'mor',      renk: '#7b3fe4' },
-            { key: 'pembe',    renk: '#ff6fa5' },
-            { key: 'lacivert', renk: '#0a1a5c' },
-            { key: 'yesil',    renk: '#1e8a57' },
+        // Hazır temalar — her biri arka plan + başlık rengi + şık rengini birlikte tanımlar
+        const HAZIR_TEMALAR = [
+            { key: 'turkuaz',  bg: '#1ecbe1', baslik: 'koyu',    sik: 'sari'   },
+            { key: 'mor',      bg: '#7b3fe4', baslik: 'beyaz',   sik: 'altin'  },
+            { key: 'pembe',    bg: '#ff6fa5', baslik: 'beyaz',   sik: 'krem'   },
+            { key: 'lacivert', bg: '#0a1a5c', baslik: 'altin',   sik: 'gok'    },
+            { key: 'yesil',    bg: '#1e8a57', baslik: 'mint',    sik: 'sari'   },
+            { key: 'sari-quiz', bg: '#ffb100', baslik: 'koyu',   sik: 'beyaz'  },
         ];
-        // Şık (cevap) renk paleti — kullanıcı istediğini seçebilir
+        // Geriye dönük uyumluluk için eski dizi adı korunuyor
+        const PAYLASIM_TEMALARI = HAZIR_TEMALAR.map(t => ({ key: t.key, renk: t.bg }));
+        // Şık (cevap) renk paleti — hazır temalar tarafından referans alınır
         const SIK_RENKLERI = [
             { key: 'sari',    buton: '#ffcc00', rozet: '#4a2e8c', metin: '#1a1a2e' },
             { key: 'altin',   buton: '#ffd166', rozet: '#050f36', metin: '#050f36' },
@@ -1950,7 +2115,7 @@ body.modal-open { animation-play-state: paused; }
             { key: 'lila',    buton: '#c9a7ff', rozet: '#2d1b4e', metin: '#2d1b4e' },
             { key: 'koyu',    buton: '#1e2a44', rozet: '#ffd166', metin: '#ffffff' },
         ];
-        // Başlık ("MuGöl BİLGİN") renk paleti — kullanıcı istediğini seçebilir
+        // Başlık ("MuGöl BİLGİN") renk paleti — hazır temalar tarafından referans alınır
         const BASLIK_RENKLERI = [
             { key: 'sari',     renk: '#ffd400' },
             { key: 'beyaz',    renk: '#ffffff' },
@@ -1960,10 +2125,22 @@ body.modal-open { animation-play-state: paused; }
             { key: 'pembe',    renk: '#ff9fce' },
             { key: 'gok',      renk: '#7ecbff' },
             { key: 'lila',     renk: '#c9a7ff' },
+            { key: 'koyu',     renk: '#14091f' },
         ];
         let secilenTema = 'turkuaz';
         let secilenSikRenk = 'sari';
-        let secilenBaslikRenk = 'sari';
+        let secilenBaslikRenk = 'koyu';
+
+        // Bir hazır temayı bir elemente uygular (arka plan + başlık + şık rengi birlikte)
+        function _hazirTemaUygula(el, temaKey) {
+            let t = HAZIR_TEMALAR.find(x => x.key === temaKey) || HAZIR_TEMALAR[0];
+            secilenTema = t.key;
+            secilenBaslikRenk = t.baslik;
+            secilenSikRenk = t.sik;
+            el.setAttribute('data-tema', t.key);
+            _sikRenkUygula(el, t.sik);
+            _baslikRenkUygula(el, t.baslik);
+        }
 
         function _sikRenkUygula(el, key) {
             let r = SIK_RENKLERI.find(x => x.key === key) || SIK_RENKLERI[0];
@@ -2008,23 +2185,19 @@ body.modal-open { animation-play-state: paused; }
             let captureArea = document.getElementById('capture-area');
             let wrap = document.getElementById('share-preview-wrap');
             let themeRow = document.getElementById('share-theme-row');
-            let sikRow = document.getElementById('share-sik-row');
-            let baslikRow = document.getElementById('share-baslik-row');
 
             // Önizleme için orijinali klonla (id çakışmasın diye id'leri temizle)
             wrap.innerHTML = '';
             let clone = captureArea.cloneNode(true);
             clone.removeAttribute('id');
             clone.classList.add('capturing-mode');
-            clone.setAttribute('data-tema', secilenTema);
             clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
             let cloneWatermark = clone.querySelector('.capture-watermark');
-            if (cloneWatermark) cloneWatermark.style.display = 'block';
+            if (cloneWatermark) cloneWatermark.style.display = 'flex';
             // PNG ile birebir aynı görünsün diye klon da 1080px genişlikte
             clone.style.width = '1080px';
             clone.style.maxWidth = '1080px';
-            _sikRenkUygula(clone, secilenSikRenk);
-            _baslikRenkUygula(clone, secilenBaslikRenk);
+            _hazirTemaUygula(clone, secilenTema);
             let cloneQBox = clone.querySelector('.question-box');
             let cloneOGrid = clone.querySelector('.options-grid');
             if (cloneQBox && cloneOGrid) _fontBoyutlariniAyarla(cloneQBox, cloneOGrid);
@@ -2032,8 +2205,8 @@ body.modal-open { animation-play-state: paused; }
             // Sabit 1080x1350 çerçeve — çıktıyla birebir aynı görünsün
             let frame = document.createElement('div');
             frame.className = 'share-preview-frame';
-            let temaObjIlk = PAYLASIM_TEMALARI.find(t => t.key === secilenTema) || PAYLASIM_TEMALARI[0];
-            frame.style.background = temaObjIlk.renk;
+            let temaObjIlk = HAZIR_TEMALAR.find(t => t.key === secilenTema) || HAZIR_TEMALAR[0];
+            frame.style.background = temaObjIlk.bg;
             frame.appendChild(clone);
             wrap.appendChild(frame);
 
@@ -2062,61 +2235,22 @@ body.modal-open { animation-play-state: paused; }
             window.addEventListener('resize', onizlemeOlcekle);
             requestAnimationFrame(onizlemeOlcekle);
 
-            // Tema (arka plan) seçim düğmeleri
+            // Hazır tema seçim kartları — her biri arka plan + başlık + şık rengini birlikte uygular
             themeRow.innerHTML = '';
-            PAYLASIM_TEMALARI.forEach(t => {
+            HAZIR_TEMALAR.forEach(t => {
                 let sw = document.createElement('div');
                 sw.className = 'share-theme-swatch' + (t.key === secilenTema ? ' active' : '');
-                sw.style.background = t.renk;
-                sw.title = 'Arka plan: ' + t.key;
+                sw.style.background = t.bg;
+                sw.title = 'Tema: ' + t.key;
                 sw.onclick = () => {
                     sesCal('tiklama');
-                    secilenTema = t.key;
-                    clone.setAttribute('data-tema', secilenTema);
-                    frame.style.background = t.renk;
+                    _hazirTemaUygula(clone, t.key);
+                    frame.style.background = t.bg;
                     themeRow.querySelectorAll('.share-theme-swatch').forEach(s => s.classList.remove('active'));
                     sw.classList.add('active');
                 };
                 themeRow.appendChild(sw);
             });
-
-            // Şık (cevap) renk seçim düğmeleri
-            if (sikRow) {
-                sikRow.innerHTML = '';
-                SIK_RENKLERI.forEach(r => {
-                    let sw = document.createElement('div');
-                    sw.className = 'share-theme-swatch' + (r.key === secilenSikRenk ? ' active' : '');
-                    sw.style.background = r.buton;
-                    sw.title = 'Şık rengi: ' + r.key;
-                    sw.onclick = () => {
-                        sesCal('tiklama');
-                        secilenSikRenk = r.key;
-                        _sikRenkUygula(clone, secilenSikRenk);
-                        sikRow.querySelectorAll('.share-theme-swatch').forEach(s => s.classList.remove('active'));
-                        sw.classList.add('active');
-                    };
-                    sikRow.appendChild(sw);
-                });
-            }
-
-            // Başlık renk seçim düğmeleri
-            if (baslikRow) {
-                baslikRow.innerHTML = '';
-                BASLIK_RENKLERI.forEach(r => {
-                    let sw = document.createElement('div');
-                    sw.className = 'share-theme-swatch' + (r.key === secilenBaslikRenk ? ' active' : '');
-                    sw.style.background = r.renk;
-                    sw.title = 'Başlık rengi: ' + r.key;
-                    sw.onclick = () => {
-                        sesCal('tiklama');
-                        secilenBaslikRenk = r.key;
-                        _baslikRenkUygula(clone, secilenBaslikRenk);
-                        baslikRow.querySelectorAll('.share-theme-swatch').forEach(s => s.classList.remove('active'));
-                        sw.classList.add('active');
-                    };
-                    baslikRow.appendChild(sw);
-                });
-            }
 
             document.getElementById('share-preview-modal').classList.add('open');
             requestAnimationFrame(onizlemeOlcekle);
@@ -2140,10 +2274,8 @@ body.modal-open { animation-play-state: paused; }
             captureArea.style.width = mevcutGenislik + 'px';
             captureArea.style.maxWidth = mevcutGenislik + 'px';
             captureArea.classList.add('capturing-mode');
-            captureArea.setAttribute('data-tema', secilenTema);
-            _sikRenkUygula(captureArea, secilenSikRenk);
-            _baslikRenkUygula(captureArea, secilenBaslikRenk);
-            watermark.style.display = 'block';
+            _hazirTemaUygula(captureArea, secilenTema);
+            watermark.style.display = 'flex';
 
             // Soru ve şık metinleri uzunsa (örn. "Hiroşima" gibi kutuya sığmayan tek kelimeler)
             // font boyutunu kademeli küçült — taşmayı ve kelimenin ortadan bölünmesini engelle.
@@ -2152,7 +2284,7 @@ body.modal-open { animation-play-state: paused; }
             let oncekiSikFontSizes = sikTextEls.map(el => el.style.fontSize);
             _fontBoyutlariniAyarla(qBox, oGrid);
 
-            let temaObj = PAYLASIM_TEMALARI.find(t => t.key === secilenTema) || PAYLASIM_TEMALARI[0];
+            let temaObj = HAZIR_TEMALAR.find(t => t.key === secilenTema) || HAZIR_TEMALAR[0];
 
             // PNG çıktısı 1080x1350'yi geçmeyecek şekilde ölçek hesapla (oranı bozmadan sığdır)
             const MAX_W = 1080, MAX_H = 1350;
@@ -2165,7 +2297,7 @@ body.modal-open { animation-play-state: paused; }
             }
 
             html2canvas(captureArea, {
-                backgroundColor: temaObj.renk, scale: hesaplananOlcek, logging: false, useCORS: true,
+                backgroundColor: temaObj.bg, scale: hesaplananOlcek, logging: false, useCORS: true,
                 onclone: function(clonedDoc) { let clonedQBox = clonedDoc.getElementById('q-text-span'); if(clonedQBox) clonedQBox.style.textShadow = 'none'; let clonedTexts = clonedDoc.querySelectorAll('.text'); clonedTexts.forEach(t => t.style.textShadow = 'none'); }
             }).then(canvas => {
                 captureArea.classList.remove('capturing-mode'); captureArea.removeAttribute('data-tema');
@@ -2196,7 +2328,7 @@ body.modal-open { animation-play-state: paused; }
                 sabitCanvas.width = MAX_W;
                 sabitCanvas.height = MAX_H;
                 let sctx = sabitCanvas.getContext('2d');
-                sctx.fillStyle = temaObj.renk || '#1ecbe1';
+                sctx.fillStyle = temaObj.bg || '#1ecbe1';
                 sctx.fillRect(0, 0, MAX_W, MAX_H);
                 sctx.imageSmoothingEnabled = true;
                 sctx.imageSmoothingQuality = 'high';
