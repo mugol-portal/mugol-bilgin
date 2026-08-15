@@ -376,7 +376,7 @@
         }
 
         .text-box { display: flex; align-items: center; flex: 1; padding: 10px 15px; min-width: 0; }
-        .text-box .text { word-wrap: break-word; overflow-wrap: break-word; white-space: normal; font-size: 1.05rem; font-weight: 700; line-height: 1.3; text-align: left; color: #ffffff; }
+        .text-box .text { word-wrap: normal; overflow-wrap: normal; word-break: keep-all; white-space: normal; font-size: 1.05rem; font-weight: 700; line-height: 1.3; text-align: left; color: #ffffff; }
 
         .option-btn.hidden { visibility: hidden; pointer-events: none; }
         .option-btn.selected { background: linear-gradient(90deg, #d35400, #e67e22); border-color: #ffe066; box-shadow: 0 0 20px rgba(255, 223, 0, 0.4); }
@@ -1120,7 +1120,7 @@ body::before, body::after { content: none !important; display: none !important; 
     color: var(--sik-metin, var(--tema-metin)) !important; font-weight: 700 !important;
     text-shadow: none !important;
     font-size: 0.98rem !important; line-height: 1.2 !important;
-    word-break: normal !important; overflow-wrap: break-word !important;
+    word-break: keep-all !important; overflow-wrap: normal !important; word-wrap: normal !important;
     hyphens: none !important;
     display: block !important; width: 100% !important;
 }
@@ -1133,6 +1133,15 @@ body::before, body::after { content: none !important; display: none !important; 
     font-weight: 700 !important;
     text-shadow: 0 2px 4px rgba(0,0,0,0.18) !important;
     margin-top: 30px !important; position: relative; z-index: 2;
+    align-items: center !important; justify-content: center !important; gap: 10px !important;
+}
+.capturing-mode .capture-watermark-logo {
+    width: 30px !important; height: 30px !important; border-radius: 8px !important;
+    object-fit: contain !important; display: block !important;
+}
+.capturing-mode .capture-watermark span {
+    font-size: 0.88rem !important; font-weight: 800 !important; letter-spacing: 0.3px !important;
+    color: #ffffff !important;
 }
 
 .capturing-mode .capture-card::before,
@@ -1156,165 +1165,6 @@ body::before, body::after { content: none !important; display: none !important; 
 }
 .capturing-mode[data-tema="sari-quiz"] {
     --tema-bg: #ffb100; --tema-baslik: #14091f; --tema-buton: #ffb700; --tema-rozet: #14091f; --tema-metin: #14091f;
-}
-
-/* --- GENEL "Günün Sorusu" TASARIMI (tüm arka plan renklerinde geçerli) --- */
-.capturing-mode {
-    background: linear-gradient(135deg, #4dd6d0 0%, #2f6fe0 60%, #1a3fb0 100%) !important;
-    background-image: none !important;
-    padding: 40px 6px 50px !important;
-}
-/* Üst logo/başlık bloğu kullanılmıyor — tamamen gizli */
-.capturing-mode .capture-deco {
-    display: none !important;
-}
-.capturing-mode .capture-card {
-    padding: 0 !important;
-    margin: 0 0 40px !important;
-    position: relative !important;
-    width: 100% !important;
-}
-/* Büyük beyaz "GÜNÜN SORUSU" başlığı — kartın üstünde */
-.capturing-mode .capture-card::before {
-    content: 'Günün Sorusu' !important;
-    display: block !important;
-    text-align: center !important;
-    font-weight: 900 !important;
-    font-size: 2.3rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    color: #ffffff !important;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.25) !important;
-    margin: 0 0 46px !important;
-    line-height: 1.15 !important;
-}
-/* Koyu mavi soru kutusu — ? ikonu + soru metni */
-.capturing-mode .capture-cream-box {
-    background: linear-gradient(160deg, #241fb0, #150f7a) !important;
-    border-radius: 26px !important;
-    padding: 56px 26px 66px !important;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.35) !important;
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-/* "?" ikonu — kutunun üst ortasında beyaz daire */
-.capturing-mode .capture-cream-box::before {
-    content: '?' !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: absolute !important;
-    top: -30px !important; left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 68px !important; height: 68px !important;
-    border-radius: 50% !important;
-    background: #ffffff !important;
-    color: #241fb0 !important;
-    font-size: 2.1rem !important;
-    font-weight: 900 !important;
-    box-shadow: 0 10px 22px rgba(0,0,0,0.3) !important;
-}
-/* Soru metni — koyu mavi kutunun içinde, beyaz yazı */
-.capturing-mode .question-box {
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 12px 0 30px !important;
-    text-align: center !important;
-    border: none !important;
-    border-radius: 0 !important;
-}
-.capturing-mode .question-box::before { content: none !important; display: none !important; }
-.capturing-mode span#q-text-span,
-.capturing-mode .question-box span {
-    display: block !important;
-    text-align: center !important;
-    font-weight: 800 !important;
-    font-size: 1.42rem !important;
-    line-height: 1.35 !important;
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
-}
-/* Şık kutusu — koyu mavi kutunun içinde en altta, beyaz panel, hafif taşma efekti */
-.capturing-mode .options-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-    background: #ffffff !important;
-    border-radius: 22px !important;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.25) !important;
-    padding: 24px !important;
-    position: relative !important;
-    margin: 0 auto -46px !important;
-    width: calc(100% - 28px) !important;
-    align-self: center !important;
-}
-.capturing-mode .option-btn {
-    background: var(--sik-buton, #4ec9ea) !important;
-    border-radius: 50px !important;
-    box-shadow: none !important;
-    min-height: 64px !important;
-    padding: 0 22px 0 6px !important;
-    justify-content: flex-start !important;
-    display: flex !important;
-    align-items: center !important;
-}
-.capturing-mode .letter-box {
-    background: #a742d1 !important;
-    color: #ffffff !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 50% !important;
-    font-size: 1.2rem !important;
-    font-weight: 900 !important;
-    min-width: 50px !important; width: 50px !important; height: 50px !important;
-    margin-left: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-shrink: 0 !important;
-}
-.capturing-mode .text-box {
-    padding: 0 0 0 14px !important;
-    min-width: 0 !important;
-    flex: 1 1 auto !important;
-    display: flex !important;
-    align-items: center !important;
-}
-.capturing-mode .text-box .text,
-.capturing-mode .text {
-    color: #14091f !important;
-    -webkit-text-fill-color: #14091f !important;
-    font-weight: 700 !important;
-    font-size: 1.2rem !important;
-    word-spacing: 2px !important;
-    white-space: normal !important;
-    word-break: normal !important;
-    overflow-wrap: break-word !important;
-}
-.capturing-mode .capture-watermark {
-    color: #ffffff !important;
-    opacity: 0.9 !important;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
-    margin-top: 22px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-}
-.capturing-mode .capture-watermark-logo {
-    width: 30px !important;
-    height: 30px !important;
-    border-radius: 8px !important;
-    object-fit: contain !important;
-    display: block !important;
-}
-.capturing-mode .capture-watermark span {
-    font-size: 0.88rem !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.3px !important;
-    color: #ffffff !important;
 }
 
 /* --- PAYLAŞIM ÖNİZLEME MODALI --- */
@@ -1562,8 +1412,7 @@ body.modal-open { animation-play-state: paused; }
                         <div class="capture-logo-badge"><span class="capture-logo-icon">👑</span><span>MuGöl BİLGİN</span></div>
                         <div class="capture-coin-badge"><span>🪙</span><span id="capture-prize-text">500 TL</span></div>
                     </div>
-                    <span class="capture-title-main">MuGöl BİLGİN</span>
-                    <span class="capture-title-sub">Aklın Sınırlarını Zorla!</span>
+                    <span class="capture-title-main">Günün Sorusu</span>
                     <div class="capture-hero">
                         <div class="capture-hero-glow"></div>
                         <span class="capture-hero-icon">👑</span>
@@ -1714,6 +1563,98 @@ body.modal-open { animation-play-state: paused; }
     <!-- YENİ BİR KATEGORİ EKLERSENİZ BURAYA YAZIN. Örnek: <script src="sorular/arabalar.js"></script> -->
 
     <script>
+        // =========================================================
+        // SORU GEÇİŞ REKLAMI — AdSense (ca-pub-1880946354382681/2331344971)
+        // Her soru cevaplandıktan sonra (doğru/yanlış fark etmeksizin) gösterilir.
+        // Reklamsız kod aktifse atlanır.
+        // =========================================================
+        (function() {
+            'use strict';
+            var AD_CLIENT = 'ca-pub-1880946354382681';
+            var AD_SLOT   = '2331344971';
+            var AD_DELAY  = 5; // saniye
+            var _adInterval = null;
+
+            function _noadsAktifMi() {
+                try { return typeof userHasNoads === 'function' && userHasNoads(); } catch(e) { return false; }
+            }
+
+            function _buildAdModal() {
+                if (document.getElementById('mg-q-ad-overlay')) return;
+                var overlay = document.createElement('div');
+                overlay.id = 'mg-q-ad-overlay';
+                overlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;';
+                overlay.innerHTML = [
+                    '<div style="background:#fff;border-radius:24px;width:min(92vw,420px);padding:0;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.45);display:flex;flex-direction:column;animation:mgQAdFadeIn .35s cubic-bezier(.25,.8,.25,1) both;">',
+                    '<div style="background:linear-gradient(135deg,#4318ff,#6366f1);padding:14px 20px;display:flex;align-items:center;gap:10px;">',
+                    '<span style="font-size:1.6rem;">🚀</span>',
+                    '<div style="flex:1;">',
+                    '<div style="color:#fff;font-weight:900;font-size:1rem;line-height:1.2;">Sonraki Soru</div>',
+                    '<div style="color:rgba(255,255,255,.7);font-size:.78rem;margin-top:2px;">Lütfen reklamı izleyin</div>',
+                    '</div>',
+                    '<div id="mg-q-ad-timer-badge" style="background:rgba(255,255,255,.18);border-radius:50px;padding:6px 14px;color:#fff;font-weight:800;font-size:.85rem;white-space:nowrap;user-select:none;">',
+                    '<span id="mg-q-ad-sec">' + AD_DELAY + '</span>s</div>',
+                    '</div>',
+                    '<div style="padding:16px;background:#f3f5f9;">',
+                    '<ins class="adsbygoogle mg-q-ad-ins" style="display:block;width:100%;min-height:250px;" data-ad-client="' + AD_CLIENT + '" data-ad-slot="' + AD_SLOT + '" data-ad-format="auto" data-full-width-responsive="true"></ins>',
+                    '</div>',
+                    '<div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;">',
+                    '<span style="font-size:.75rem;color:#64748b;">Reklam · MuGöl BİLGİN</span>',
+                    '<button id="mg-q-ad-skip-btn" disabled style="padding:9px 22px;border-radius:50px;border:none;background:linear-gradient(135deg,#4318ff,#6366f1);color:#fff;font-weight:800;font-size:.88rem;cursor:not-allowed;font-family:inherit;opacity:.45;transition:all .25s;">Geç →</button>',
+                    '</div>',
+                    '</div>',
+                    '<style>@keyframes mgQAdFadeIn{from{opacity:0;transform:scale(.93) translateY(20px)}to{opacity:1;transform:none}}</style>'
+                ].join('');
+                document.body.appendChild(overlay);
+            }
+
+            function _pushAd() {
+                try {
+                    var ins = document.querySelector('.mg-q-ad-ins');
+                    if (ins && !ins.dataset.adsbygoogleStatus) {
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                } catch(e) {}
+            }
+
+            // Reklamı göster; kapatılınca (Geç'e basılınca) devam(callback) çalışır.
+            window.mgSoruGecisReklamiGoster = function(devamEt) {
+                if (_noadsAktifMi()) { devamEt(); return; }
+                _buildAdModal();
+                var overlay  = document.getElementById('mg-q-ad-overlay');
+                var skipBtn  = document.getElementById('mg-q-ad-skip-btn');
+                var secEl    = document.getElementById('mg-q-ad-sec');
+                var badge    = document.getElementById('mg-q-ad-timer-badge');
+                var left     = AD_DELAY;
+
+                skipBtn.disabled = true; skipBtn.style.opacity = '.45'; skipBtn.style.cursor = 'not-allowed';
+                secEl.textContent = left;
+                badge.innerHTML = '<span id="mg-q-ad-sec">' + left + '</span>s';
+
+                overlay.style.display = 'flex';
+                _pushAd();
+
+                if (_adInterval) clearInterval(_adInterval);
+                _adInterval = setInterval(function() {
+                    left--;
+                    var s = document.getElementById('mg-q-ad-sec');
+                    if (s) s.textContent = left;
+                    if (left <= 0) {
+                        clearInterval(_adInterval);
+                        skipBtn.disabled = false; skipBtn.style.opacity = '1'; skipBtn.style.cursor = 'pointer';
+                        badge.textContent = '✓ Geçebilirsiniz';
+                    }
+                }, 1000);
+
+                skipBtn.onclick = function() {
+                    if (skipBtn.disabled) return;
+                    if (_adInterval) clearInterval(_adInterval);
+                    overlay.style.display = 'none';
+                    devamEt();
+                };
+            };
+        })();
+
         const oduller = ["500 TL", "1.000 TL", "2.000 TL", "3.000 TL", "5.000 TL", "7.500 TL", "15.000 TL", "30.000 TL", "60.000 TL", "125.000 TL", "250.000 TL", "1.000.000 TL"];
         let suankiSeviye = 1, aktifSoru = null, seciliKategori = "Karışık", tiklanabilir = true;
         let sure = 60, zamanlayiciInterval;
@@ -2072,11 +2013,20 @@ body.modal-open { animation-play-state: paused; }
                 if (secilenSik === aktifSoru.dogruCevap) {
                     sesCal('dogru'); secilenBtn.classList.replace('selected', 'correct');
                     konfetiPatlat(); pariltiPatlat(secilenBtn);
-                    setTimeout(() => { if (suankiSeviye < 12) { suankiSeviye++; soruyuYukle(); } else { oyunuBitir(true, "MÜKEMMELSİN!"); } }, 2500);
+                    setTimeout(() => {
+                        mgSoruGecisReklamiGoster(() => {
+                            if (suankiSeviye < 12) { suankiSeviye++; soruyuYukle(); } else { oyunuBitir(true, "MÜKEMMELSİN!"); }
+                        });
+                    }, 2500);
                 } else {
                     sesCal('yanlis'); secilenBtn.classList.replace('selected', 'wrong');
                     if (ciftCevapAktif) { ciftCevapAktif = false; setTimeout(() => { sureyiBaslat(); tiklanabilir = true; }, 1000); } 
-                    else { dogruBtn.classList.add('correct'); setTimeout(() => oyunuBitir(false, "YANLIŞ CEVAP!"), 2500); }
+                    else {
+                        dogruBtn.classList.add('correct');
+                        setTimeout(() => {
+                            mgSoruGecisReklamiGoster(() => { oyunuBitir(false, "YANLIŞ CEVAP!"); });
+                        }, 2500);
+                    }
                 }
             }, 2500); 
         }
@@ -2174,8 +2124,9 @@ body.modal-open { animation-play-state: paused; }
                 return Math.max(max, uzunKelime);
             }, 0);
             let sikFontSize;
-            if (enUzunKelime > 10 || enUzunSik > 22) sikFontSize = '0.78rem';
-            else if (enUzunKelime > 8 || enUzunSik > 16) sikFontSize = '0.86rem';
+            if (enUzunKelime > 12 || enUzunSik > 24) sikFontSize = '0.68rem';
+            else if (enUzunKelime > 9 || enUzunSik > 20) sikFontSize = '0.78rem';
+            else if (enUzunKelime > 7 || enUzunSik > 15) sikFontSize = '0.86rem';
             else sikFontSize = '0.98rem';
             sikTextEls.forEach(el => el.style.setProperty('font-size', sikFontSize, 'important'));
         }
@@ -2223,8 +2174,7 @@ body.modal-open { animation-play-state: paused; }
 
                 let icerikW = clone.offsetWidth || 1080;
                 let icerikH = clone.offsetHeight || 1350;
-                let tamOlcek = Math.max(1080 / icerikW, 1350 / icerikH);
-                let doldurOlcek = Math.min(tamOlcek, 1.15);
+                let doldurOlcek = Math.min(1080 / icerikW, 1350 / icerikH);
                 clone.style.transform = 'scale(' + doldurOlcek + ')';
 
                 let modalOlcek = Math.min(kullW / 1080, kullH / 1350, 1);
@@ -2332,8 +2282,8 @@ body.modal-open { animation-play-state: paused; }
                 sctx.fillRect(0, 0, MAX_W, MAX_H);
                 sctx.imageSmoothingEnabled = true;
                 sctx.imageSmoothingQuality = 'high';
-                let tamOlcek = Math.max(MAX_W / finalCanvas.width, MAX_H / finalCanvas.height);
-                let doldurOlcek = Math.min(tamOlcek, 1.15);
+                let tamOlcek = Math.min(MAX_W / finalCanvas.width, MAX_H / finalCanvas.height);
+                let doldurOlcek = tamOlcek;
                 let cizW = finalCanvas.width * doldurOlcek;
                 let cizH = finalCanvas.height * doldurOlcek;
                 let dx = (MAX_W - cizW) / 2;
