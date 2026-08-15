@@ -14,12 +14,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="MuGöl BİLGİN">
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1880946354382681" crossorigin="anonymous"></script>
-    <!-- AMP Otomatik Reklamlar -->
-    <script async custom-element="amp-auto-ads"
-            src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-    </script>
     <!-- Ekran görüntüsü almak için kütüphane -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
@@ -171,7 +165,7 @@
         .category-section-header span {
             color: rgba(255,255,255,0.5); font-size: 0.7rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
         }
-        
+
         /* --- KATEGORİ GRID: yatay şerit kartlar --- */
         .category-grid { 
             display: grid; 
@@ -1290,10 +1284,6 @@ body.modal-open { animation-play-state: paused; }
 
 </head>
 <body>
-<amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-1880946354382681">
-</amp-auto-ads>
-
     <div id="start-screen" class="screen active">
         <div class="glass-card">
             <div class="home-header-band">
@@ -1563,98 +1553,6 @@ body.modal-open { animation-play-state: paused; }
     <!-- YENİ BİR KATEGORİ EKLERSENİZ BURAYA YAZIN. Örnek: <script src="sorular/arabalar.js"></script> -->
 
     <script>
-        // =========================================================
-        // SORU GEÇİŞ REKLAMI — AdSense (ca-pub-1880946354382681/2331344971)
-        // Her soru cevaplandıktan sonra (doğru/yanlış fark etmeksizin) gösterilir.
-        // Reklamsız kod aktifse atlanır.
-        // =========================================================
-        (function() {
-            'use strict';
-            var AD_CLIENT = 'ca-pub-1880946354382681';
-            var AD_SLOT   = '2331344971';
-            var AD_DELAY  = 5; // saniye
-            var _adInterval = null;
-
-            function _noadsAktifMi() {
-                try { return typeof userHasNoads === 'function' && userHasNoads(); } catch(e) { return false; }
-            }
-
-            function _buildAdModal() {
-                if (document.getElementById('mg-q-ad-overlay')) return;
-                var overlay = document.createElement('div');
-                overlay.id = 'mg-q-ad-overlay';
-                overlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;';
-                overlay.innerHTML = [
-                    '<div style="background:#fff;border-radius:24px;width:min(92vw,420px);padding:0;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.45);display:flex;flex-direction:column;animation:mgQAdFadeIn .35s cubic-bezier(.25,.8,.25,1) both;">',
-                    '<div style="background:linear-gradient(135deg,#4318ff,#6366f1);padding:14px 20px;display:flex;align-items:center;gap:10px;">',
-                    '<span style="font-size:1.6rem;">🚀</span>',
-                    '<div style="flex:1;">',
-                    '<div style="color:#fff;font-weight:900;font-size:1rem;line-height:1.2;">Sonraki Soru</div>',
-                    '<div style="color:rgba(255,255,255,.7);font-size:.78rem;margin-top:2px;">Lütfen reklamı izleyin</div>',
-                    '</div>',
-                    '<div id="mg-q-ad-timer-badge" style="background:rgba(255,255,255,.18);border-radius:50px;padding:6px 14px;color:#fff;font-weight:800;font-size:.85rem;white-space:nowrap;user-select:none;">',
-                    '<span id="mg-q-ad-sec">' + AD_DELAY + '</span>s</div>',
-                    '</div>',
-                    '<div style="padding:16px;background:#f3f5f9;">',
-                    '<ins class="adsbygoogle mg-q-ad-ins" style="display:block;width:100%;min-height:250px;" data-ad-client="' + AD_CLIENT + '" data-ad-slot="' + AD_SLOT + '" data-ad-format="auto" data-full-width-responsive="true"></ins>',
-                    '</div>',
-                    '<div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;">',
-                    '<span style="font-size:.75rem;color:#64748b;">Reklam · MuGöl BİLGİN</span>',
-                    '<button id="mg-q-ad-skip-btn" disabled style="padding:9px 22px;border-radius:50px;border:none;background:linear-gradient(135deg,#4318ff,#6366f1);color:#fff;font-weight:800;font-size:.88rem;cursor:not-allowed;font-family:inherit;opacity:.45;transition:all .25s;">Geç →</button>',
-                    '</div>',
-                    '</div>',
-                    '<style>@keyframes mgQAdFadeIn{from{opacity:0;transform:scale(.93) translateY(20px)}to{opacity:1;transform:none}}</style>'
-                ].join('');
-                document.body.appendChild(overlay);
-            }
-
-            function _pushAd() {
-                try {
-                    var ins = document.querySelector('.mg-q-ad-ins');
-                    if (ins && !ins.dataset.adsbygoogleStatus) {
-                        (window.adsbygoogle = window.adsbygoogle || []).push({});
-                    }
-                } catch(e) {}
-            }
-
-            // Reklamı göster; kapatılınca (Geç'e basılınca) devam(callback) çalışır.
-            window.mgSoruGecisReklamiGoster = function(devamEt) {
-                if (_noadsAktifMi()) { devamEt(); return; }
-                _buildAdModal();
-                var overlay  = document.getElementById('mg-q-ad-overlay');
-                var skipBtn  = document.getElementById('mg-q-ad-skip-btn');
-                var secEl    = document.getElementById('mg-q-ad-sec');
-                var badge    = document.getElementById('mg-q-ad-timer-badge');
-                var left     = AD_DELAY;
-
-                skipBtn.disabled = true; skipBtn.style.opacity = '.45'; skipBtn.style.cursor = 'not-allowed';
-                secEl.textContent = left;
-                badge.innerHTML = '<span id="mg-q-ad-sec">' + left + '</span>s';
-
-                overlay.style.display = 'flex';
-                _pushAd();
-
-                if (_adInterval) clearInterval(_adInterval);
-                _adInterval = setInterval(function() {
-                    left--;
-                    var s = document.getElementById('mg-q-ad-sec');
-                    if (s) s.textContent = left;
-                    if (left <= 0) {
-                        clearInterval(_adInterval);
-                        skipBtn.disabled = false; skipBtn.style.opacity = '1'; skipBtn.style.cursor = 'pointer';
-                        badge.textContent = '✓ Geçebilirsiniz';
-                    }
-                }, 1000);
-
-                skipBtn.onclick = function() {
-                    if (skipBtn.disabled) return;
-                    if (_adInterval) clearInterval(_adInterval);
-                    overlay.style.display = 'none';
-                    devamEt();
-                };
-            };
-        })();
-
         const oduller = ["500 TL", "1.000 TL", "2.000 TL", "3.000 TL", "5.000 TL", "7.500 TL", "15.000 TL", "30.000 TL", "60.000 TL", "125.000 TL", "250.000 TL", "1.000.000 TL"];
         let suankiSeviye = 1, aktifSoru = null, seciliKategori = "Karışık", tiklanabilir = true;
         let sure = 60, zamanlayiciInterval;
@@ -2013,20 +1911,11 @@ body.modal-open { animation-play-state: paused; }
                 if (secilenSik === aktifSoru.dogruCevap) {
                     sesCal('dogru'); secilenBtn.classList.replace('selected', 'correct');
                     konfetiPatlat(); pariltiPatlat(secilenBtn);
-                    setTimeout(() => {
-                        mgSoruGecisReklamiGoster(() => {
-                            if (suankiSeviye < 12) { suankiSeviye++; soruyuYukle(); } else { oyunuBitir(true, "MÜKEMMELSİN!"); }
-                        });
-                    }, 2500);
+                    setTimeout(() => { if (suankiSeviye < 12) { suankiSeviye++; soruyuYukle(); } else { oyunuBitir(true, "MÜKEMMELSİN!"); } }, 2500);
                 } else {
                     sesCal('yanlis'); secilenBtn.classList.replace('selected', 'wrong');
                     if (ciftCevapAktif) { ciftCevapAktif = false; setTimeout(() => { sureyiBaslat(); tiklanabilir = true; }, 1000); } 
-                    else {
-                        dogruBtn.classList.add('correct');
-                        setTimeout(() => {
-                            mgSoruGecisReklamiGoster(() => { oyunuBitir(false, "YANLIŞ CEVAP!"); });
-                        }, 2500);
-                    }
+                    else { dogruBtn.classList.add('correct'); setTimeout(() => oyunuBitir(false, "YANLIŞ CEVAP!"), 2500); }
                 }
             }, 2500); 
         }
