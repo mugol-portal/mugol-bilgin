@@ -322,12 +322,12 @@
         .joker-buy:hover:not(:disabled) { background: #2ecc71 !important; color: #000 !important; box-shadow: 0 0 15px rgba(46, 204, 113, 0.6) !important; }
 
         .timer-circle {
-            background: radial-gradient(circle, #0a1a5c, #000); border: 3px solid #ffd166; color: #ffd166;
+            background: radial-gradient(circle, #0a1a5c, #000); color: #ffd166;
             width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
             font-size: 1.3rem; font-weight: 900; box-shadow: 0 0 15px rgba(255, 209, 102, 0.6); flex-shrink: 0;
             text-shadow: 0 0 10px #ffd166;
         }
-        .timer-warning { border-color: #ff4444; color: #ff4444; box-shadow: 0 0 15px #ff4444; text-shadow: 0 0 10px #ff4444; animation: pulse 0.8s infinite; }
+        .timer-warning { color: #ff4444; box-shadow: 0 0 15px #ff4444; text-shadow: 0 0 10px #ff4444; animation: pulse 0.8s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         
         .progress-bar-container { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; margin-top: 10px; }
@@ -351,7 +351,7 @@
 
         .option-btn {
             display: flex; align-items: stretch; 
-            background: linear-gradient(95deg, #071335, #123080); 
+            background: linear-gradient(95deg, #a97a12, #e0b23d); 
             border: 2px solid #ffd166; border-radius: 30px; cursor: pointer; color: white; 
             box-shadow: 0 6px 18px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.06); 
             transition: all 0.2s ease; min-height: 55px; height: auto; overflow: hidden; 
@@ -800,13 +800,13 @@ body::before, body::after { content: none !important; display: none !important; 
 .timer-circle {
     position: relative;
     background: var(--app-surface) !important;
-    border: 3px solid var(--app-primary) !important; color: var(--app-primary) !important;
+    color: var(--app-primary) !important;
     width: 56px !important; height: 56px !important; font-size: 1.3rem !important;
     box-shadow: 0 6px 16px rgba(47,107,255,0.25) !important;
     text-shadow: none !important;
 }
 .timer-circle::before { content: none; }
-.timer-warning { border-color: var(--app-danger) !important; color: var(--app-danger) !important; text-shadow: none !important; box-shadow: 0 6px 16px rgba(255,84,112,0.35) !important; }
+.timer-warning { color: var(--app-danger) !important; text-shadow: none !important; box-shadow: 0 6px 16px rgba(255,84,112,0.35) !important; }
 
 /* İlerleme çubuğu */
 .progress-bar-container { height: 6px !important; background: var(--app-border) !important; border: none; border-radius: 6px; }
@@ -837,17 +837,17 @@ body::before, body::after { content: none !important; display: none !important; 
 /* Şıklar */
 .options-grid { gap: 14px !important; }
 .option-btn {
-    background: var(--app-surface) !important;
-    border: 1.5px solid color-mix(in oklab, var(--app-primary) 35%, var(--app-border)) !important;
+    background: linear-gradient(135deg, #fff4d6, #ffe6a0) !important;
+    border: 1.5px solid #e0b23d !important;
     border-radius: 20px !important;
-    box-shadow: 0 4px 14px rgba(31,45,94,0.10) !important;
+    box-shadow: 0 4px 14px rgba(224,178,61,0.25) !important;
     overflow: hidden !important; position: relative !important;
     transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
 }
 .option-btn:hover:not(.wrong):not(.correct):not(.selected) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(47,107,255,0.2) !important;
-    border-color: var(--app-primary) !important;
+    box-shadow: 0 8px 20px rgba(224,178,61,0.4) !important;
+    border-color: #c9992b !important;
 }
 .option-btn::after { content: none; }
 .letter-box {
@@ -855,15 +855,15 @@ body::before, body::after { content: none !important; display: none !important; 
     height: 40px !important;
     margin: auto 0 auto 12px !important;
     border-radius: 50% !important;
-    background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark)) !important;
+    background: linear-gradient(135deg, #c9992b, #8a6a1a) !important;
     color: #fff !important;
     border-right: none !important;
     text-shadow: none !important;
     font-family: 'Nunito', sans-serif !important;
-    box-shadow: 0 3px 8px rgba(47,107,255,0.35);
+    box-shadow: 0 3px 8px rgba(138,106,26,0.4);
     flex-shrink: 0;
 }
-.text-box .text { color: var(--app-text) !important; }
+.text-box .text { color: #4a3a0a !important; }
 .option-btn.selected { background: linear-gradient(90deg, var(--app-accent), var(--app-accent2)) !important; border-color: transparent !important; box-shadow: 0 6px 18px rgba(255,122,69,0.4) !important; }
 .option-btn.selected .letter-box { background: rgba(255,255,255,0.3) !important; color: #fff !important; box-shadow: none; }
 .option-btn.selected .text-box .text { color: #fff !important; }
@@ -1341,6 +1341,8 @@ body.modal-open { animation-play-state: paused; }
             <h3>⚙️ Ayarlar</h3>
             <p class="settings-label">Ses</p>
             <button class="action-btn sound-btn" id="sound-toggle-main" onclick="toggleSound()" style="width:100%; justify-content:center; margin-bottom: 14px;">🔊 Ses Açık</button>
+            <p class="settings-label">Sesli Okuma</p>
+            <button class="action-btn tts-btn" id="tts-toggle-main" onclick="toggleOtoOkuma()" style="width:100%; justify-content:center; margin-bottom: 14px;">🎙️ Otomatik Okuma Kapalı</button>
             <p class="settings-label">Tema Seç</p>
             <div class="app-theme-picker" id="app-theme-picker">
                 <div class="app-theme-swatch" data-tema="acik" style="background: linear-gradient(135deg,#2f6bff,#ff7a45);" title="Açık"></div>
@@ -1449,6 +1451,7 @@ body.modal-open { animation-play-state: paused; }
 
         <div class="game-bottom-bar">
             <button class="action-btn sound-btn" id="sound-toggle-game" onclick="toggleSound()">🔊 Ses</button>
+            <button class="action-btn tts-btn" id="tts-toggle-game" onclick="soruyuSesliOku()">🎙️ Oku</button>
             <button class="action-btn" onclick="soruyuIndir()">📸 Paylaş</button>
         </div>
     </div>
@@ -1619,6 +1622,62 @@ body.modal-open { animation-play-state: paused; }
             document.getElementById('sound-toggle-game').innerText = sesAcik ? "🔊" : "🔇";
         }
 
+        /* ============ SESLİ OKUMA (Text-to-Speech) ============ */
+        let otoOkumaAcik = false;
+        try { otoOkumaAcik = localStorage.getItem('mugolyoner_oto_okuma') === '1'; } catch(e) {}
+        const konusmaDestekli = 'speechSynthesis' in window;
+        let trSes = null;
+
+        function trSesiBul() {
+            if (!konusmaDestekli) return null;
+            let sesler = window.speechSynthesis.getVoices();
+            return sesler.find(s => s.lang && s.lang.toLowerCase().startsWith('tr')) || null;
+        }
+        if (konusmaDestekli) {
+            trSes = trSesiBul();
+            window.speechSynthesis.onvoiceschanged = () => { trSes = trSesiBul(); };
+        }
+
+        function metniOku(metin) {
+            if (!konusmaDestekli || !metin) return;
+            window.speechSynthesis.cancel();
+            const konusma = new SpeechSynthesisUtterance(metin);
+            konusma.lang = 'tr-TR';
+            if (trSes) konusma.voice = trSes;
+            konusma.rate = 0.95;
+            konusma.pitch = 1;
+            window.speechSynthesis.speak(konusma);
+        }
+
+        function sesliOkumayiDurdur() {
+            if (konusmaDestekli) window.speechSynthesis.cancel();
+        }
+
+        function aktifSoruyuMetneCevir() {
+            if (!aktifSoru) return "";
+            let metin = aktifSoru.soru + ". ";
+            metin += "A seçeneği: " + aktifSoru.secenekler.A + ". ";
+            metin += "B seçeneği: " + aktifSoru.secenekler.B + ". ";
+            metin += "C seçeneği: " + aktifSoru.secenekler.C + ". ";
+            metin += "D seçeneği: " + aktifSoru.secenekler.D + ".";
+            return metin;
+        }
+
+        function soruyuSesliOku() {
+            sesCal('tiklama');
+            if (!konusmaDestekli) { alert("Cihazınız sesli okumayı desteklemiyor."); return; }
+            metniOku(aktifSoruyuMetneCevir());
+        }
+
+        function toggleOtoOkuma() {
+            otoOkumaAcik = !otoOkumaAcik;
+            try { localStorage.setItem('mugolyoner_oto_okuma', otoOkumaAcik ? '1' : '0'); } catch(e) {}
+            let btn = document.getElementById('tts-toggle-main');
+            if (btn) btn.innerText = otoOkumaAcik ? "🎙️ Otomatik Okuma Açık" : "🎙️ Otomatik Okuma Kapalı";
+            if (otoOkumaAcik && aktifSoru) metniOku(aktifSoruyuMetneCevir());
+            else sesliOkumayiDurdur();
+        }
+
         function sesCal(tur) {
             if (!sesAcik) return; if (sesContext.state === 'suspended') sesContext.resume();
             const osc = sesContext.createOscillator(), gainNode = sesContext.createGain();
@@ -1688,7 +1747,7 @@ body.modal-open { animation-play-state: paused; }
                 });
             });
         }
-        function ayarlariAc() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "flex"; document.body.classList.add('modal-open'); }
+        function ayarlariAc() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "flex"; document.body.classList.add('modal-open'); let ttsBtn = document.getElementById('tts-toggle-main'); if (ttsBtn) ttsBtn.innerText = otoOkumaAcik ? "🎙️ Otomatik Okuma Açık" : "🎙️ Otomatik Okuma Kapalı"; }
         function ayarlariKapat() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "none"; document.body.classList.remove('modal-open'); }
 
         function kategorileriYukle() {
@@ -1819,6 +1878,7 @@ body.modal-open { animation-play-state: paused; }
             let capLevelEl = document.getElementById('capture-level-text'); if (capLevelEl) capLevelEl.innerText = `${aktifSoru.kategori} · Soru ${suankiSeviye}/12`;
 
             AnimasyonlariTetikle(); sureyiBaslat();
+            if (otoOkumaAcik) metniOku(aktifSoruyuMetneCevir()); else sesliOkumayiDurdur();
         }
 
         function joker50Kullan() {
@@ -1903,7 +1963,7 @@ body.modal-open { animation-play-state: paused; }
         }
 
         function checkAnswer(secilenSik) {
-            if (!tiklanabilir) return; tiklanabilir = false; clearInterval(zamanlayiciInterval); sesCal('tiklama'); 
+            if (!tiklanabilir) return; tiklanabilir = false; clearInterval(zamanlayiciInterval); sesCal('tiklama'); sesliOkumayiDurdur();
             let secilenBtn = document.getElementById(`btn-${secilenSik}`); let dogruBtn = document.getElementById(`btn-${aktifSoru.dogruCevap}`); secilenBtn.classList.add('selected');
             rippleOlustur(secilenBtn.querySelector('.letter-box'));
             secilenBtn.classList.add('locked'); setTimeout(() => secilenBtn.classList.remove('locked'), 400);
@@ -1921,7 +1981,7 @@ body.modal-open { animation-play-state: paused; }
         }
 
         function oyunuBitir(kazandi, sebepYazisi) {
-            clearInterval(zamanlayiciInterval); let finalEkrani = document.getElementById('game-over'); finalEkrani.style.display = 'flex'; document.getElementById('end-reason').innerText = sebepYazisi;
+            clearInterval(zamanlayiciInterval); sesliOkumayiDurdur(); let finalEkrani = document.getElementById('game-over'); finalEkrani.style.display = 'flex'; document.getElementById('end-reason').innerText = sebepYazisi;
             let kazanilanOdulStr = "0 TL";
             if (kazandi) { kazanilanOdulStr = oduller[11]; document.getElementById('end-message').innerText = "TEBRİKLER! MİLYONER OLDUNUZ!"; document.getElementById('final-prize').innerText = `Kazanılan Ödül: ${kazanilanOdulStr}`; } 
             else { document.getElementById('end-message').innerText = "ELENDİNİZ."; kazanilanOdulStr = suankiSeviye > 7 ? oduller[6] : (suankiSeviye > 2 ? oduller[1] : "0 TL"); document.getElementById('final-prize').innerText = `Garanti Edilen Ödül: ${kazanilanOdulStr}`; }
