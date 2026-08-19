@@ -1993,6 +1993,44 @@ body.modal-open { animation-play-state: paused; }
         function ayarlariAc() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "flex"; document.body.classList.add('modal-open'); let ttsBtn = document.getElementById('tts-toggle-main'); if (ttsBtn) ttsBtn.innerText = otoOkumaAcik ? "🎙️ Otomatik Okuma Açık" : "🎙️ Otomatik Okuma Kapalı"; }
         function ayarlariKapat() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "none"; document.body.classList.remove('modal-open'); }
 
+        // ===== REKLAM YARDIMCI FONKSİYONU =====
+        // AdSense bir reklamı doldurunca <ins> elemanına data-ad-status="filled" yazar;
+        // dolduramazsa data-ad-status="unfilled" yazar. data-adsbygoogle-status="done" ise
+        // sadece "işlem tamamlandı" anlamına gelir, dolu/boş ayrımını GÖSTERMEZ — bu yüzden
+        // doğru kontrol data-ad-status'a bakmaktır. MutationObserver ile anlık değişimi
+        // izliyoruz; hiç tetiklenmezse 4 saniyelik güvenlik zaman aşımı devreye girer.
+        function reklamGosterVeyaGizle(slot) {
+            let ins = slot.querySelector('ins.adsbygoogle');
+            if (!ins) return;
+            try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+
+            let karar_verildi = false;
+            function kararVer() {
+                if (karar_verildi) return;
+                let adStatus = ins.getAttribute('data-ad-status');
+                if (adStatus === 'filled') { karar_verildi = true; slot.style.display = 'flex'; if (obs) obs.disconnect(); }
+                else if (adStatus === 'unfilled') { karar_verildi = true; slot.style.display = 'none'; if (obs) obs.disconnect(); }
+            }
+
+            let obs = null;
+            try {
+                obs = new MutationObserver(kararVer);
+                obs.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
+            } catch(e) {}
+
+            kararVer(); // attribute zaten hemen set edilmiş olabilir
+            // Güvenlik ağı: 4 saniye içinde hiçbir statü gelmezse dolu kabul edip göster
+            // (bazı ağlarda/adblock filtrelerinde attribute hiç set edilmeyebiliyor;
+            // bu durumda kutuyu tamamen gizlemek yerine göstermeyi tercih ediyoruz).
+            setTimeout(() => {
+                if (karar_verildi) return;
+                let adStatus = ins.getAttribute('data-ad-status');
+                if (adStatus === 'unfilled') slot.style.display = 'none';
+                else slot.style.display = 'flex';
+                if (obs) obs.disconnect();
+            }, 4000);
+        }
+
         function kategorileriYukle() {
             const wrap = document.getElementById("category-buttons-wrap"); wrap.innerHTML = "";
             if(!window.tumSorular || window.tumSorular.length === 0) { wrap.innerHTML = "<p>Sorular yüklenemedi!</p>"; return; }
@@ -2138,20 +2176,8 @@ body.modal-open { animation-play-state: paused; }
             // Tüm grid parçalarına aktif sütun sayısını uygula
             sutunSayisiAyarla(sutunSayisi, false);
 
-            // Reklam kutularını Google AdSense'e bildir
-            document.querySelectorAll('.ad-slot ins.adsbygoogle:not([data-adsbygoogle-status])').forEach(ins => {
-                try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
-            });
-            // Reklam dolmazsa kutuyu gizli tut (boş kare kalmasın)
-            document.querySelectorAll('.ad-slot').forEach(slot => {
-                let ins = slot.querySelector('ins.adsbygoogle');
-                if (!ins) return;
-                setTimeout(() => {
-                    let status = ins.getAttribute('data-adsbygoogle-status');
-                    let dolu = status === 'done' && ins.innerHTML.trim().length > 0;
-                    slot.style.display = dolu ? 'flex' : 'none';
-                }, 2500);
-            });
+            // Reklam kutularını Google AdSense'e bildir ve doldurulma durumuna göre göster/gizle
+            document.querySelectorAll('.ad-slot').forEach(slot => reklamGosterVeyaGizle(slot));
         }
 
         function arkaplanAyarla(kategori) {
@@ -2177,13 +2203,7 @@ body.modal-open { animation-play-state: paused; }
             let gameAdSlot = document.getElementById('game-ad-slot');
             if (gameAdSlot && !gameAdSlot.dataset.tetiklendi) {
                 gameAdSlot.dataset.tetiklendi = '1';
-                try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
-                setTimeout(() => {
-                    let ins = gameAdSlot.querySelector('ins.adsbygoogle');
-                    let status = ins && ins.getAttribute('data-adsbygoogle-status');
-                    let dolu = status === 'done' && ins.innerHTML.trim().length > 0;
-                    gameAdSlot.style.display = dolu ? 'flex' : 'none';
-                }, 2500);
+                reklamGosterVeyaGizle(gameAdSlot);
             }
         }
 
@@ -2378,13 +2398,7 @@ body.modal-open { animation-play-state: paused; }
             if (gameOverAdSlot) {
                 gameOverAdSlot.style.display = 'none';
                 gameOverAdSlot.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>';
-                try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
-                setTimeout(() => {
-                    let ins = gameOverAdSlot.querySelector('ins.adsbygoogle');
-                    let status = ins && ins.getAttribute('data-adsbygoogle-status');
-                    let dolu = status === 'done' && ins.innerHTML.trim().length > 0;
-                    gameOverAdSlot.style.display = dolu ? 'flex' : 'none';
-                }, 2500);
+                reklamGosterVeyaGizle(gameOverAdSlot);
             }
         }
 
