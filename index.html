@@ -588,12 +588,12 @@
         #game-over button { padding: 12px 30px; font-size: 1.1rem; cursor: pointer; background: linear-gradient(145deg, #ffd166, #a67c1f); color: #030926; border: none; border-radius: 30px; font-weight: 900; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,209,102,0.4); }
 
         @media (min-width: 768px) {
-            #screen-game { flex-direction: row; position: relative; }
+            #screen-game { flex-direction: row; flex-wrap: wrap; position: relative; }
             .top-bar-game { position: absolute; top: 0; left: 0; width: 100%; background: transparent; border:none; box-shadow: none; }
-            .prize-container { width: 280px; height: 100%; border-bottom: none; border-left: 3px solid rgba(244, 197, 66, 0.4); background: rgba(0,0,15,0.8); padding: 80px 20px 40px; order: 2; overflow-y: auto; white-space: normal; }
+            .prize-container { width: 280px; flex: 0 0 280px; height: auto; align-self: stretch; border-bottom: none; border-left: 3px solid rgba(244, 197, 66, 0.4); background: rgba(0,0,15,0.8); padding: 80px 20px 40px; order: 2; overflow-y: auto; white-space: normal; }
             .prize-ladder { flex-direction: column-reverse; height: 100%; justify-content: space-evenly; align-items: stretch; text-align: right; }
-            .main-game { order: 1; padding: 90px 50px 40px; }
-            .game-bottom-bar { order: 3; width: 100%; }
+            .main-game { order: 1; flex: 1 1 0%; min-width: 0; padding: 90px 50px 40px; }
+            .game-bottom-bar { order: 3; flex: 0 0 100%; width: 100%; }
             .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
             .jokers { justify-content: flex-start; }
             #start-screen { justify-content: center; padding: 20px; }
@@ -620,7 +620,7 @@
             .home-footer-nav { max-width: 700px; }
 
             #screen-game { max-width: 1100px; margin: 0 auto; height: 100dvh; }
-            .prize-container { width: 320px; }
+            .prize-container { width: 320px; flex: 0 0 320px; }
             .main-game { padding: 90px 70px 40px; max-width: 760px; margin: 0 auto; }
 
             .modal-content { max-width: 480px; }
@@ -1692,6 +1692,8 @@ body.modal-open { animation-play-state: paused; }
     <script>_kategoriDosyaKaydet('teknoloji');</script>
     <script src="sorular/turkce-sozluk.js"></script>
     <script>_kategoriDosyaKaydet('turkce-sozluk');</script>
+    <script src="sorular/geleneklerimiz.js"></script>
+    <script>_kategoriDosyaKaydet('geleneklerimiz');</script>
     <!-- YENİ BİR KATEGORİ EKLERSENİZ BURAYA YAZIN. Örnek: <script src="sorular/arabalar.js"></script><script>_kategoriDosyaKaydet('arabalar');</script> -->
 
     <script>
@@ -1973,7 +1975,7 @@ body.modal-open { animation-play-state: paused; }
                 "Doğa": "🌿", "Mimari": "🏗️", "Psikoloji": "🧠", "Felsefe": "💭",
                 "Arabalar": "🚗", "Uçaklar": "✈️", "Gemiler": "🚢", "Trenler": "🚂",
                 "Oyunlar": "🎮", "Animasyon": "🎥", "Çizgi Roman": "💥", "Şiir": "✍️",
-                "Dil": "🗣️", "Kimya": "⚗️", "Fizik": "⚛️", "Biyoloji": "🧬"
+                "Dil": "🗣️", "Kimya": "⚗️", "Fizik": "⚛️", "Biyoloji": "🧬", "Geleneklerimiz": "🪔"
             };
             const fallbackEmojiler = ["🎯","🌟","💡","🔑","🎪","🏆","🎭","🧪","🌈","🎲","💎","🔮"];
             function kategoriEmojiGetir(kat) {
@@ -1989,6 +1991,7 @@ body.modal-open { animation-play-state: paused; }
             function kategoriResimYolu(kat) {
                 if (kat === "Karışık") return "resim/karisik.png";
                 if (kat === "Önemli Yerler Yurt Dışı") return "onemli-yerler-yurtdisi.png";
+                if (kat === "Geleneklerimiz") return "resim/gelenek.png";
                 let dosyaAdi = (window._kategoriDosyaHaritasi && window._kategoriDosyaHaritasi[kat]) || null;
                 if (!dosyaAdi) {
                     // Harita bulunamazsa (örn. yeni eklenen bir kategori) eski yönteme geri dön
