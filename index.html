@@ -1681,7 +1681,7 @@ body.modal-open { animation-play-state: paused; }
     <script src="sorular/onemli-yerler-turkiye.js"></script>
     <script>_kategoriDosyaKaydet('onemli-yerler-turkiye');</script>
     <script src="sorular/onemli-yerler-yurtdisi.js"></script>
-    <script>_kategoriDosyaKaydet('onem-yer-yurtdisi');</script>
+    <script>_kategoriDosyaKaydet('onemli-yerler-yurtdisi');</script>
     <script src="sorular/soz-siir.js"></script>
     <script>_kategoriDosyaKaydet('soz-siir');</script>
     <script src="sorular/meshur.js"></script>
@@ -1988,6 +1988,7 @@ body.modal-open { animation-play-state: paused; }
             //      sorular/onemli-yerler-turkiye.js -> resim/onemli-yerler-turkiye.png
             function kategoriResimYolu(kat) {
                 if (kat === "Karışık") return "resim/karisik.png";
+                if (kat === "Önemli Yerler Yurt Dışı") return "onemli-yerler-yurtdisi.png";
                 let dosyaAdi = (window._kategoriDosyaHaritasi && window._kategoriDosyaHaritasi[kat]) || null;
                 if (!dosyaAdi) {
                     // Harita bulunamazsa (örn. yeni eklenen bir kategori) eski yönteme geri dön
