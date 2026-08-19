@@ -110,7 +110,7 @@ window.tumSorular.push(
     { seviye: 257, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Tandır Kebabı' meşhurdur?", secenekler: { A: "Denizli", B: "Konya", C: "Akşehir", D: "Hepsi" }, dogruCevap: "D" },
     { seviye: 258, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Yağlaması' (Şebit) meşhurdur?", secenekler: { A: "Kayseri", B: "Nevşehir", C: "Kırşehir", D: "Sivas" }, dogruCevap: "A" },
     { seviye: 259, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Pöç' yemeği meşhurdur?", secenekler: { A: "Kayseri", B: "Niğde", C: "Aksaray", D: "Yozgat" }, dogruCevap: "A" },
-    { seviye: 260, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Yenidünya Kebabı' meyveli bir lezzettir?", secenekler: { A: "Gaziantep", B: "Şanlıurfa", C: "Kilis", D: "Mersin" }, dogruCevap: "A" },
+    
     { seviye: 261, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Simit Kebabı' meşhurdur?", secenekler: { A: "Gaziantep", B: "Kahramanmaraş", C: "Adana", D: "Osmaniye" }, dogruCevap: "A" },
     { seviye: 262, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Patlıcan Kebabı' (Birecik) ünlüdür?", secenekler: { A: "Şanlıurfa", B: "Gaziantep", C: "Hatay", D: "Diyarbakır" }, dogruCevap: "A" },
     { seviye: 263, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Söğürmesi' közlenmiş patlıcanla yapılır?", secenekler: { A: "Şanlıurfa", B: "Hatay", C: "Kilis", D: "Gaziantep" }, dogruCevap: "A" },
