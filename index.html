@@ -285,6 +285,17 @@
         }
         .ad-slot ins.adsbygoogle { width: 100%; }
 
+        /* Elenme (game-over) ekranındaki reklam kutusu daha büyük gösterilir */
+        #gameover-ad-slot.ad-filled {
+            min-height: 250px;
+            max-height: none;
+        }
+        /* Ana ekranın en altındaki büyük reklam kutusu */
+        .ad-slot-buyuk.ad-filled {
+            min-height: 250px;
+            max-height: none;
+        }
+
         .btn-mixed { 
             grid-column: 1 / -1;
             aspect-ratio: auto;
@@ -1573,10 +1584,6 @@ body.modal-open { animation-play-state: paused; }
                     <span>MuGöl BİLGİN</span>
                 </div>
             </div>
-
-            <div class="ad-slot" id="game-ad-slot">
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            </div>
         </div>
 
         <div class="game-bottom-bar">
@@ -2175,7 +2182,7 @@ body.modal-open { animation-play-state: paused; }
                 reklamNo++;
                 let ad = document.createElement("div");
                 ad.className = "ad-slot"; ad.id = "home-ad-slot-" + reklamNo;
-                ad.innerHTML = `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+                ad.innerHTML = `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1435965312" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
                 wrap.appendChild(ad);
             }
             function kartEkle(btn) {
@@ -2210,8 +2217,18 @@ body.modal-open { animation-play-state: paused; }
             // Tüm grid parçalarına aktif sütun sayısını uygula
             sutunSayisiAyarla(sutunSayisi, false);
 
+            // En altta ayrıca büyük bir reklam kutusu (farklı reklam birimi)
+            let altReklam = document.createElement("div");
+            altReklam.className = "ad-slot ad-slot-buyuk"; altReklam.id = "home-ad-slot-alt";
+            altReklam.innerHTML = `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+            wrap.appendChild(altReklam);
+
             // Reklam kutularını Google AdSense'e bildir ve doldurulma durumuna göre göster/gizle
-            document.querySelectorAll('.ad-slot').forEach(slot => reklamGosterVeyaGizle(slot));
+            // Reklam kutuları aynı anda push edilirse AdSense çoğunu "unfilled" bırakabiliyor.
+            // Aralarına kısa gecikme koyarak sırayla push ediyoruz.
+            document.querySelectorAll('.ad-slot').forEach((slot, i) => {
+                setTimeout(() => reklamGosterVeyaGizle(slot), i * 600);
+            });
         }
 
         function arkaplanAyarla(kategori) {
@@ -2235,13 +2252,6 @@ body.modal-open { animation-play-state: paused; }
             let mainGameEl2 = document.getElementById('main-game'); if (mainGameEl2) mainGameEl2.style.display = '';
             let bottomBarEl2 = document.querySelector('.game-bottom-bar'); if (bottomBarEl2) bottomBarEl2.style.display = '';
             odulAgaciniOlustur(); soruyuYukle();
-
-            // Oyun ekranı reklamı: her kategori girişinde bir kez tetiklenir
-            let gameAdSlot = document.getElementById('game-ad-slot');
-            if (gameAdSlot && !gameAdSlot.dataset.tetiklendi) {
-                gameAdSlot.dataset.tetiklendi = '1';
-                reklamGosterVeyaGizle(gameAdSlot);
-            }
         }
 
         function anaMenuyeDon() {
