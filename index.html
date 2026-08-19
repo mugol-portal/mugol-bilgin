@@ -2005,7 +2005,8 @@ body.modal-open { animation-play-state: paused; }
         // sadece "işlem tamamlandı" anlamına gelir, dolu/boş ayrımını GÖSTERMEZ — bu yüzden
         // doğru kontrol data-ad-status'a bakmaktır. MutationObserver ile anlık değişimi
         // izliyoruz; hiç tetiklenmezse 4 saniyelik güvenlik zaman aşımı devreye girer.
-        function reklamGosterVeyaGizle(slot) {
+        function reklamGosterVeyaGizle(slot, denemeNo) {
+            denemeNo = denemeNo || 1;
             let ins = slot.querySelector('ins.adsbygoogle');
             if (!ins) return;
 
@@ -2023,7 +2024,26 @@ body.modal-open { animation-play-state: paused; }
                 if (karar_verildi) return;
                 let adStatus = ins.getAttribute('data-ad-status');
                 if (adStatus === 'filled') { karar_verildi = true; slot.style.display = 'flex'; slot.classList.add('ad-filled'); if (obs) obs.disconnect(); }
-                else if (adStatus === 'unfilled') { karar_verildi = true; slot.style.display = 'none'; slot.classList.remove('ad-filled'); if (obs) obs.disconnect(); }
+                else if (adStatus === 'unfilled') {
+                    karar_verildi = true; slot.style.display = 'none'; slot.classList.remove('ad-filled'); if (obs) obs.disconnect();
+                    // Aynı sayfada aynı reklam biriminin birden fazla kez istenmesi bazen "unfilled"
+                    // sonucunu getirebiliyor (özellikle art arda push edilen kutularda). Kısa bir
+                    // gecikmeyle, tazelenmiş bir ins elementiyle birkaç kez daha deniyoruz.
+                    if (denemeNo < 3) {
+                        setTimeout(() => {
+                            let yeniIns = document.createElement('ins');
+                            yeniIns.className = 'adsbygoogle';
+                            yeniIns.style.display = 'block';
+                            yeniIns.setAttribute('data-ad-client', ins.getAttribute('data-ad-client'));
+                            yeniIns.setAttribute('data-ad-slot', ins.getAttribute('data-ad-slot'));
+                            yeniIns.setAttribute('data-ad-format', ins.getAttribute('data-ad-format'));
+                            yeniIns.setAttribute('data-full-width-responsive', ins.getAttribute('data-full-width-responsive'));
+                            slot.innerHTML = '';
+                            slot.appendChild(yeniIns);
+                            reklamGosterVeyaGizle(slot, denemeNo + 1);
+                        }, 1500 * denemeNo);
+                    }
+                }
             }
 
             let obs = null;
