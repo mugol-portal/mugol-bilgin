@@ -17,6 +17,8 @@
     <!-- Ekran görüntüsü almak için kütüphane -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1880946354382681" crossorigin="anonymous"></script>
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -256,6 +258,26 @@
         .category-btn:hover .cat-text {
             color: #ffffff;
         }
+
+        /* --- REKLAM ALANI (Google AdSense) --- kategori grid'inin dışında, kendi satırında */
+        .ad-slot {
+            width: 100%;
+            max-width: 420px;
+            margin: 4px auto;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px dashed var(--app-border, rgba(255,255,255,0.25));
+            background: var(--app-surface2, rgba(255,255,255,0.04));
+            min-height: 90px;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            position: relative;
+        }
+        .ad-slot::before {
+            content: 'REKLAM';
+            font-size: 0.6rem; font-weight: 800; letter-spacing: 1.2px;
+            color: var(--app-text-muted, rgba(255,255,255,0.4)); margin-bottom: 6px;
+        }
+        .ad-slot ins.adsbygoogle { width: 100%; }
 
         .btn-mixed { 
             grid-column: 1 / -1;
@@ -1390,8 +1412,8 @@ body.modal-open { animation-play-state: paused; }
                     <span>Kategori Seçin</span>
                 </div>
 
-                <div class="category-grid" id="category-buttons">
-                    <!-- Dinamik Kategoriler Buraya Yüklenecek -->
+                <div id="category-buttons-wrap">
+                    <!-- Dinamik Kategoriler ve Reklamlar Buraya Yüklenecek -->
                 </div>
             </div>
         </div>
@@ -1545,6 +1567,10 @@ body.modal-open { animation-play-state: paused; }
                     <span>MuGöl BİLGİN</span>
                 </div>
             </div>
+
+            <div class="ad-slot" id="game-ad-slot">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            </div>
         </div>
 
         <div class="game-bottom-bar">
@@ -1618,6 +1644,9 @@ body.modal-open { animation-play-state: paused; }
         <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
             <button class="restart-btn" onclick="oyunuBaslat(seciliKategori)">🔄 Baştan Başla</button>
             <button onclick="anaMenuyeDon()">Ana Menüye Dön</button>
+        </div>
+        <div class="ad-slot" id="gameover-ad-slot" style="margin-top:20px;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>
         </div>
     </div>
 
@@ -1694,6 +1723,10 @@ body.modal-open { animation-play-state: paused; }
     <script>_kategoriDosyaKaydet('turkce-sozluk');</script>
     <script src="sorular/geleneklerimiz.js"></script>
     <script>_kategoriDosyaKaydet('geleneklerimiz');</script>
+    <script src="sorular/istanbul.js"></script>
+    <script>_kategoriDosyaKaydet('istanbul');</script>
+    <script src="sorular/osmanli.js"></script>
+    <script>_kategoriDosyaKaydet('osmanli');</script>
     <!-- YENİ BİR KATEGORİ EKLERSENİZ BURAYA YAZIN. Örnek: <script src="sorular/arabalar.js"></script><script>_kategoriDosyaKaydet('arabalar');</script> -->
 
     <script>
@@ -1961,8 +1994,8 @@ body.modal-open { animation-play-state: paused; }
         function ayarlariKapat() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "none"; document.body.classList.remove('modal-open'); }
 
         function kategorileriYukle() {
-            const btnContainer = document.getElementById("category-buttons"); btnContainer.innerHTML = "";
-            if(!window.tumSorular || window.tumSorular.length === 0) { btnContainer.innerHTML = "<p>Sorular yüklenemedi!</p>"; return; }
+            const wrap = document.getElementById("category-buttons-wrap"); wrap.innerHTML = "";
+            if(!window.tumSorular || window.tumSorular.length === 0) { wrap.innerHTML = "<p>Sorular yüklenemedi!</p>"; return; }
             
             // Bilinmeyen kategoriler için akıllı emoji seçici (PNG yüklenemezse yedek olarak kullanılır)
             const katSimgeleri = {
@@ -1975,7 +2008,8 @@ body.modal-open { animation-play-state: paused; }
                 "Doğa": "🌿", "Mimari": "🏗️", "Psikoloji": "🧠", "Felsefe": "💭",
                 "Arabalar": "🚗", "Uçaklar": "✈️", "Gemiler": "🚢", "Trenler": "🚂",
                 "Oyunlar": "🎮", "Animasyon": "🎥", "Çizgi Roman": "💥", "Şiir": "✍️",
-                "Dil": "🗣️", "Kimya": "⚗️", "Fizik": "⚛️", "Biyoloji": "🧬", "Geleneklerimiz": "🪔"
+                "Dil": "🗣️", "Kimya": "⚗️", "Fizik": "⚛️", "Biyoloji": "🧬", "Geleneklerimiz": "🪔",
+                "İstanbul'a Dair": "🕌", "Osmanlı Tarihi": "🗡️"
             };
             const fallbackEmojiler = ["🎯","🌟","💡","🔑","🎪","🏆","🎭","🧪","🌈","🎲","💎","🔮"];
             function kategoriEmojiGetir(kat) {
@@ -2047,11 +2081,48 @@ body.modal-open { animation-play-state: paused; }
             function kategoriRenkKoyu(hex) { return _hexKaristir(hex, 0, 0, 0, 0.32); }
 
             const kategoriler = [...new Set(window.tumSorular.map(s => s.kategori))];
-            
+
+            // Aktif sütun sayısını localStorage'dan oku (kullanıcının ayarlardan seçtiği değer).
+            // Media query'ler sadece geniş ekranlarda (≥1024px) --kat-sutun'u kendi değerine
+            // çekebilir; bu durumda sutunSayisiAyarla() her grid'e inline olarak doğru değeri
+            // zaten yazacağı için burada localStorage değeri esas alınır.
+            let sutunSayisi = 2;
+            try { sutunSayisi = parseInt(localStorage.getItem('mugolyoner_sutun_sayisi'), 10) || 2; } catch(e) {}
+
+            let reklamAraligi = sutunSayisi * 2; // 2 satırda bir reklam
+            let kartSayaci = 0;
+            let reklamNo = 0;
+            let aktifGrid = null;
+
+            function yeniGridAc() {
+                aktifGrid = document.createElement("div");
+                aktifGrid.className = "category-grid";
+                wrap.appendChild(aktifGrid);
+            }
+            function reklamKutusuEkle() {
+                reklamNo++;
+                let ad = document.createElement("div");
+                ad.className = "ad-slot"; ad.id = "home-ad-slot-" + reklamNo;
+                ad.innerHTML = `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+                wrap.appendChild(ad);
+            }
+            function kartEkle(btn) {
+                if (!aktifGrid) yeniGridAc();
+                aktifGrid.appendChild(btn);
+                kartSayaci++;
+                if (kartSayaci % reklamAraligi === 0) {
+                    reklamKutusuEkle();
+                    aktifGrid = null; // bir sonraki kart yeni bir grid parçası başlatır
+                }
+            }
+
+            yeniGridAc();
+
             let mixBtn = document.createElement("button"); mixBtn.className = "category-btn btn-mixed";
             mixBtn.innerHTML = `${catIconHtml("Karışık", "🎲")}<div class="cat-text">Karışık</div>`; mixBtn.onclick = () => oyunuBaslat("Karışık"); 
-            btnContainer.appendChild(mixBtn);
-            
+            aktifGrid.appendChild(mixBtn);
+            aktifGrid = null; // Karışık kendi satırını kaplar (masaüstünde tam genişlik) — sayaca dahil edilmez, yeni grid parçası kategorilerle başlar
+
             kategoriler.forEach((kat, idx) => {
                 let btn = document.createElement("button"); btn.className = "category-btn";
                 let emoji = kategoriEmojiGetir(kat); 
@@ -2060,7 +2131,26 @@ body.modal-open { animation-play-state: paused; }
                 btn.style.setProperty('--cat-color-light', kategoriRenkAcik(renk));
                 btn.style.setProperty('--cat-color-dark', kategoriRenkKoyu(renk));
                 btn.innerHTML = `${catIconHtml(kat, emoji)}<div class="cat-text">${kat}</div>`;
-                btn.onclick = () => oyunuBaslat(kat); btnContainer.appendChild(btn);
+                btn.onclick = () => oyunuBaslat(kat);
+                kartEkle(btn);
+            });
+
+            // Tüm grid parçalarına aktif sütun sayısını uygula
+            sutunSayisiAyarla(sutunSayisi, false);
+
+            // Reklam kutularını Google AdSense'e bildir
+            document.querySelectorAll('.ad-slot ins.adsbygoogle:not([data-adsbygoogle-status])').forEach(ins => {
+                try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+            });
+            // Reklam dolmazsa kutuyu gizli tut (boş kare kalmasın)
+            document.querySelectorAll('.ad-slot').forEach(slot => {
+                let ins = slot.querySelector('ins.adsbygoogle');
+                if (!ins) return;
+                setTimeout(() => {
+                    let status = ins.getAttribute('data-adsbygoogle-status');
+                    let dolu = status === 'done' && ins.innerHTML.trim().length > 0;
+                    slot.style.display = dolu ? 'flex' : 'none';
+                }, 2500);
             });
         }
 
@@ -2082,6 +2172,19 @@ body.modal-open { animation-play-state: paused; }
             document.getElementById("current-category-label").innerText = kategori;
             document.getElementById("start-screen").classList.remove("active"); document.getElementById("screen-game").classList.add("active");
             document.getElementById("game-over").style.display = "none"; odulAgaciniOlustur(); soruyuYukle();
+
+            // Oyun ekranı reklamı: her kategori girişinde bir kez tetiklenir
+            let gameAdSlot = document.getElementById('game-ad-slot');
+            if (gameAdSlot && !gameAdSlot.dataset.tetiklendi) {
+                gameAdSlot.dataset.tetiklendi = '1';
+                try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+                setTimeout(() => {
+                    let ins = gameAdSlot.querySelector('ins.adsbygoogle');
+                    let status = ins && ins.getAttribute('data-adsbygoogle-status');
+                    let dolu = status === 'done' && ins.innerHTML.trim().length > 0;
+                    gameAdSlot.style.display = dolu ? 'flex' : 'none';
+                }, 2500);
+            }
         }
 
         function anaMenuyeDon() {
@@ -2269,6 +2372,20 @@ body.modal-open { animation-play-state: paused; }
             let eklenecekMiktar = parseInt(kazanilanOdulStr.replace(/[^0-9]/g, '')) || 0;
             if (eklenecekMiktar > 0) { kasaGuncelle(eklenecekMiktar); document.getElementById('kasa-eklenen').innerText = `Kasanıza Eklendi: +${eklenecekMiktar.toLocaleString('tr-TR')} TL`; } 
             else { document.getElementById('kasa-eklenen').innerText = ""; }
+
+            // Oyun sonu reklamı: her seferinde yeniden tetiklenmesi için önceki ins'i temizleyip yeniden oluştur
+            let gameOverAdSlot = document.getElementById('gameover-ad-slot');
+            if (gameOverAdSlot) {
+                gameOverAdSlot.style.display = 'none';
+                gameOverAdSlot.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+                try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+                setTimeout(() => {
+                    let ins = gameOverAdSlot.querySelector('ins.adsbygoogle');
+                    let status = ins && ins.getAttribute('data-adsbygoogle-status');
+                    let dolu = status === 'done' && ins.innerHTML.trim().length > 0;
+                    gameOverAdSlot.style.display = dolu ? 'flex' : 'none';
+                }, 2500);
+            }
         }
 
         // ===== PAYLAŞIM ÖNİZLEME SİSTEMİ =====
@@ -2614,12 +2731,17 @@ body.modal-open { animation-play-state: paused; }
 
         // ===== KATEGORİ SÜTUN SAYISI =====
         function sutunSayisiAyarla(sayi, kaydet) {
-            let grid = document.getElementById('category-buttons');
-            if (grid) grid.style.setProperty('--kat-sutun', sayi);
+            document.querySelectorAll('.category-grid').forEach(function(grid) {
+                grid.style.setProperty('--kat-sutun', sayi);
+            });
             document.querySelectorAll('.col-count-btn').forEach(function(b) {
                 b.classList.toggle('active', parseInt(b.getAttribute('data-cols'), 10) === sayi);
             });
-            if (kaydet !== false) { try { localStorage.setItem('mugolyoner_sutun_sayisi', sayi); } catch(e) {} sesCal('tiklama'); }
+            if (kaydet !== false) {
+                try { localStorage.setItem('mugolyoner_sutun_sayisi', sayi); } catch(e) {}
+                sesCal('tiklama');
+                kategorileriYukle(); // reklam aralığı yeni sütun sayısına göre yeniden hesaplanır
+            }
         }
         function sutunSayisiBaslat() {
             let kayitliSayi = 2;
