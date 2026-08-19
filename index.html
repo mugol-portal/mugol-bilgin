@@ -266,13 +266,18 @@
             margin: 4px auto;
             border-radius: 14px;
             overflow: hidden;
-            border: 1px dashed var(--app-border, rgba(255,255,255,0.25));
-            background: var(--app-surface2, rgba(255,255,255,0.04));
-            min-height: 90px;
+            border: none;
+            background: transparent;
+            min-height: 0;
             display: none; flex-direction: column; align-items: center; justify-content: center;
             position: relative;
         }
-        .ad-slot::before {
+        .ad-slot.ad-filled {
+            border: 1px dashed var(--app-border, rgba(255,255,255,0.25));
+            background: var(--app-surface2, rgba(255,255,255,0.04));
+            min-height: 250px;
+        }
+        .ad-slot.ad-filled::before {
             content: 'REKLAM';
             font-size: 0.6rem; font-weight: 800; letter-spacing: 1.2px;
             color: var(--app-text-muted, rgba(255,255,255,0.4)); margin-bottom: 6px;
@@ -604,7 +609,7 @@
         .btn-close-about { background: linear-gradient(145deg, #ffd166, #a67c1f); color: #030926; border: none; padding: 10px 20px; border-radius: 25px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; width: 100%; box-shadow: 0 5px 15px rgba(255,209,102,0.4); }
         .btn-close-about:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,209,102,0.6); }
 
-        #game-over { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 15, 0.95); backdrop-filter: blur(10px); z-index: 20; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        #game-over { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 15, 0.95); backdrop-filter: blur(10px); z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         #game-over h1 { color: #ffaa00; margin-bottom: 10px; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; text-shadow: 0 0 20px rgba(255,170,0,0.6); }
         #end-reason { color: white; font-size: 1.2rem; margin-bottom: 15px; font-weight: 600; }
         #game-over button { padding: 12px 30px; font-size: 1.1rem; cursor: pointer; background: linear-gradient(145deg, #ffd166, #a67c1f); color: #030926; border: none; border-radius: 30px; font-weight: 900; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,209,102,0.4); }
@@ -1495,7 +1500,7 @@ body.modal-open { animation-play-state: paused; }
             <div class="prize-ladder" id="prize-ladder"></div>
         </div>
 
-        <div class="main-game">
+        <div class="main-game" id="main-game">
             <div class="game-header-info">
                 <div class="joker-timer-row">
                     <div class="jokers">
@@ -2002,14 +2007,22 @@ body.modal-open { animation-play-state: paused; }
         function reklamGosterVeyaGizle(slot) {
             let ins = slot.querySelector('ins.adsbygoogle');
             if (!ins) return;
-            try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+
+            // ÖNEMLİ: AdSense "auto" + "full-width-responsive" formatı, push() çağrıldığı anda
+            // kutunun görünür ve ölçülebilir (genişlik > 0) olmasını bekler. display:none iken
+            // push() çağrılırsa genişlik 0 okunur ve reklam doldurulamaz. Bu yüzden önce kutuyu
+            // görünür yapıp, tarayıcının bir sonraki frame'inde push() çağırıyoruz.
+            slot.style.display = 'flex';
+            requestAnimationFrame(() => {
+                try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+            });
 
             let karar_verildi = false;
             function kararVer() {
                 if (karar_verildi) return;
                 let adStatus = ins.getAttribute('data-ad-status');
-                if (adStatus === 'filled') { karar_verildi = true; slot.style.display = 'flex'; if (obs) obs.disconnect(); }
-                else if (adStatus === 'unfilled') { karar_verildi = true; slot.style.display = 'none'; if (obs) obs.disconnect(); }
+                if (adStatus === 'filled') { karar_verildi = true; slot.style.display = 'flex'; slot.classList.add('ad-filled'); if (obs) obs.disconnect(); }
+                else if (adStatus === 'unfilled') { karar_verildi = true; slot.style.display = 'none'; slot.classList.remove('ad-filled'); if (obs) obs.disconnect(); }
             }
 
             let obs = null;
@@ -2025,8 +2038,8 @@ body.modal-open { animation-play-state: paused; }
             setTimeout(() => {
                 if (karar_verildi) return;
                 let adStatus = ins.getAttribute('data-ad-status');
-                if (adStatus === 'unfilled') slot.style.display = 'none';
-                else slot.style.display = 'flex';
+                if (adStatus === 'unfilled') { slot.style.display = 'none'; slot.classList.remove('ad-filled'); }
+                else { slot.style.display = 'flex'; slot.classList.add('ad-filled'); }
                 if (obs) obs.disconnect();
             }, 4000);
         }
@@ -2197,7 +2210,10 @@ body.modal-open { animation-play-state: paused; }
             jokersUsed = { '50': false, 'degistir': false, 'cift': false, 'seyirci': false }; jokerButonlariniGuncelle();
             document.getElementById("current-category-label").innerText = kategori;
             document.getElementById("start-screen").classList.remove("active"); document.getElementById("screen-game").classList.add("active");
-            document.getElementById("game-over").style.display = "none"; odulAgaciniOlustur(); soruyuYukle();
+            document.getElementById("game-over").style.display = "none";
+            let mainGameEl2 = document.getElementById('main-game'); if (mainGameEl2) mainGameEl2.style.display = '';
+            let bottomBarEl2 = document.querySelector('.game-bottom-bar'); if (bottomBarEl2) bottomBarEl2.style.display = '';
+            odulAgaciniOlustur(); soruyuYukle();
 
             // Oyun ekranı reklamı: her kategori girişinde bir kez tetiklenir
             let gameAdSlot = document.getElementById('game-ad-slot');
@@ -2211,6 +2227,8 @@ body.modal-open { animation-play-state: paused; }
             sesCal('tiklama'); clearInterval(zamanlayiciInterval);
             document.body.style.background = "linear-gradient(-45deg, #020024, #090979, #002a4d, #000000)"; document.body.style.backgroundSize = "400% 400%";
             document.getElementById("screen-game").classList.remove("active"); document.getElementById("game-over").style.display = "none"; document.getElementById("start-screen").classList.add("active");
+            let mainGameEl3 = document.getElementById('main-game'); if (mainGameEl3) mainGameEl3.style.display = '';
+            let bottomBarEl3 = document.querySelector('.game-bottom-bar'); if (bottomBarEl3) bottomBarEl3.style.display = '';
             jokersUsed = { '50': false, 'degistir': false, 'cift': false, 'seyirci': false }; jokerButonlariniGuncelle();
             kasaGuncelle(0); 
         }
@@ -2385,7 +2403,10 @@ body.modal-open { animation-play-state: paused; }
         }
 
         function oyunuBitir(kazandi, sebepYazisi) {
-            clearInterval(zamanlayiciInterval); sesliOkumayiDurdur(); let finalEkrani = document.getElementById('game-over'); finalEkrani.style.display = 'flex'; document.getElementById('end-reason').innerText = sebepYazisi;
+            clearInterval(zamanlayiciInterval); sesliOkumayiDurdur();
+            let mainGameEl = document.getElementById('main-game'); if (mainGameEl) mainGameEl.style.display = 'none';
+            let bottomBarEl = document.querySelector('.game-bottom-bar'); if (bottomBarEl) bottomBarEl.style.display = 'none';
+            let finalEkrani = document.getElementById('game-over'); finalEkrani.style.display = 'flex'; document.getElementById('end-reason').innerText = sebepYazisi;
             let kazanilanOdulStr = "0 TL";
             if (kazandi) { kazanilanOdulStr = oduller[11]; document.getElementById('end-message').innerText = "TEBRİKLER! MİLYONER OLDUNUZ!"; document.getElementById('final-prize').innerText = `Kazanılan Ödül: ${kazanilanOdulStr}`; } 
             else { document.getElementById('end-message').innerText = "ELENDİNİZ."; kazanilanOdulStr = suankiSeviye > 7 ? oduller[6] : (suankiSeviye > 2 ? oduller[1] : "0 TL"); document.getElementById('final-prize').innerText = `Garanti Edilen Ödül: ${kazanilanOdulStr}`; }
@@ -2397,6 +2418,7 @@ body.modal-open { animation-play-state: paused; }
             let gameOverAdSlot = document.getElementById('gameover-ad-slot');
             if (gameOverAdSlot) {
                 gameOverAdSlot.style.display = 'none';
+                gameOverAdSlot.classList.remove('ad-filled');
                 gameOverAdSlot.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1880946354382681" data-ad-slot="1689789138" data-ad-format="auto" data-full-width-responsive="true"></ins>';
                 reklamGosterVeyaGizle(gameOverAdSlot);
             }
