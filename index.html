@@ -76,6 +76,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
         .action-btn:hover { background: #ffd166; color: #030926; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(255,209,102,0.6); }
+        .action-btn.tts-active { background: #ffd166; color: #030926; box-shadow: 0 0 15px rgba(255,209,102,0.8); animation: ttsPulse 1.1s ease-in-out infinite; }
+        @keyframes ttsPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
         .sound-btn { border-color: #f4c542; color: #f4c542; }
         .sound-btn:hover { background: #f4c542; color: #000000; box-shadow: 0 8px 15px rgba(244, 197, 66, 0.6); }
 
@@ -806,6 +808,7 @@ body::before, body::after { content: none !important; display: none !important; 
     color: var(--app-text) !important; box-shadow: none !important; border-radius: 14px !important;
 }
 .action-btn:hover { background: var(--app-primary) !important; color: #fff !important; border-color: var(--app-primary) !important; box-shadow: 0 6px 16px rgba(47,107,255,0.3) !important; }
+.action-btn.tts-active { background: var(--app-primary) !important; color: #fff !important; border-color: var(--app-primary) !important; box-shadow: 0 0 15px rgba(47,107,255,0.5) !important; animation: ttsPulse 1.1s ease-in-out infinite; }
 .sound-btn { border-color: var(--app-border) !important; color: var(--app-text) !important; }
 .sound-btn:hover { background: var(--app-accent2) !important; color: #1c2540 !important; border-color: var(--app-accent2) !important; }
 
@@ -1687,6 +1690,8 @@ body.modal-open { animation-play-state: paused; }
     <script>_kategoriDosyaKaydet('baskent');</script>
     <script src="sorular/teknoloji.js"></script>
     <script>_kategoriDosyaKaydet('teknoloji');</script>
+    <script src="sorular/turkce-sozluk.js"></script>
+    <script>_kategoriDosyaKaydet('turkce-sozluk');</script>
     <!-- YENİ BİR KATEGORİ EKLERSENİZ BURAYA YAZIN. Örnek: <script src="sorular/arabalar.js"></script><script>_kategoriDosyaKaydet('arabalar');</script> -->
 
     <script>
@@ -1826,14 +1831,17 @@ body.modal-open { animation-play-state: paused; }
 
         function metniOku(metin) {
             if (!konusmaDestekli || !metin) return;
+            const btnOku = document.getElementById('tts-toggle-game');
             const konusmayiBaslat = () => {
                 const konusma = new SpeechSynthesisUtterance(sayilariYaziyaCevir(metin));
                 konusma.lang = 'tr-TR';
                 if (trSes) konusma.voice = trSes;
                 konusma.rate = 0.95;
                 konusma.pitch = 1;
-                konusma.onerror = (e) => { console.warn('TTS hata:', e.error); };
+                konusma.onerror = (e) => { console.warn('TTS hata:', e.error); if (btnOku) btnOku.classList.remove('tts-active'); };
+                konusma.onend = () => { if (btnOku) btnOku.classList.remove('tts-active'); };
                 window.speechSynthesis.speak(konusma);
+                if (btnOku) btnOku.classList.add('tts-active');
             };
             window.speechSynthesis.cancel();
             // Bazı Android WebView/Chrome sürümlerinde cancel() hemen ardından
@@ -1843,6 +1851,8 @@ body.modal-open { animation-play-state: paused; }
 
         function sesliOkumayiDurdur() {
             if (konusmaDestekli) window.speechSynthesis.cancel();
+            const btnOku = document.getElementById('tts-toggle-game');
+            if (btnOku) btnOku.classList.remove('tts-active');
         }
 
         function aktifSoruyuMetneCevir() {
@@ -1858,6 +1868,11 @@ body.modal-open { animation-play-state: paused; }
         function soruyuSesliOku() {
             sesCal('tiklama');
             if (!konusmaDestekli) { alert("Cihazınız sesli okumayı desteklemiyor."); return; }
+            // Zaten okunuyorsa (konuşuyor veya duraklatılmışsa) tekrar basınca durdur
+            if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+                sesliOkumayiDurdur();
+                return;
+            }
             try { window.speechSynthesis.resume(); } catch(e) {}
             metniOku(aktifSoruyuMetneCevir());
         }
