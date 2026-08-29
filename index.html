@@ -236,78 +236,6 @@
         .qac-oneri:hover { box-shadow: 0 8px 20px rgba(23,185,120,0.3); }
         .qac-oneri .qac-title { color: var(--app-success, #17b978); }
 
-        /* --- MEYDAN OKUMA MODALI --- */
-        .meydan-modal-content { max-width: 420px; text-align: left; }
-        .meydan-sekme-bar { display: flex; gap: 8px; margin-bottom: 16px; }
-        .meydan-sekme-btn {
-            flex: 1; padding: 9px; border-radius: 12px; border: 1px solid var(--app-border, rgba(255,255,255,0.15));
-            background: var(--app-surface2, rgba(255,255,255,0.06)); color: var(--app-text, #fff);
-            font-weight: 800; font-size: 0.82rem; cursor: pointer; transition: all 0.2s ease;
-        }
-        .meydan-sekme-btn.active { background: #7c3aed; border-color: #7c3aed; color: #fff; }
-        .meydan-panel { display: none; }
-        .meydan-panel.active { display: block; }
-        .meydan-label { font-size: 0.78rem; font-weight: 800; opacity: 0.75; margin: 12px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .meydan-select, .meydan-input {
-            width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--app-border, rgba(255,255,255,0.18));
-            background: var(--app-surface2, rgba(255,255,255,0.07)); color: var(--app-text, #fff);
-            font-size: 0.9rem; font-weight: 600; font-family: inherit; outline: none;
-        }
-        .meydan-select:focus, .meydan-input:focus { border-color: #f4c542; }
-        .meydan-olustur-btn {
-            width: 100%; margin-top: 16px; padding: 12px; border-radius: 14px; border: none;
-            background: linear-gradient(135deg, #7c3aed, #f4c542); color: #fff; font-weight: 900;
-            font-size: 0.92rem; cursor: pointer; box-shadow: 0 6px 16px rgba(124,58,237,0.35);
-        }
-        .meydan-olustur-btn:active { transform: scale(0.98); }
-        .meydan-sonuc-kart {
-            display: none; margin-top: 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(244,197,66,0.4);
-            border-radius: 14px; padding: 14px;
-        }
-        .meydan-sonuc-kart.show { display: block; }
-        .meydan-link-row { display: flex; gap: 8px; margin-top: 10px; }
-        .meydan-link-input {
-            flex: 1; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--app-border, rgba(255,255,255,0.18));
-            background: rgba(0,0,0,0.25); color: var(--app-text, #fff); font-size: 0.78rem; font-family: monospace;
-        }
-        .meydan-kopyala-btn, .meydan-gonder-btn {
-            padding: 9px 14px; border-radius: 10px; border: none; background: #f4c542; color: #1a0b3d;
-            font-weight: 800; font-size: 0.8rem; cursor: pointer; white-space: nowrap;
-        }
-        .meydan-gecmis-liste { max-height: 260px; overflow-y: auto; margin-top: 4px; }
-        .meydan-gecmis-item {
-            display: flex; align-items: center; justify-content: space-between; gap: 10px;
-            padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;
-        }
-        .meydan-gecmis-sol { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-        .meydan-gecmis-kat { font-weight: 800; font-size: 0.85rem; }
-        .meydan-gecmis-alt { font-size: 0.72rem; opacity: 0.7; }
-        .meydan-gecmis-skor { font-weight: 900; font-size: 0.85rem; color: #f4c542; white-space: nowrap; }
-        .meydan-bos-mesaj { text-align: center; opacity: 0.7; font-size: 0.85rem; padding: 20px 10px; }
-
-        /* --- MEYDAN OKUMA: oyun içi rakip rozeti --- */
-        .meydan-rakip-banner {
-            display: flex; align-items: center; gap: 8px; justify-content: center;
-            background: linear-gradient(90deg, rgba(124,58,237,0.25), rgba(244,197,66,0.2));
-            border-bottom: 1px solid rgba(244,197,66,0.35);
-            padding: 6px 12px; font-size: 0.76rem; font-weight: 800; flex-shrink: 0;
-        }
-
-        /* --- MEYDAN OKUMA: oyun sonu karşılaştırma kartı --- */
-        .meydan-vs-kart {
-            display: none; margin: 14px auto 0; max-width: 320px; background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(244,197,66,0.4); border-radius: 16px; padding: 14px 16px;
-        }
-        .meydan-vs-kart.show { display: block; }
-        .meydan-vs-baslik { text-align: center; font-weight: 900; font-size: 0.85rem; color: #f4c542; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
-        .meydan-vs-satir { display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem; font-weight: 700; padding: 6px 0; }
-        .meydan-vs-satir.sen { color: #fff; }
-        .meydan-vs-satir.rakip { color: rgba(255,255,255,0.7); }
-        .meydan-vs-sonuc { text-align: center; margin-top: 8px; font-weight: 900; font-size: 0.95rem; }
-        .meydan-vs-sonuc.kazandin { color: #2ecc71; }
-        .meydan-vs-sonuc.kaybettin { color: #e74c3c; }
-        .meydan-vs-sonuc.berabere { color: #f4c542; }
 
         .wheel-modal-content { max-width: 360px; }
         .wheel-sub-text { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin: 4px 0 18px; }
@@ -941,18 +869,6 @@
         }
         .cat-info-card .about-stats { width: 100%; margin-bottom: 0; max-height: none; }
         .cat-info-start-btn { max-width: 440px; }
-        .cat-info-meydan-btn {
-            width: 100%; max-width: 440px; padding: 13px; border-radius: 16px;
-            border: none;
-            background: linear-gradient(135deg, #7c3aed, #a855f7 50%, #f4c542);
-            color: #fff; font-weight: 900; font-size: 0.92rem; cursor: pointer;
-            box-shadow: 0 6px 16px rgba(124,58,237,0.4);
-            text-shadow: 0 1px 3px rgba(0,0,0,0.35);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .cat-info-meydan-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(124,58,237,0.55); }
-        .cat-info-meydan-btn:active { transform: scale(0.98); }
-
         #game-over { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 15, 0.95); backdrop-filter: blur(10px); z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         #game-over h1 { color: #ffaa00; margin-bottom: 10px; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; text-shadow: 0 0 20px rgba(255,170,0,0.6); }
         #end-reason { color: white; font-size: 1.2rem; margin-bottom: 15px; font-weight: 600; }
@@ -1938,7 +1854,6 @@ body.modal-open { animation-play-state: paused; }
                 <div class="cat-info-meta" id="cat-info-meta"></div>
                 <div class="about-stats" id="cat-stats-body"></div>
             </div>
-            <button class="cat-info-meydan-btn" id="cat-info-meydan-btn" onclick="meydanOkumaModaliniAcKategoriIle()"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Bu Kategoride Meydan Oku</button>
             <button class="btn-close-about cat-info-start-btn" id="cat-stats-start-btn" onclick="katistatistikBaslaTiklandi()">▶ Başla</button>
         </div>
     </div>
@@ -1950,10 +1865,6 @@ body.modal-open { animation-play-state: paused; }
             <div class="top-bar-right">
                 <div class="kasa-badge" id="kasa-game" onclick="magazayiAc()" title="Mağazayı Aç"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M15 9.2c0-1.2-1.3-2.2-3-2.2s-3 .9-3 2.1c0 3 6 1.4 6 4.4 0 1.2-1.3 2.1-3 2.1s-3-1-3-2.2"/></svg> 0 TL</div>
             </div>
-        </div>
-
-        <div id="meydan-rakip-banner" class="meydan-rakip-banner" style="display:none;">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> <span id="meydan-rakip-metin"></span>
         </div>
 
         <div class="prize-container">
@@ -2102,10 +2013,6 @@ body.modal-open { animation-play-state: paused; }
                     <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
                     <span class="sheet-grid-label">Hatalarım</span>
                 </button>
-                <button class="sheet-grid-item" onclick="altMenuyuKapat(); meydanOkumaModaliniAc();">
-                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg></span>
-                    <span class="sheet-grid-label">Meydan Okuma</span>
-                </button>
                 <button class="sheet-grid-item" onclick="magazayiAc(); altMenuyuKapat();">
                     <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
                     <span class="sheet-grid-label">Mağaza</span>
@@ -2188,60 +2095,6 @@ body.modal-open { animation-play-state: paused; }
         </div>
     </div>
 
-    <!-- MEYDAN OKUMA MODALı -->
-    <div id="meydan-modal" class="modal-overlay">
-        <div class="modal-content meydan-modal-content">
-            <h3><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okuma</h3>
-            <div class="meydan-sekme-bar">
-                <button class="meydan-sekme-btn active" data-panel="meydan-panel-olustur" onclick="meydanSekmeSec('meydan-panel-olustur')"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> Oluştur</button>
-                <button class="meydan-sekme-btn" data-panel="meydan-panel-gecmis" onclick="meydanSekmeSec('meydan-panel-gecmis')"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Geçmiş</button>
-            </div>
-
-            <div id="meydan-panel-olustur" class="meydan-panel active">
-                <p class="meydan-label">Kategori</p>
-                <select id="meydan-kategori-secim" class="meydan-select"></select>
-
-                <p class="meydan-label">Rumuzun (skorunla birlikte gösterilecek)</p>
-                <input type="text" id="meydan-gonderen-adi" class="meydan-input" placeholder="Örn: Ahmet" maxlength="20">
-
-                <button class="meydan-olustur-btn" onclick="meydanOkumaOlustur()"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okuma Linki Oluştur</button>
-
-                <div id="meydan-sonuc-kart" class="meydan-sonuc-kart">
-                    <p style="font-weight:800; font-size:0.85rem;"><svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Meydan okuman hazır! Linki arkadaşına gönder:</p>
-                    <div class="meydan-link-row">
-                        <input type="text" id="meydan-link-alani" class="meydan-link-input" readonly>
-                        <button class="meydan-kopyala-btn" onclick="meydanLinkKopyala()"><svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Kopyala</button>
-                    </div>
-                    <div class="meydan-link-row">
-                        <button class="meydan-gonder-btn" style="flex:1;" onclick="meydanLinkPaylas()"><svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> Paylaş</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="meydan-panel-gecmis" class="meydan-panel">
-                <div id="meydan-gecmis-liste" class="meydan-gecmis-liste">
-                    <p class="meydan-bos-mesaj">Henüz bir meydan okuma sonucun yok.<br>Bir tane oluştur veya aldığın bir meydan okuma linkini aç!</p>
-                </div>
-            </div>
-
-            <button class="btn-close-about" style="margin-top:14px;" onclick="meydanOkumaModaliniKapat()">Kapat</button>
-        </div>
-    </div>
-
-    <!-- MEYDAN OKUMA DAVET EKRANI (link ile gelindiğinde gösterilir) -->
-    <div id="meydan-davet-modal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 380px; text-align:center;">
-            <h3><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okumaya Davet Edildin!</h3>
-            <p style="margin: 10px 0 4px; font-weight:800; font-size:1.05rem; color:#f4c542;" id="meydan-davet-gonderen"></p>
-            <p style="opacity:0.85; font-size:0.88rem; margin-bottom:10px;" id="meydan-davet-detay"></p>
-            <p style="opacity:0.75; font-size:0.85rem; margin-bottom:16px;">Aynı 12 soruyu cevaplayıp skorunu karşılaştırabilirsin. Hazır mısın?</p>
-            <div class="control-panel">
-                <button class="cp-btn" style="background:linear-gradient(135deg,#7c3aed,#f4c542); color:#fff;" onclick="meydanDavetiKabulEt()"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okumayı Kabul Et</button>
-                <button class="cp-btn btn-about" onclick="meydanDavetiReddet()">Belki Sonra</button>
-            </div>
-        </div>
-    </div>
-
     <!-- GÜNLÜK BONUS ÇARKI -->
     <div id="wheel-modal" class="modal-overlay">
         <div class="modal-content wheel-modal-content">
@@ -2263,16 +2116,6 @@ body.modal-open { animation-play-state: paused; }
         <div id="end-reason"></div>
         <h2 id="final-prize">Kazandığınız Ödül: 0 TL</h2>
         <h3 id="kasa-eklenen" style="color: #2ecc71; font-weight: 800; margin-top:10px;"></h3>
-
-        <div id="meydan-vs-kart" class="meydan-vs-kart">
-            <div class="meydan-vs-baslik"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okuma Sonucu</div>
-            <div class="meydan-vs-satir sen"><span id="meydan-vs-sen-ad">Sen</span><span id="meydan-vs-sen-skor">-</span></div>
-            <div class="meydan-vs-satir rakip"><span id="meydan-vs-rakip-ad">Rakip</span><span id="meydan-vs-rakip-skor">-</span></div>
-            <div id="meydan-vs-sonuc" class="meydan-vs-sonuc"></div>
-            <div class="meydan-link-row" style="margin-top:10px;">
-                <button class="meydan-gonder-btn" style="flex:1;" onclick="meydanSonucPaylas()"><svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> Sonucu Paylaş</button>
-            </div>
-        </div>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px;">
             <button class="restart-btn" onclick="oyunuGercektenBaslat(seciliKategori)"><svg class="icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Baştan Başla</button>
@@ -2384,274 +2227,6 @@ body.modal-open { animation-play-state: paused; }
         let jokersThisQuestion = { '50': false, 'degistir': false, 'cift': false, 'seyirci': false, 'dondur': false };
         let zamanDonduruldu = false;
         let buOyundaJokerKullanildiMi = false;
-
-        // ===== MEYDAN OKUMA MODU =====
-        // Backend olmadığı için meydan okuma, URL'e kodlanan bir "seed" ile çalışır:
-        // Aynı seed + aynı kategori + aynı soru havuzu => her iki cihazda da AYNI 12 soru, AYNI sırayla gelir.
-        // Böylece arkadaşınla tam olarak aynı soruları cevaplayıp skorlarınızı adil şekilde kıyaslayabilirsiniz.
-        const MEYDAN_ANAHTAR = 'mugolyoner_meydan_sonuclar';
-        let meydanAktif = false;          // şu an bir meydan okuma oyunu mu oynanıyor?
-        let meydanSeed = null;            // paylaşılan/alınan seed
-        let meydanKategori = null;
-        let meydanGonderenAdi = null;     // meydan okuyanın adı (URL'den geldiyse)
-        let meydanGonderenSkor = null;    // meydan okuyanın ulaştığı seviye/ödülü (URL'den geldiyse)
-        let meydanSoruSirasi = [];        // bu seed için önceden hesaplanmış soru dizisi
-
-        // Basit, deterministik string->sayı hash (mulberry32 tohumlama için)
-        function _meydanHashUret(str) {
-            let h = 1779033703 ^ str.length;
-            for (let i = 0; i < str.length; i++) {
-                h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
-                h = (h << 13) | (h >>> 19);
-            }
-            return function() {
-                h = Math.imul(h ^ (h >>> 16), 2246822507);
-                h = Math.imul(h ^ (h >>> 13), 3266489909);
-                h ^= h >>> 16;
-                return h >>> 0;
-            };
-        }
-        // Seed'e bağlı deterministik "rastgele" sayı üretici (0-1 arası)
-        function _meydanRngOlustur(seedStr) {
-            let seedFn = _meydanHashUret(seedStr);
-            let a = seedFn();
-            return function() {
-                a |= 0; a = (a + 0x6D2B79F5) | 0;
-                let t = Math.imul(a ^ (a >>> 15), 1 | a);
-                t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-            };
-        }
-        function _meydanRastgeleKod(uzunluk) {
-            let alfabe = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // karışıklık yaratan karakterler (0,O,1,I) çıkarıldı
-            let sonuc = '';
-            for (let i = 0; i < uzunluk; i++) sonuc += alfabe[Math.floor(Math.random() * alfabe.length)];
-            return sonuc;
-        }
-        // Verilen seed + kategoriye göre 12 soruluk deterministik diziyi üretir (Fisher-Yates, seed'li RNG ile)
-        function meydanSoruDizisiUret(seed, kategori) {
-            if (!window.tumSorular || window.tumSorular.length === 0) return [];
-            let havuz = kategori === 'Karışık' ? window.tumSorular.slice() : window.tumSorular.filter(s => s.kategori === kategori);
-            let rng = _meydanRngOlustur(seed + '::' + kategori);
-            // Fisher-Yates karıştırma (deterministik)
-            for (let i = havuz.length - 1; i > 0; i--) {
-                let j = Math.floor(rng() * (i + 1));
-                [havuz[i], havuz[j]] = [havuz[j], havuz[i]];
-            }
-            return havuz.slice(0, 12);
-        }
-        function meydanSonuclariYukle() {
-            try { return JSON.parse(localStorage.getItem(MEYDAN_ANAHTAR)) || {}; } catch(e) { return {}; }
-        }
-        function meydanSonucKaydet(seed, veri) {
-            let tum = meydanSonuclariYukle();
-            tum[seed] = veri;
-            try { localStorage.setItem(MEYDAN_ANAHTAR, JSON.stringify(tum)); } catch(e) {}
-        }
-
-        // --- Modal aç/kapat ---
-        function meydanOkumaModaliniAc(onSeciliKategori) {
-            sesCal('tiklama');
-            let secim = document.getElementById('meydan-kategori-secim');
-            if (secim && window.tumSorular && window.tumSorular.length) {
-                let kategoriler = [...new Set(window.tumSorular.map(s => s.kategori))];
-                secim.innerHTML = `<option value="Karışık">Karışık</option>` +
-                    kategoriler.map(k => `<option value="${k}">${kategoriEmojiGetir(k)} ${k}</option>`).join('');
-                if (onSeciliKategori && kategoriler.includes(onSeciliKategori)) secim.value = onSeciliKategori;
-            }
-            document.getElementById('meydan-sonuc-kart').classList.remove('show');
-            meydanGecmisiRenderla();
-            // Kategori seçilerek açıldıysa doğrudan "Oluştur" sekmesini göster
-            meydanSekmeSec('meydan-panel-olustur');
-            document.getElementById('meydan-modal').style.display = 'flex';
-            document.body.classList.add('modal-open');
-        }
-        // Kategori ön-bilgi ekranındaki "Bu Kategoride Meydan Oku" butonu için sarmalayıcı
-        function meydanOkumaModaliniAcKategoriIle() {
-            meydanOkumaModaliniAc(_katistatistikBekleyenKategori);
-        }
-        function meydanOkumaModaliniKapat() {
-            sesCal('tiklama');
-            document.getElementById('meydan-modal').style.display = 'none';
-            document.body.classList.remove('modal-open');
-        }
-        function meydanSekmeSec(panelId) {
-            sesCal('tiklama');
-            document.querySelectorAll('.meydan-sekme-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-panel') === panelId));
-            document.querySelectorAll('.meydan-panel').forEach(p => p.classList.toggle('active', p.id === panelId));
-            if (panelId === 'meydan-panel-gecmis') meydanGecmisiRenderla();
-        }
-
-        // --- Meydan okuma linki oluşturma ---
-        function meydanOkumaOlustur() {
-            let kategori = document.getElementById('meydan-kategori-secim').value || 'Karışık';
-            let adInput = document.getElementById('meydan-gonderen-adi');
-            let ad = (adInput.value || '').trim() || 'Bir Arkadaşın';
-            if (!window.tumSorular || window.tumSorular.length === 0) { alert('Sorular henüz yüklenmedi, birazdan tekrar deneyin.'); return; }
-
-            let seed = _meydanRastgeleKod(6);
-            let diziKontrol = meydanSoruDizisiUret(seed, kategori);
-            if (diziKontrol.length < 3) { alert('Bu kategoride yeterli soru yok, başka bir kategori seçin.'); return; }
-
-            sesCal('dogru');
-            let url = new URL(window.location.href);
-            url.search = ''; url.hash = '';
-            url.searchParams.set('meydan', seed);
-            url.searchParams.set('kat', kategori);
-            url.searchParams.set('ad', ad);
-
-            let linkAlani = document.getElementById('meydan-link-alani');
-            linkAlani.value = url.toString();
-            document.getElementById('meydan-sonuc-kart').classList.add('show');
-
-            // Kendi tarafımızda da bu seed'i "gönderdiğim meydan okuma" olarak geçmişe kaydedelim (sonuç henüz yok)
-            let tum = meydanSonuclariYukle();
-            if (!tum[seed]) {
-                meydanSonucKaydet(seed, { kategori, gonderenAdi: ad, rol: 'gonderen', tarih: Date.now(), benimSonuc: null });
-            }
-        }
-        function meydanLinkKopyala() {
-            let linkAlani = document.getElementById('meydan-link-alani');
-            linkAlani.select(); linkAlani.setSelectionRange(0, 99999);
-            try {
-                navigator.clipboard.writeText(linkAlani.value);
-                sesCal('dogru');
-                alert('Link kopyalandı! Şimdi arkadaşına gönderebilirsin.');
-            } catch(e) {
-                document.execCommand('copy');
-            }
-        }
-        function meydanLinkPaylas() {
-            sesCal('tiklama');
-            let link = document.getElementById('meydan-link-alani').value;
-            let mesaj = `Sana meydan okuyorum! MuGöl BİLGİN'de aynı soruları cevaplayıp skorumuzu kıyaslayalım:\n${link}`;
-            if (navigator.share) {
-                navigator.share({ title: 'MuGöl BİLGİN - Meydan Okuma', text: mesaj }).catch(() => {});
-            } else {
-                window.open('https://wa.me/?text=' + encodeURIComponent(mesaj), '_blank');
-            }
-        }
-
-        // --- Gelen meydan okuma linkini kontrol et (sayfa açılışında çağrılır) ---
-        function meydanLinkKontrolEt() {
-            try {
-                let params = new URLSearchParams(window.location.search);
-                let seed = params.get('meydan');
-                if (!seed) return;
-                let kategori = params.get('kat') || 'Karışık';
-                let gonderenAdi = params.get('ad') || 'Bir Arkadaşın';
-
-                meydanSeed = seed; meydanKategori = kategori; meydanGonderenAdi = gonderenAdi;
-
-                let tum = meydanSonuclariYukle();
-                let kayit = tum[seed];
-                let gonderenSkorMetni = 'Bilinmiyor';
-                if (kayit && kayit.gonderenSonuc) gonderenSkorMetni = kayit.gonderenSonuc.oduMetni;
-
-                document.getElementById('meydan-davet-gonderen').innerText = `${gonderenAdi} seni meydan okumaya çağırıyor!`;
-                document.getElementById('meydan-davet-detay').innerText = `Kategori: ${kategoriEmojiGetir(kategori)} ${kategori}`;
-                document.getElementById('meydan-davet-modal').style.display = 'flex';
-                document.body.classList.add('modal-open');
-
-                // URL'i temizle ki sayfa yenilenince tekrar tetiklenmesin
-                window.history.replaceState({}, '', window.location.pathname);
-            } catch(e) {}
-        }
-        function meydanDavetiReddet() {
-            sesCal('tiklama');
-            document.getElementById('meydan-davet-modal').style.display = 'none';
-            document.body.classList.remove('modal-open');
-            meydanSeed = null; meydanKategori = null; meydanGonderenAdi = null;
-        }
-        function meydanDavetiKabulEt() {
-            sesCal('dogru');
-            document.getElementById('meydan-davet-modal').style.display = 'none';
-            document.body.classList.remove('modal-open');
-            if (!meydanSeed || !meydanKategori) return;
-            meydanAktif = true;
-            meydanSoruSirasi = meydanSoruDizisiUret(meydanSeed, meydanKategori);
-            oyunuGercektenBaslat(meydanKategori);
-        }
-
-        // --- Geçmiş listesi ---
-        function meydanGecmisiRenderla() {
-            let liste = document.getElementById('meydan-gecmis-liste');
-            if (!liste) return;
-            let tum = meydanSonuclariYukle();
-            let anahtarlar = Object.keys(tum).sort((a, b) => (tum[b].tarih || 0) - (tum[a].tarih || 0));
-            if (anahtarlar.length === 0) {
-                liste.innerHTML = `<p class="meydan-bos-mesaj">Henüz bir meydan okuma sonucun yok.<br>Bir tane oluştur veya aldığın bir meydan okuma linkini aç!</p>`;
-                return;
-            }
-            liste.innerHTML = anahtarlar.map(seed => {
-                let kayit = tum[seed];
-                let benim = kayit.benimSonuc ? kayit.benimSonuc.oduMetni : null;
-                let rakip = kayit.rol === 'gonderen' ? (kayit.gonderenSonuc ? null : null) : (kayit.gonderenSonuc ? kayit.gonderenSonuc.oduMetni : null);
-                let durum;
-                if (kayit.rol === 'gonderen') {
-                    durum = benim ? `Sen: ${benim}` : 'Henüz oynamadın';
-                } else {
-                    durum = benim ? `Sen: ${benim} · ${kayit.gonderenAdi || 'Rakip'}: ${rakip || '?'}` : `${kayit.gonderenAdi || 'Rakip'} meydan okudu`;
-                }
-                return `
-                    <div class="meydan-gecmis-item">
-                        <div class="meydan-gecmis-sol">
-                            <span class="meydan-gecmis-kat">${kategoriEmojiGetir(kayit.kategori)} ${kayit.kategori}</span>
-                            <span class="meydan-gecmis-alt">${durum}</span>
-                        </div>
-                        <span class="meydan-gecmis-skor">${benim ? '<svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'}</span>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // --- Oyun sonunda meydan okuma sonucunu kaydet ve karşılaştırma göster ---
-        function meydanOyunSonuIsle(kazanilanOdulStr, eklenecekMiktar) {
-            if (!meydanAktif || !meydanSeed) return;
-            let tum = meydanSonuclariYukle();
-            let kayit = tum[meydanSeed] || { kategori: meydanKategori, gonderenAdi: meydanGonderenAdi, tarih: Date.now(), rol: 'alan' };
-            kayit.rol = kayit.rol || 'alan';
-            let benimSonuc = { oduMetni: kazanilanOdulStr, miktar: eklenecekMiktar, tarih: Date.now() };
-
-            let vsKart = document.getElementById('meydan-vs-kart');
-            let senAd = 'Sen', rakipAd = meydanGonderenAdi || 'Rakip', rakipMiktar = null;
-
-            if (kayit.rol === 'gonderen') {
-                kayit.gonderenSonuc = benimSonuc; kayit.benimSonuc = benimSonuc;
-            } else {
-                kayit.benimSonuc = benimSonuc;
-                rakipMiktar = kayit.gonderenSonuc ? kayit.gonderenSonuc.miktar : null;
-            }
-            meydanSonucKaydet(meydanSeed, kayit);
-
-            document.getElementById('meydan-vs-sen-ad').innerText = senAd;
-            document.getElementById('meydan-vs-sen-skor').innerText = kazanilanOdulStr;
-            document.getElementById('meydan-vs-rakip-ad').innerText = rakipAd;
-
-            if (rakipMiktar === null) {
-                document.getElementById('meydan-vs-rakip-skor').innerText = 'Henüz oynamadı';
-                document.getElementById('meydan-vs-sonuc').innerText = 'Rakibin oynayınca sonucu burada görebilirsin.';
-                document.getElementById('meydan-vs-sonuc').className = 'meydan-vs-sonuc berabere';
-            } else {
-                let kayitliRakipOdul = kayit.gonderenSonuc.oduMetni;
-                document.getElementById('meydan-vs-rakip-skor').innerText = kayitliRakipOdul;
-                let sonucEl = document.getElementById('meydan-vs-sonuc');
-                if (eklenecekMiktar > rakipMiktar) { sonucEl.innerText = 'Kazandın!'; sonucEl.className = 'meydan-vs-sonuc kazandin'; }
-                else if (eklenecekMiktar < rakipMiktar) { sonucEl.innerText = 'Bu sefer rakibin önde.'; sonucEl.className = 'meydan-vs-sonuc kaybettin'; }
-                else { sonucEl.innerText = 'Berabere!'; sonucEl.className = 'meydan-vs-sonuc berabere'; }
-            }
-            vsKart.classList.add('show');
-        }
-        function meydanSonucPaylas() {
-            sesCal('tiklama');
-            let senSkor = document.getElementById('meydan-vs-sen-skor').innerText;
-            let mesaj = `MuGöl BİLGİN meydan okumasında ${senSkor} kazandım! Sıra sende, beni geçebilir misin?`;
-            if (navigator.share) {
-                navigator.share({ title: 'MuGöl BİLGİN - Meydan Okuma Sonucu', text: mesaj }).catch(() => {});
-            } else {
-                window.open('https://wa.me/?text=' + encodeURIComponent(mesaj), '_blank');
-            }
-        }
 
         // ===== İSTATİSTİK SİSTEMİ =====
         const ISTATISTIK_ANAHTAR = 'mugolyoner_istatistik';
@@ -3945,8 +3520,6 @@ body.modal-open { animation-play-state: paused; }
         let _katistatistikBekleyenKategori = null;
         function oyunuBaslat(kategori) {
             sesCal('tiklama');
-            // Kategori kartından normal başlatma her zaman meydan okuma modunu iptal eder
-            meydanAktif = false; meydanSeed = null; meydanKategori = null; meydanGonderenAdi = null; meydanSoruSirasi = [];
             _katistatistikBekleyenKategori = kategori;
 
             let emoji = kategoriEmojiGetir(kategori);
@@ -4002,20 +3575,6 @@ body.modal-open { animation-play-state: paused; }
             let mainGameEl2 = document.getElementById('main-game'); if (mainGameEl2) mainGameEl2.style.display = '';
             let bottomBarEl2 = document.querySelector('.game-bottom-bar'); if (bottomBarEl2) bottomBarEl2.style.display = '';
 
-            // Meydan okuma modu aktifse soru sırası zaten deterministik olarak hazırlanmıştır;
-            // önceden görülmüş/kaydedilmiş soru filtresi bu oyunda devre dışı bırakılır ki
-            // her iki taraf da TAM AYNI 12 soruyu görsün.
-            let rakipBanner = document.getElementById('meydan-rakip-banner');
-            if (meydanAktif) {
-                if (!meydanSoruSirasi || meydanSoruSirasi.length === 0) meydanSoruSirasi = meydanSoruDizisiUret(meydanSeed, meydanKategori);
-                if (rakipBanner) {
-                    document.getElementById('meydan-rakip-metin').innerText = `${meydanGonderenAdi || 'Bir arkadaşın'} ile meydan okuma modundasın — aynı sorular!`;
-                    rakipBanner.style.display = 'flex';
-                }
-            } else if (rakipBanner) {
-                rakipBanner.style.display = 'none';
-            }
-
             odulAgaciniOlustur(); soruyuYukle(); sesliKomutDinlemeyeBasla();
         }
 
@@ -4027,10 +3586,6 @@ body.modal-open { animation-play-state: paused; }
             let bottomBarEl3 = document.querySelector('.game-bottom-bar'); if (bottomBarEl3) bottomBarEl3.style.display = '';
             jokersUsed = { '50': false, 'degistir': false, 'cift': false, 'seyirci': false, 'dondur': false }; jokerButonlariniGuncelle();
             kasaGuncelle(0); sesliKomutDinlemeyiDurdur();
-            // Ana menüye dönüldüğünde meydan okuma oturumu sona erer (rozet de gizlenir)
-            meydanAktif = false; meydanSeed = null; meydanKategori = null; meydanGonderenAdi = null; meydanSoruSirasi = [];
-            let rakipBanner2 = document.getElementById('meydan-rakip-banner'); if (rakipBanner2) rakipBanner2.style.display = 'none';
-            let vsKart2 = document.getElementById('meydan-vs-kart'); if (vsKart2) vsKart2.classList.remove('show');
         }
 
         function odulAgaciniOlustur() {
@@ -4080,20 +3635,13 @@ body.modal-open { animation-play-state: paused; }
             if(aktifOdulUI) { aktifOdulUI.classList.add('active'); if (window.innerWidth < 768) aktifOdulUI.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }); }
 
             let yeniSoru;
-            if (meydanAktif && meydanSoruSirasi && meydanSoruSirasi.length > 0) {
-                // Meydan okuma modu: deterministik sıradan al (seviye 1 => index 0, vb.)
-                // Bu sayede meydan okuyan ve kabul eden TAM AYNI sorulara, AYNI sırayla maruz kalır.
-                let index = Math.min(suankiSeviye - 1, meydanSoruSirasi.length - 1);
-                yeniSoru = meydanSoruSirasi[index];
-            } else {
-                let havuz = window.tumSorular; if (seciliKategori !== "Karışık") { havuz = window.tumSorular.filter(s => s.kategori === seciliKategori); }
-                let sorulmamislar = havuz.filter(s => !sorulmusSorular.includes(s.soru));
-                if (sorulmamislar.length === 0) {
-                    let havuzSorulari = havuz.map(s => s.soru); sorulmusSorular = sorulmusSorular.filter(q => !havuzSorulari.includes(q)); kaydetSorulmus(); sorulmamislar = havuz;
-                }
-                yeniSoru = sorulmamislar[Math.floor(Math.random() * sorulmamislar.length)];
-                sorulmusSorular.push(yeniSoru.soru); kaydetSorulmus();
+            let havuz = window.tumSorular; if (seciliKategori !== "Karışık") { havuz = window.tumSorular.filter(s => s.kategori === seciliKategori); }
+            let sorulmamislar = havuz.filter(s => !sorulmusSorular.includes(s.soru));
+            if (sorulmamislar.length === 0) {
+                let havuzSorulari = havuz.map(s => s.soru); sorulmusSorular = sorulmusSorular.filter(q => !havuzSorulari.includes(q)); kaydetSorulmus(); sorulmamislar = havuz;
             }
+            yeniSoru = sorulmamislar[Math.floor(Math.random() * sorulmamislar.length)];
+            sorulmusSorular.push(yeniSoru.soru); kaydetSorulmus();
             aktifSoru = yeniSoru;
 
             document.getElementById('q-text-span').innerText = aktifSoru.soru; document.querySelector('#btn-A .text').innerText = aktifSoru.secenekler.A;
@@ -4270,9 +3818,6 @@ body.modal-open { animation-play-state: paused; }
             let eklenecekMiktar = parseInt(kazanilanOdulStr.replace(/[^0-9]/g, '')) || 0;
             if (eklenecekMiktar > 0) { kasaGuncelle(eklenecekMiktar); document.getElementById('kasa-eklenen').innerText = `Kasanıza Eklendi: +${eklenecekMiktar.toLocaleString('tr-TR')} TL`; } 
             else { document.getElementById('kasa-eklenen').innerText = ""; }
-
-            // Meydan okuma modundaysak sonucu kaydet ve rakip karşılaştırma kartını göster
-            meydanOyunSonuIsle(kazanilanOdulStr, eklenecekMiktar);
 
             // Oyun sonu reklamı: her seferinde yeniden tetiklenmesi için önceki ins'i temizleyip yeniden oluştur
             let gameOverAdSlot = document.getElementById('gameover-ad-slot');
@@ -4683,7 +4228,7 @@ body.modal-open { animation-play-state: paused; }
         window.addEventListener('online', ceviriDurumGuncelle);
         window.addEventListener('offline', ceviriDurumGuncelle);
 
-        window.onload = () => { setTimeout(() => { kategorileriYukle(); sutunSayisiBaslat(); gorunumModuBaslat(); }, 300); kasaGuncelle(0); appTemaBaslat(); karsilamaMesajiniKontrolEt(); gunlukCarkBanneriniGuncelle(); meydanLinkKontrolEt(); setTimeout(() => { if (!carkBugunCevrildiMi() && !document.getElementById('meydan-davet-modal').style.display.includes('flex')) gunlukCarkAc(); }, 900); hizliOynaKontrolEt(); ceviriDurumGuncelle(); };
+        window.onload = () => { setTimeout(() => { kategorileriYukle(); sutunSayisiBaslat(); gorunumModuBaslat(); }, 300); kasaGuncelle(0); appTemaBaslat(); karsilamaMesajiniKontrolEt(); gunlukCarkBanneriniGuncelle(); setTimeout(() => { if (!carkBugunCevrildiMi()) gunlukCarkAc(); }, 900); hizliOynaKontrolEt(); ceviriDurumGuncelle(); };
 
         // ===== KATEGORİ SÜTUN SAYISI =====
         function sutunSayisiAyarla(sayi, kaydet) {
