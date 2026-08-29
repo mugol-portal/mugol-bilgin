@@ -500,8 +500,6 @@ window.tumSorular.push(
     { seviye: 647, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Sert Buğday'ı meşhurdur?", secenekler: { A: "Gaziantep - Şanlıurfa", B: "Diyarbakır", C: "Mardin", D: "Konya" }, dogruCevap: "A" },
     { seviye: 648, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Mısır'ı meşhurdur?", secenekler: { A: "Adana - Sakarya - Konya", B: "Şanlıurfa", C: "Mardin", D: "Hepsi" }, dogruCevap: "D" },
     { seviye: 649, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Yer Elması' meşhurdur?", secenekler: { A: "Hatay - Ankara - Kayseri", B: "Muğla", C: "Antalya", D: "İzmir" }, dogruCevap: "A" },
-    { seviye: 650, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Karnabahar ve Brokoli'si meşhurdur?", secenekler: { A: "Bursa - İzmir - Antalya", B: "Aydın", C: "Hepsi", D: "Muğla" }, dogruCevap: "C" }
- 
- 
- 
+    { seviye: 650, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Karnabahar ve Brokoli'si meşhurdur?", secenekler: { A: "Bursa - İzmir - Antalya", B: "Aydın", C: "Hepsi", D: "Muğla" }, dogruCevap: "C" },
+    { seviye: 651, kategori: "İller ve Meşhurlar", soru: "Hangi ilimizin 'Ipek Böcekçiliği' geleneği meşhurdur?", secenekler: { A: "Bursa", B: "Antalya", C: "Trabzon", D: "Kars" }, dogruCevap: "A" }
 );

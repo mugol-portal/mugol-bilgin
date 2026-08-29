@@ -404,7 +404,13 @@ window.tumSorular.push(
     { seviye: 452, kategori: "Genel Kültür", soru: "Boğaz kıyısında bulunan ve Avrupa'nın en lüks saraylarından biri kabul edilen yapı?", secenekler: { A: "Çırağan Sarayı", B: "Yıldız Sarayı", C: "Dolmabahçe Sarayı", D: "Beylerbeyi Sarayı" }, dogruCevap: "C" },
     { seviye: 454, kategori: "Genel Kültür", soru: "Sultan Ahmet tarafından yaptırılan ve 'Mavi Cami' olarak bilinen yapı?", secenekler: { A: "Sultanahmet Camii", B: "Ortaköy Camii", C: "Yeni Cami", D: "Fatih Camii" }, dogruCevap: "A" },
     { seviye: 458, kategori: "Genel Kültür", soru: "Haliç üzerinde bulunan ve Karaköy ile Eminönü'nü bağlayan köprü?", secenekler: { A: "Haliç Köprüsü", B: "Metro Köprüsü", C: "Galata Köprüsü", D: "Unkapanı Köprüsü" }, dogruCevap: "C" },
-    { seviye: 499, kategori: "Genel Kültür", soru: "Fırat nehri kıyısındaki yarısı sular altında kalmış ilçe?", secenekler: { A: "Yavuzeli", B: "Nizip", C: "Birecik", D: "Halfeti" }, dogruCevap: "D" }
- 
- 
+    { seviye: 499, kategori: "Genel Kültür", soru: "Fırat nehri kıyısındaki yarısı sular altında kalmış ilçe?", secenekler: { A: "Yavuzeli", B: "Nizip", C: "Birecik", D: "Halfeti" }, dogruCevap: "D" },
+    { seviye: 551, kategori: "Genel Kültür", soru: "Kütahya'da Osmanlı dönemine ait tarihi çini ve seramik merkezi?", secenekler: { A: "Kütahya Çarşısı", B: "Kütahya Kalesi", C: "Germiyan Konakları", D: "Kütahya Çini Atölyeleri" }, dogruCevap: "D" },
+    { seviye: 552, kategori: "Genel Kültür", soru: "Uşak'ta bulunan ve halı dokumacılığıyla ünlü tarihi bölge?", secenekler: { A: "Uşak Halı Merkezi", B: "Banaz", C: "Eşme", D: "Sivaslı" }, dogruCevap: "A" },
+    { seviye: 553, kategori: "Genel Kültür", soru: "Manisa'da bulunan ve mesir macunu geleneğiyle ünlü tarihi cami?", secenekler: { A: "Muradiye Camii", B: "Sultan Camii", C: "Hatuniye Camii", D: "Ulu Cami" }, dogruCevap: "B" },
+    { seviye: 554, kategori: "Genel Kültür", soru: "Afyonkarahisar'ın simgesi olan ve şehre hakim kayalık tepe?", secenekler: { A: "Afyon Kalesi", B: "Sandıklı Kalesi", C: "İscehisar", D: "Şuhut Kalesi" }, dogruCevap: "A" },
+    { seviye: 555, kategori: "Genel Kültür", soru: "Kırşehir'de bulunan ve Ahilik teşkilatının merkezi kabul edilen türbe?", secenekler: { A: "Cacabey Medresesi", B: "Ahi Evran Türbesi", C: "Aşık Paşa Türbesi", D: "Melik Gazi Türbesi" }, dogruCevap: "B" },
+    { seviye: 556, kategori: "Genel Kültür", soru: "Yozgat'ta bulunan ve Osmanlı dönemine ait tarihi konak/müze?", secenekler: { A: "Çapanoğlu Camii", B: "Yozgat Kalesi", C: "Nizamoğlu Konağı", D: "Başçavuş Camii" }, dogruCevap: "C" },
+    { seviye: 557, kategori: "Genel Kültür", soru: "Çorum'da bulunan ve Hitit uygarlığına ait büyük açık hava müzesi?", secenekler: { A: "Alacahöyük", B: "Boğazköy (Hattuşa)", C: "Şapinuva", D: "Eskiyapar" }, dogruCevap: "B" },
+    { seviye: 558, kategori: "Genel Kültür", soru: "Amasya yakınlarındaki ve Pontus Krallığı dönemine ait antik kent kalıntıları?", secenekler: { A: "Amaseia (Amasya Antik Kenti)", B: "Zela", C: "Comana", D: "Gaziura" }, dogruCevap: "A" }
 );
