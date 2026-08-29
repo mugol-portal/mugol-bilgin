@@ -200,47 +200,114 @@
         }
         .welcome-banner-btn:active { transform: scale(0.96); }
 
-        /* --- GÜNLÜK BONUS ÇARKI ---
-           Sabit koyu-zemin renkleri yerine temaya duyarlı yüzey/metin renkleri kullanılır,
-           böylece açık temalarda (günbatımı, orman, pembe, gökmavi vb.) kart ve yazılar
-           arka planla aynı tona düşüp kaybolmaz. */
-        .daily-wheel-banner {
-            width: 100%; display: flex; align-items: center; gap: 12px; text-align: left;
-            background: linear-gradient(135deg, color-mix(in oklab, var(--app-primary, #7c5cff) 20%, var(--app-surface, #1a0b3d)), color-mix(in oklab, var(--app-accent2, #ff8a3d) 16%, var(--app-surface, #1a0b3d)));
-            border: 1px solid color-mix(in oklab, var(--app-accent, #ffd166) 45%, transparent); border-radius: 18px; padding: 12px 16px;
-            margin: 6px 0 18px; cursor: pointer; color: var(--app-text, #ffffff); font-family: inherit;
+        /* --- HIZLI EYLEMLER SATIRI: Günlük Çark + Sana Özel, yan yana tek satır --- */
+        .quick-actions-row { display: flex; gap: 10px; margin: 6px 0 18px; }
+        .quick-action-card {
+            flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; text-align: left;
+            border-radius: 16px; padding: 11px 12px;
+            cursor: pointer; color: var(--app-text, #ffffff); font-family: inherit; border: 1px solid transparent;
             animation: slideUpFade 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .daily-wheel-banner:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,138,61,0.3); }
-        .daily-wheel-banner:active { transform: scale(0.98); }
-        .daily-wheel-banner.done { opacity: 0.55; filter: grayscale(0.4); }
-        .dwb-icon { font-size: 1.8rem; flex-shrink: 0; animation: dwbSpinHint 3.5s ease-in-out infinite; }
-        @keyframes dwbSpinHint { 0%, 80%, 100% { transform: rotate(0deg); } 85% { transform: rotate(-12deg); } 90% { transform: rotate(12deg); } 95% { transform: rotate(-6deg); } }
-        .dwb-text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-        .dwb-title { font-weight: 900; font-size: 0.9rem; color: var(--app-primary-dark, #ffd166); }
-        .dwb-sub { font-size: 0.72rem; color: var(--app-text-soft, rgba(255,255,255,0.75)); font-weight: 600; }
-        .dwb-arrow { font-size: 1.4rem; color: var(--app-text-soft, rgba(255,255,255,0.5)); flex-shrink: 0; }
-        /* Koyu (varsayılan) ve koyu-mavi/aurora temalarında başlık altın rengiyle vurgulanır */
-        html:not([data-app-tema]) .dwb-title,
-        html[data-app-tema="lacivert"] .dwb-title,
-        html[data-app-tema="aurora"] .dwb-title { color: var(--app-accent, #ffd166); }
+        .quick-action-card:hover { transform: translateY(-2px); }
+        .quick-action-card:active { transform: scale(0.98); }
+        .qac-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .qac-text { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+        .qac-title { font-weight: 900; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .qac-sub { font-size: 0.66rem; color: var(--app-text-soft, rgba(255,255,255,0.75)); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .kategori-oneri-kart {
-            width: 100%; display: flex; align-items: center; gap: 12px; text-align: left;
-            background: linear-gradient(135deg, color-mix(in oklab, var(--app-success, #17b978) 22%, var(--app-surface, #1a0b3d)), color-mix(in oklab, var(--app-primary, #7c5cff) 16%, var(--app-surface, #1a0b3d)));
-            border: 1px solid color-mix(in oklab, var(--app-success, #17b978) 45%, transparent); border-radius: 18px; padding: 12px 16px;
-            margin: 6px 0 14px; cursor: pointer; color: var(--app-text, #ffffff); font-family: inherit;
-            animation: slideUpFade 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        #daily-wheel-btn {
+            background: linear-gradient(135deg, color-mix(in oklab, var(--app-primary, #7c5cff) 20%, var(--app-surface, #1a0b3d)), color-mix(in oklab, var(--app-accent2, #ff8a3d) 16%, var(--app-surface, #1a0b3d)));
+            border-color: color-mix(in oklab, var(--app-accent, #ffd166) 45%, transparent);
         }
-        .kategori-oneri-kart:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(23,185,120,0.3); }
-        .kategori-oneri-kart:active { transform: scale(0.98); }
-        .oneri-icon { font-size: 1.6rem; flex-shrink: 0; }
-        .oneri-text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-        .oneri-baslik { font-weight: 900; font-size: 0.85rem; color: var(--app-success, #17b978); }
-        .oneri-alt { font-size: 0.72rem; color: var(--app-text-soft, rgba(255,255,255,0.75)); font-weight: 600; }
-        .oneri-arrow { font-size: 1.4rem; color: var(--app-text-soft, rgba(255,255,255,0.5)); flex-shrink: 0; }
+        #daily-wheel-btn:hover { box-shadow: 0 8px 20px rgba(255,138,61,0.3); }
+        #daily-wheel-btn.done { opacity: 0.55; filter: grayscale(0.4); }
+        .qac-icon { animation: dwbSpinHint 3.5s ease-in-out infinite; }
+        @keyframes dwbSpinHint { 0%, 80%, 100% { transform: rotate(0deg); } 85% { transform: rotate(-12deg); } 90% { transform: rotate(12deg); } 95% { transform: rotate(-6deg); } }
+        #daily-wheel-btn .qac-title { color: var(--app-primary-dark, #ffd166); }
+        html:not([data-app-tema]) #daily-wheel-btn .qac-title,
+        html[data-app-tema="lacivert"] #daily-wheel-btn .qac-title,
+        html[data-app-tema="aurora"] #daily-wheel-btn .qac-title { color: var(--app-accent, #ffd166); }
+
+        .qac-oneri {
+            background: linear-gradient(135deg, color-mix(in oklab, var(--app-success, #17b978) 22%, var(--app-surface, #1a0b3d)), color-mix(in oklab, var(--app-primary, #7c5cff) 16%, var(--app-surface, #1a0b3d)));
+            border-color: color-mix(in oklab, var(--app-success, #17b978) 45%, transparent);
+        }
+        .qac-oneri:hover { box-shadow: 0 8px 20px rgba(23,185,120,0.3); }
+        .qac-oneri .qac-title { color: var(--app-success, #17b978); }
+
+        /* --- MEYDAN OKUMA MODALI --- */
+        .meydan-modal-content { max-width: 420px; text-align: left; }
+        .meydan-sekme-bar { display: flex; gap: 8px; margin-bottom: 16px; }
+        .meydan-sekme-btn {
+            flex: 1; padding: 9px; border-radius: 12px; border: 1px solid var(--app-border, rgba(255,255,255,0.15));
+            background: var(--app-surface2, rgba(255,255,255,0.06)); color: var(--app-text, #fff);
+            font-weight: 800; font-size: 0.82rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .meydan-sekme-btn.active { background: #7c3aed; border-color: #7c3aed; color: #fff; }
+        .meydan-panel { display: none; }
+        .meydan-panel.active { display: block; }
+        .meydan-label { font-size: 0.78rem; font-weight: 800; opacity: 0.75; margin: 12px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .meydan-select, .meydan-input {
+            width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--app-border, rgba(255,255,255,0.18));
+            background: var(--app-surface2, rgba(255,255,255,0.07)); color: var(--app-text, #fff);
+            font-size: 0.9rem; font-weight: 600; font-family: inherit; outline: none;
+        }
+        .meydan-select:focus, .meydan-input:focus { border-color: #f4c542; }
+        .meydan-olustur-btn {
+            width: 100%; margin-top: 16px; padding: 12px; border-radius: 14px; border: none;
+            background: linear-gradient(135deg, #7c3aed, #f4c542); color: #fff; font-weight: 900;
+            font-size: 0.92rem; cursor: pointer; box-shadow: 0 6px 16px rgba(124,58,237,0.35);
+        }
+        .meydan-olustur-btn:active { transform: scale(0.98); }
+        .meydan-sonuc-kart {
+            display: none; margin-top: 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(244,197,66,0.4);
+            border-radius: 14px; padding: 14px;
+        }
+        .meydan-sonuc-kart.show { display: block; }
+        .meydan-link-row { display: flex; gap: 8px; margin-top: 10px; }
+        .meydan-link-input {
+            flex: 1; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--app-border, rgba(255,255,255,0.18));
+            background: rgba(0,0,0,0.25); color: var(--app-text, #fff); font-size: 0.78rem; font-family: monospace;
+        }
+        .meydan-kopyala-btn, .meydan-gonder-btn {
+            padding: 9px 14px; border-radius: 10px; border: none; background: #f4c542; color: #1a0b3d;
+            font-weight: 800; font-size: 0.8rem; cursor: pointer; white-space: nowrap;
+        }
+        .meydan-gecmis-liste { max-height: 260px; overflow-y: auto; margin-top: 4px; }
+        .meydan-gecmis-item {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); margin-bottom: 8px;
+        }
+        .meydan-gecmis-sol { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .meydan-gecmis-kat { font-weight: 800; font-size: 0.85rem; }
+        .meydan-gecmis-alt { font-size: 0.72rem; opacity: 0.7; }
+        .meydan-gecmis-skor { font-weight: 900; font-size: 0.85rem; color: #f4c542; white-space: nowrap; }
+        .meydan-bos-mesaj { text-align: center; opacity: 0.7; font-size: 0.85rem; padding: 20px 10px; }
+
+        /* --- MEYDAN OKUMA: oyun içi rakip rozeti --- */
+        .meydan-rakip-banner {
+            display: flex; align-items: center; gap: 8px; justify-content: center;
+            background: linear-gradient(90deg, rgba(124,58,237,0.25), rgba(244,197,66,0.2));
+            border-bottom: 1px solid rgba(244,197,66,0.35);
+            padding: 6px 12px; font-size: 0.76rem; font-weight: 800; flex-shrink: 0;
+        }
+
+        /* --- MEYDAN OKUMA: oyun sonu karşılaştırma kartı --- */
+        .meydan-vs-kart {
+            display: none; margin: 14px auto 0; max-width: 320px; background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(244,197,66,0.4); border-radius: 16px; padding: 14px 16px;
+        }
+        .meydan-vs-kart.show { display: block; }
+        .meydan-vs-baslik { text-align: center; font-weight: 900; font-size: 0.85rem; color: #f4c542; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .meydan-vs-satir { display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem; font-weight: 700; padding: 6px 0; }
+        .meydan-vs-satir.sen { color: #fff; }
+        .meydan-vs-satir.rakip { color: rgba(255,255,255,0.7); }
+        .meydan-vs-sonuc { text-align: center; margin-top: 8px; font-weight: 900; font-size: 0.95rem; }
+        .meydan-vs-sonuc.kazandin { color: #2ecc71; }
+        .meydan-vs-sonuc.kaybettin { color: #e74c3c; }
+        .meydan-vs-sonuc.berabere { color: #f4c542; }
 
         .wheel-modal-content { max-width: 360px; }
         .wheel-sub-text { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin: 4px 0 18px; }
@@ -285,6 +352,38 @@
         .category-section-header span {
             color: rgba(255,255,255,0.5); font-size: 0.7rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
         }
+
+        /* --- KATEGORİ ARAMA KUTUSU --- */
+        .category-search-wrap {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--app-surface2, rgba(255,255,255,0.07));
+            border: 1px solid var(--app-border, rgba(255,255,255,0.15));
+            border-radius: 14px; padding: 10px 14px; margin: 0 16px 14px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .category-search-wrap:focus-within {
+            border-color: var(--app-accent, #f4c542);
+            box-shadow: 0 0 0 3px rgba(244, 197, 66, 0.18);
+        }
+        .category-search-icon { font-size: 0.95rem; opacity: 0.65; flex-shrink: 0; }
+        .category-search-input {
+            flex: 1; background: transparent; border: none; outline: none;
+            color: var(--app-text, #fff); font-size: 0.92rem; font-weight: 600;
+            min-width: 0;
+        }
+        .category-search-input::placeholder { color: rgba(255,255,255,0.4); font-weight: 600; }
+        .category-search-clear {
+            background: rgba(255,255,255,0.12); border: none; color: var(--app-text, #fff);
+            width: 22px; height: 22px; border-radius: 50%; font-size: 0.7rem;
+            cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s ease;
+        }
+        .category-search-clear:hover { background: rgba(255,255,255,0.25); }
+        .category-search-empty {
+            text-align: center; color: rgba(255,255,255,0.55); font-size: 0.88rem;
+            font-weight: 700; margin: 10px 0 18px; padding: 0 20px;
+        }
+        .category-btn.search-hidden { display: none !important; }
 
         /* --- LİSTE (GRUPLU / YATAY KAYDIRMALI) GÖRÜNÜM --- */
         .kat-liste-grup { margin-bottom: 22px; }
@@ -842,6 +941,17 @@
         }
         .cat-info-card .about-stats { width: 100%; margin-bottom: 0; max-height: none; }
         .cat-info-start-btn { max-width: 440px; }
+        .cat-info-meydan-btn {
+            width: 100%; max-width: 440px; padding: 13px; border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, #7c3aed, #a855f7 50%, #f4c542);
+            color: #fff; font-weight: 900; font-size: 0.92rem; cursor: pointer;
+            box-shadow: 0 6px 16px rgba(124,58,237,0.4);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cat-info-meydan-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(124,58,237,0.55); }
+        .cat-info-meydan-btn:active { transform: scale(0.98); }
 
         #game-over { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 15, 0.95); backdrop-filter: blur(10px); z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         #game-over h1 { color: #ffaa00; margin-bottom: 10px; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; text-shadow: 0 0 20px rgba(255,170,0,0.6); }
@@ -1667,12 +1777,27 @@ body:has(#start-screen.active) #start-screen { padding-bottom: 92px; }
 
 body.modal-open { overflow: hidden; }
 body.modal-open { animation-play-state: paused; }
+
+/* ===== SVG İKON SİSTEMİ ===== */
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+.icon-fill { fill: currentColor; stroke: none; }
 </style>
 
 </head>
 <body>
     <!-- ÇEVRİMDIŞI GÖSTERGESİ -->
-    <div id="offline-badge">📡 Çevrimdışı</div>
+    <div id="offline-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" y1="20" x2="12.01" y2="20"/><line x1="2" y1="2" x2="22" y2="22"/></svg> Çevrimdışı</div>
 
     <div id="start-screen" class="screen active">
         <div class="glass-card">
@@ -1687,30 +1812,38 @@ body.modal-open { animation-play-state: paused; }
 
             <div class="home-body">
                 <div id="welcome-banner" class="welcome-banner" style="display:none;">
-                    <button class="welcome-banner-close" onclick="karsilamaMesajiniKapat()" aria-label="Kapat">✕</button>
-                    <span class="welcome-banner-icon">👋</span>
+                    <button class="welcome-banner-close" onclick="karsilamaMesajiniKapat()" aria-label="Kapat"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                    <span class="welcome-banner-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-9.33-5"/><path d="M2 12l1.6-1.6a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 0 2.8 0l1.2-1.2a2 2 0 0 1 2.8 0L14 12"/><path d="M2 16l1.6-1.6a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 0 2.8 0l1.2-1.2a2 2 0 0 1 2.8 0L14 16"/><path d="M2 20l1.6-1.6a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 0 2.8 0l1.2-1.2a2 2 0 0 1 2.8 0"/></svg></span>
                     <p class="welcome-banner-text">Hoş geldin! Daha önce oynadıysan kasa, istatistik ve rozet verilerini geri yükleyebilirsin.</p>
-                    <button class="welcome-banner-btn" onclick="document.getElementById('kasa-upload').click()">📂 Verilerimi Yükle</button>
+                    <button class="welcome-banner-btn" onclick="document.getElementById('kasa-upload').click()"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Verilerimi Yükle</button>
                 </div>
-                <button id="daily-wheel-btn" class="daily-wheel-banner" onclick="gunlukCarkAc()">
-                    <span class="dwb-icon">🎡</span>
-                    <div class="dwb-text">
-                        <span class="dwb-title" id="daily-wheel-title">Günlük Bonus Çarkı</span>
-                        <span class="dwb-sub" id="daily-wheel-sub">Bugün çevirmedin — dokun ve kazan!</span>
+                <div class="quick-actions-row">
+                    <button id="daily-wheel-btn" class="quick-action-card" onclick="gunlukCarkAc()">
+                        <span class="qac-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v7.5M12 14.5V22M2 12h7.5M14.5 12H22M4.9 4.9l5.3 5.3M13.8 13.8l5.3 5.3M19.1 4.9l-5.3 5.3M10.2 13.8l-5.3 5.3"/></svg></span>
+                        <div class="qac-text">
+                            <span class="qac-title" id="daily-wheel-title">Günlük Çark</span>
+                            <span class="qac-sub" id="daily-wheel-sub">Dokun ve kazan!</span>
+                        </div>
+                    </button>
+                    <div id="kategori-oneri-kart" class="quick-action-card qac-oneri" style="display:none;" onclick="oneriKategoriyleBasla()">
+                        <span class="qac-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></span>
+                        <div class="qac-text">
+                            <span class="qac-title">Sana Özel</span>
+                            <span class="qac-sub" id="kategori-oneri-metin"></span>
+                        </div>
                     </div>
-                    <span class="dwb-arrow">›</span>
-                </button>
-                <div id="kategori-oneri-kart" class="kategori-oneri-kart" style="display:none;" onclick="oneriKategoriyleBasla()">
-                    <span class="oneri-icon">✨</span>
-                    <div class="oneri-text">
-                        <span class="oneri-baslik">Sana Özel Öneri</span>
-                        <span class="oneri-alt" id="kategori-oneri-metin"></span>
-                    </div>
-                    <span class="oneri-arrow">›</span>
                 </div>
+
                 <div class="category-section-header">
                     <span>Kategori Seçin</span>
                 </div>
+
+                <div class="category-search-wrap">
+                    <span class="category-search-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+                    <input type="text" id="category-search-input" class="category-search-input" placeholder="Kategori ara..." oninput="kategoriAramaFiltrele(this.value)" autocomplete="off">
+                    <button id="category-search-clear" class="category-search-clear" onclick="kategoriAramaTemizle()" style="display:none;"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                </div>
+                <p id="category-search-empty" class="category-search-empty" style="display:none;"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="9" y1="10" x2="9.01" y2="10"/><line x1="15" y1="10" x2="15.01" y2="10"/><path d="M8 16s1.5-2 4-2 4 2 4 2"/></svg> Aramanızla eşleşen kategori bulunamadı.</p>
 
                 <div id="category-buttons-wrap">
                     <!-- Dinamik Kategoriler ve Reklamlar Buraya Yüklenecek -->
@@ -1740,7 +1873,7 @@ body.modal-open { animation-play-state: paused; }
                 <span>Çıkış</span>
             </button>
             <button class="hf-tab" id="hf-menu" onclick="altMenuyuAc()">
-                <span class="hf-icon"><span style="font-size:1.15rem;">☰</span></span>
+                <span class="hf-icon"><svg class="icon" viewBox="0 0 24 24" style="width:1.15rem;height:1.15rem;"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
                 <span>Menü</span>
             </button>
 
@@ -1751,17 +1884,17 @@ body.modal-open { animation-play-state: paused; }
 
     <div id="settings-modal" class="modal-overlay">
         <div class="modal-content settings-content">
-            <h3>⚙️ Ayarlar</h3>
+            <h3><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Ayarlar</h3>
             <p class="settings-label">Ses</p>
-            <button class="action-btn sound-btn" id="sound-toggle-main" onclick="toggleSound()" style="width:100%; justify-content:center; margin-bottom: 14px;">🔊 Ses Açık</button>
+            <button class="action-btn sound-btn" id="sound-toggle-main" onclick="toggleSound()" style="width:100%; justify-content:center; margin-bottom: 14px;"><svg class="icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Ses Açık</button>
             <p class="settings-label">Sesli Okuma</p>
-            <button class="action-btn tts-btn" id="tts-toggle-main" onclick="toggleOtoOkuma()" style="width:100%; justify-content:center; margin-bottom: 14px;">🎙️ Otomatik Okuma Kapalı</button>
+            <button class="action-btn tts-btn" id="tts-toggle-main" onclick="toggleOtoOkuma()" style="width:100%; justify-content:center; margin-bottom: 14px;"><svg class="icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Otomatik Okuma Kapalı</button>
             <p class="settings-label">Sesli Cevap Seçme</p>
-            <button class="action-btn tts-btn" id="voice-toggle-main" onclick="toggleSesliKomut()" style="width:100%; justify-content:center; margin-bottom: 14px;">🎤 Sesli Cevap Kapalı</button>
+            <button class="action-btn tts-btn" id="voice-toggle-main" onclick="toggleSesliKomut()" style="width:100%; justify-content:center; margin-bottom: 14px;"><svg class="icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Sesli Cevap Kapalı</button>
             <p class="settings-label">Kategori Görünümü</p>
             <div class="view-mode-picker" id="view-mode-picker">
-                <button class="view-mode-btn" data-mod="izgara" onclick="gorunumModuAyarla('izgara')">▦ Izgara</button>
-                <button class="view-mode-btn" data-mod="liste" onclick="gorunumModuAyarla('liste')">☰ Liste</button>
+                <button class="view-mode-btn" data-mod="izgara" onclick="gorunumModuAyarla('izgara')"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Izgara</button>
+                <button class="view-mode-btn" data-mod="liste" onclick="gorunumModuAyarla('liste')"><svg class="icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> Liste</button>
             </div>
             <p class="settings-label">Tema Seç</p>
             <div class="app-theme-picker" id="app-theme-picker">
@@ -1783,7 +1916,7 @@ body.modal-open { animation-play-state: paused; }
             </div>
             <p class="settings-label">Bilgi</p>
             <div class="control-panel" style="margin-bottom: 14px;">
-                <button class="cp-btn btn-about" onclick="ayarlariKapat(); altMenuyuAc();">☰ Menü</button>
+                <button class="cp-btn btn-about" onclick="ayarlariKapat(); altMenuyuAc();"><svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg> Menü</button>
             </div>
             <button class="btn-close-about" onclick="ayarlariKapat()">Kapat</button>
         </div>
@@ -1805,6 +1938,7 @@ body.modal-open { animation-play-state: paused; }
                 <div class="cat-info-meta" id="cat-info-meta"></div>
                 <div class="about-stats" id="cat-stats-body"></div>
             </div>
+            <button class="cat-info-meydan-btn" id="cat-info-meydan-btn" onclick="meydanOkumaModaliniAcKategoriIle()"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Bu Kategoride Meydan Oku</button>
             <button class="btn-close-about cat-info-start-btn" id="cat-stats-start-btn" onclick="katistatistikBaslaTiklandi()">▶ Başla</button>
         </div>
     </div>
@@ -1814,8 +1948,12 @@ body.modal-open { animation-play-state: paused; }
             <button class="action-btn" onclick="anaMenuyeDon()">◀ Geri</button>
             <span class="title-text" id="current-category-label">Karışık</span>
             <div class="top-bar-right">
-                <div class="kasa-badge" id="kasa-game" onclick="magazayiAc()" title="Mağazayı Aç">💰 0 TL</div>
+                <div class="kasa-badge" id="kasa-game" onclick="magazayiAc()" title="Mağazayı Aç"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M15 9.2c0-1.2-1.3-2.2-3-2.2s-3 .9-3 2.1c0 3 6 1.4 6 4.4 0 1.2-1.3 2.1-3 2.1s-3-1-3-2.2"/></svg> 0 TL</div>
             </div>
+        </div>
+
+        <div id="meydan-rakip-banner" class="meydan-rakip-banner" style="display:none;">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> <span id="meydan-rakip-metin"></span>
         </div>
 
         <div class="prize-container">
@@ -1849,16 +1987,16 @@ body.modal-open { animation-play-state: paused; }
                 <div class="confetti-layer" id="confetti-layer"></div>
                 <div class="capture-deco">
                     <div class="capture-topbar">
-                        <div class="capture-logo-badge"><span class="capture-logo-icon">👑</span><span>MuGöl BİLGİN</span></div>
-                        <div class="capture-coin-badge"><span>🪙</span><span id="capture-prize-text">500 TL</span></div>
+                        <div class="capture-logo-badge"><span class="capture-logo-icon"><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M2 20h20L20 8l-5 4-3-7-3 7-5-4-2 12z"/></svg></span><span>MuGöl BİLGİN</span></div>
+                        <div class="capture-coin-badge"><span><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M15 9.2c0-1.2-1.3-2.2-3-2.2s-3 .9-3 2.1c0 3 6 1.4 6 4.4 0 1.2-1.3 2.1-3 2.1s-3-1-3-2.2"/></svg></span><span id="capture-prize-text">500 TL</span></div>
                     </div>
                     <span class="capture-title-main">Günün Sorusu</span>
                     <div class="capture-hero">
                         <div class="capture-hero-glow"></div>
-                        <span class="capture-hero-icon">👑</span>
-                        <span class="capture-sparkle sp1">✦</span>
-                        <span class="capture-sparkle sp2">✧</span>
-                        <span class="capture-sparkle sp3">✦</span>
+                        <span class="capture-hero-icon"><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M2 20h20L20 8l-5 4-3-7-3 7-5-4-2 12z"/></svg></span>
+                        <span class="capture-sparkle sp1"><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg></span>
+                        <span class="capture-sparkle sp2"><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg></span>
+                        <span class="capture-sparkle sp3"><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg></span>
                     </div>
                     <div class="capture-level-badge" id="capture-level-text">Karışık · Soru 1/12</div>
                 </div>
@@ -1898,9 +2036,9 @@ body.modal-open { animation-play-state: paused; }
         </div>
 
         <div class="game-bottom-bar">
-            <button class="action-btn sound-btn" id="sound-toggle-game" onclick="toggleSound()">🔊 Ses</button>
-            <button class="action-btn tts-btn" id="tts-toggle-game" onclick="soruyuSesliOku()">🎙️ Oku</button>
-            <button class="action-btn" onclick="soruyuIndir()">📸 Paylaş</button>
+            <button class="action-btn sound-btn" id="sound-toggle-game" onclick="toggleSound()"><svg class="icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Ses</button>
+            <button class="action-btn tts-btn" id="tts-toggle-game" onclick="soruyuSesliOku()"><svg class="icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Oku</button>
+            <button class="action-btn" onclick="soruyuIndir()"><svg class="icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Paylaş</button>
         </div>
     </div>
 
@@ -1908,15 +2046,15 @@ body.modal-open { animation-play-state: paused; }
     <div id="share-preview-modal">
         <div class="share-modal-inner">
             <div class="share-modal-header">
-                <h3>📸 Paylaşım Önizlemesi</h3>
-                <button class="share-modal-close" onclick="paylasimOnizlemeKapat()">✕</button>
+                <h3><svg class="icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Paylaşım Önizlemesi</h3>
+                <button class="share-modal-close" onclick="paylasimOnizlemeKapat()"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
             <div class="share-modal-preview-wrap" id="share-preview-wrap"></div>
             <div class="share-theme-label" style="padding: 8px 18px 0; color:#ffe066; font-size:0.75rem; font-weight:800; letter-spacing:1px;">TEMA SEÇ</div>
             <div class="share-theme-row" id="share-theme-row"></div>
             <div class="share-modal-actions">
                 <button class="btn-share-cancel" onclick="paylasimOnizlemeKapat()">Vazgeç</button>
-                <button class="btn-share-download" onclick="paylasimIndirOnizlemeden()">⬇️ İndir</button>
+                <button class="btn-share-download" onclick="paylasimIndirOnizlemeden()"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> İndir</button>
             </div>
         </div>
     </div>
@@ -1949,43 +2087,47 @@ body.modal-open { animation-play-state: paused; }
             <div class="sheet-handle"></div>
             <div class="sheet-grid">
                 <button class="sheet-grid-item" onclick="altMenuyuKapat(); hakkindaGoster();">
-                    <span class="sheet-grid-icon">ℹ️</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
                     <span class="sheet-grid-label">Hakkında</span>
                 </button>
                 <button class="sheet-grid-item" onclick="altMenuyuKapat(); istatistiklerimGoster();">
-                    <span class="sheet-grid-icon">📊</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
                     <span class="sheet-grid-label">İstatistikler</span>
                 </button>
                 <button class="sheet-grid-item" onclick="altMenuyuKapat(); rozetlerimGoster();">
-                    <span class="sheet-grid-icon">🏅</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6 22l6-3 6 3-2.5-8.5"/></svg></span>
                     <span class="sheet-grid-label">Rozetlerim</span>
                 </button>
                 <button class="sheet-grid-item" onclick="altMenuyuKapat(); hatalarimGoster();">
-                    <span class="sheet-grid-icon">❌</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
                     <span class="sheet-grid-label">Hatalarım</span>
                 </button>
+                <button class="sheet-grid-item" onclick="altMenuyuKapat(); meydanOkumaModaliniAc();">
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg></span>
+                    <span class="sheet-grid-label">Meydan Okuma</span>
+                </button>
                 <button class="sheet-grid-item" onclick="magazayiAc(); altMenuyuKapat();">
-                    <span class="sheet-grid-icon">🛒</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
                     <span class="sheet-grid-label">Mağaza</span>
                 </button>
                 <button class="sheet-grid-item" onclick="ayarlariAc(); altMenuyuKapat();">
-                    <span class="sheet-grid-icon">⚙️</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
                     <span class="sheet-grid-label">Ayarlar</span>
                 </button>
                 <button class="sheet-grid-item" onclick="uygulamayiIndir(); altMenuyuKapat();">
-                    <span class="sheet-grid-icon">⬇️</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
                     <span class="sheet-grid-label">İndir</span>
                 </button>
                 <button class="sheet-grid-item" onclick="altMenuyuKapat(); verilerModaliniAc();">
-                    <span class="sheet-grid-icon">🗂️</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
                     <span class="sheet-grid-label">Veriler</span>
                 </button>
                 <button class="sheet-grid-item sheet-grid-danger" onclick="altMenuyuKapat(); uyarKapat();">
-                    <span class="sheet-grid-icon">🚪</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
                     <span class="sheet-grid-label">Çıkış</span>
                 </button>
                 <button class="sheet-grid-item sheet-grid-close" onclick="altMenuyuKapat()">
-                    <span class="sheet-grid-icon">✕</span>
+                    <span class="sheet-grid-icon"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
                     <span class="sheet-grid-label">Kapat</span>
                 </button>
             </div>
@@ -1996,11 +2138,11 @@ body.modal-open { animation-play-state: paused; }
     <div id="veriler-modal" class="sheet-overlay" onclick="if(event.target===this) verilerModaliniKapat();">
         <div class="sheet-content">
             <div class="sheet-handle"></div>
-            <h3>🗂️ Veriler</h3>
+            <h3><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Veriler</h3>
             <p class="veriler-aciklama">Kasa, istatistik ve rozet verilerinizi dosya olarak indirip başka bir cihazda geri yükleyebilirsiniz.</p>
             <div class="control-panel" style="flex-direction:column; gap:10px; margin: 14px 0 6px;">
-                <button class="cp-btn btn-kasa" onclick="kasaIndir()">💾 Verileri İndir</button>
-                <button class="cp-btn btn-kasa" onclick="document.getElementById('kasa-upload').click()">📂 Verileri Yükle</button>
+                <button class="cp-btn btn-kasa" onclick="kasaIndir()"><svg class="icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Verileri İndir</button>
+                <button class="cp-btn btn-kasa" onclick="document.getElementById('kasa-upload').click()"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Verileri Yükle</button>
             </div>
             <button class="btn-close-about" onclick="verilerModaliniKapat()">Kapat</button>
         </div>
@@ -2009,7 +2151,7 @@ body.modal-open { animation-play-state: paused; }
     <!-- İSTATİSTİK MODALı -->
     <div id="stats-modal" class="modal-overlay">
         <div class="modal-content about-content">
-            <h3>📊 İstatistiklerim</h3>
+            <h3><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> İstatistiklerim</h3>
             <div class="about-stats" id="stats-body"></div>
             <button class="btn-close-about" onclick="istatistiklerimKapat()">Kapat</button>
         </div>
@@ -2018,7 +2160,7 @@ body.modal-open { animation-play-state: paused; }
     <!-- ROZETLER MODALı -->
     <div id="badges-modal" class="modal-overlay">
         <div class="modal-content about-content">
-            <h3>🏅 Rozetlerim</h3>
+            <h3><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6 22l6-3 6 3-2.5-8.5"/></svg> Rozetlerim</h3>
             <div class="badges-grid" id="badges-body"></div>
             <button class="btn-close-about" onclick="rozetlerimKapat()">Kapat</button>
         </div>
@@ -2027,9 +2169,9 @@ body.modal-open { animation-play-state: paused; }
     <!-- HATALARIM MODALı -->
     <div id="hatalar-modal" class="modal-overlay">
         <div class="modal-content about-content">
-            <h3>❌ Hatalarım</h3>
+            <h3><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Hatalarım</h3>
             <div class="about-stats" id="hatalar-body" style="max-height: 55vh;"></div>
-            <button class="btn-close-about" id="hatalar-temizle-btn" onclick="hatalarimTemizle()" style="margin-bottom:10px; background:rgba(255,80,80,0.15); border-color:#ff6a6a; color:#ffb3b3;">🗑️ Hepsini Temizle</button>
+            <button class="btn-close-about" id="hatalar-temizle-btn" onclick="hatalarimTemizle()" style="margin-bottom:10px; background:rgba(255,80,80,0.15); border-color:#ff6a6a; color:#ffb3b3;"><svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Hepsini Temizle</button>
             <button class="btn-close-about" onclick="hatalarimKapat()">Kapat</button>
         </div>
     </div>
@@ -2037,19 +2179,73 @@ body.modal-open { animation-play-state: paused; }
     <!-- MAĞAZA MODALı -->
     <div id="shop-modal" class="modal-overlay">
         <div class="modal-content shop-content">
-            <h3>🛒 Joker Mağazası</h3>
-            <div class="shop-kasa-bilgi" id="shop-kasa-goster">💰 Kasanız: 0 TL</div>
+            <h3><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Joker Mağazası</h3>
+            <div class="shop-kasa-bilgi" id="shop-kasa-goster"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M15 9.2c0-1.2-1.3-2.2-3-2.2s-3 .9-3 2.1c0 3 6 1.4 6 4.4 0 1.2-1.3 2.1-3 2.1s-3-1-3-2.2"/></svg> Kasanız: 0 TL</div>
             <div class="shop-items" id="shop-items-container">
                 <!-- Dinamik olarak doldurulacak -->
             </div>
-            <button class="btn-close-shop" onclick="magazayiKapat()">✖ Kapat</button>
+            <button class="btn-close-shop" onclick="magazayiKapat()"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Kapat</button>
+        </div>
+    </div>
+
+    <!-- MEYDAN OKUMA MODALı -->
+    <div id="meydan-modal" class="modal-overlay">
+        <div class="modal-content meydan-modal-content">
+            <h3><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okuma</h3>
+            <div class="meydan-sekme-bar">
+                <button class="meydan-sekme-btn active" data-panel="meydan-panel-olustur" onclick="meydanSekmeSec('meydan-panel-olustur')"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> Oluştur</button>
+                <button class="meydan-sekme-btn" data-panel="meydan-panel-gecmis" onclick="meydanSekmeSec('meydan-panel-gecmis')"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Geçmiş</button>
+            </div>
+
+            <div id="meydan-panel-olustur" class="meydan-panel active">
+                <p class="meydan-label">Kategori</p>
+                <select id="meydan-kategori-secim" class="meydan-select"></select>
+
+                <p class="meydan-label">Rumuzun (skorunla birlikte gösterilecek)</p>
+                <input type="text" id="meydan-gonderen-adi" class="meydan-input" placeholder="Örn: Ahmet" maxlength="20">
+
+                <button class="meydan-olustur-btn" onclick="meydanOkumaOlustur()"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okuma Linki Oluştur</button>
+
+                <div id="meydan-sonuc-kart" class="meydan-sonuc-kart">
+                    <p style="font-weight:800; font-size:0.85rem;"><svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Meydan okuman hazır! Linki arkadaşına gönder:</p>
+                    <div class="meydan-link-row">
+                        <input type="text" id="meydan-link-alani" class="meydan-link-input" readonly>
+                        <button class="meydan-kopyala-btn" onclick="meydanLinkKopyala()"><svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Kopyala</button>
+                    </div>
+                    <div class="meydan-link-row">
+                        <button class="meydan-gonder-btn" style="flex:1;" onclick="meydanLinkPaylas()"><svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> Paylaş</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="meydan-panel-gecmis" class="meydan-panel">
+                <div id="meydan-gecmis-liste" class="meydan-gecmis-liste">
+                    <p class="meydan-bos-mesaj">Henüz bir meydan okuma sonucun yok.<br>Bir tane oluştur veya aldığın bir meydan okuma linkini aç!</p>
+                </div>
+            </div>
+
+            <button class="btn-close-about" style="margin-top:14px;" onclick="meydanOkumaModaliniKapat()">Kapat</button>
+        </div>
+    </div>
+
+    <!-- MEYDAN OKUMA DAVET EKRANI (link ile gelindiğinde gösterilir) -->
+    <div id="meydan-davet-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 380px; text-align:center;">
+            <h3><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okumaya Davet Edildin!</h3>
+            <p style="margin: 10px 0 4px; font-weight:800; font-size:1.05rem; color:#f4c542;" id="meydan-davet-gonderen"></p>
+            <p style="opacity:0.85; font-size:0.88rem; margin-bottom:10px;" id="meydan-davet-detay"></p>
+            <p style="opacity:0.75; font-size:0.85rem; margin-bottom:16px;">Aynı 12 soruyu cevaplayıp skorunu karşılaştırabilirsin. Hazır mısın?</p>
+            <div class="control-panel">
+                <button class="cp-btn" style="background:linear-gradient(135deg,#7c3aed,#f4c542); color:#fff;" onclick="meydanDavetiKabulEt()"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okumayı Kabul Et</button>
+                <button class="cp-btn btn-about" onclick="meydanDavetiReddet()">Belki Sonra</button>
+            </div>
         </div>
     </div>
 
     <!-- GÜNLÜK BONUS ÇARKI -->
     <div id="wheel-modal" class="modal-overlay">
         <div class="modal-content wheel-modal-content">
-            <h3>🎡 Günlük Bonus Çarkı</h3>
+            <h3><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v7.5M12 14.5V22M2 12h7.5M14.5 12H22M4.9 4.9l5.3 5.3M13.8 13.8l5.3 5.3M19.1 4.9l-5.3 5.3M10.2 13.8l-5.3 5.3"/></svg> Günlük Bonus Çarkı</h3>
             <p class="wheel-sub-text" id="wheel-sub-text">Her gün bir kez çevir, ödülünü kap!</p>
             <div class="wheel-wrap">
                 <div class="wheel-pointer">▼</div>
@@ -2067,8 +2263,19 @@ body.modal-open { animation-play-state: paused; }
         <div id="end-reason"></div>
         <h2 id="final-prize">Kazandığınız Ödül: 0 TL</h2>
         <h3 id="kasa-eklenen" style="color: #2ecc71; font-weight: 800; margin-top:10px;"></h3>
-        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-            <button class="restart-btn" onclick="oyunuGercektenBaslat(seciliKategori)">🔄 Baştan Başla</button>
+
+        <div id="meydan-vs-kart" class="meydan-vs-kart">
+            <div class="meydan-vs-baslik"><svg class="icon" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M3 21l7-7"/></svg> Meydan Okuma Sonucu</div>
+            <div class="meydan-vs-satir sen"><span id="meydan-vs-sen-ad">Sen</span><span id="meydan-vs-sen-skor">-</span></div>
+            <div class="meydan-vs-satir rakip"><span id="meydan-vs-rakip-ad">Rakip</span><span id="meydan-vs-rakip-skor">-</span></div>
+            <div id="meydan-vs-sonuc" class="meydan-vs-sonuc"></div>
+            <div class="meydan-link-row" style="margin-top:10px;">
+                <button class="meydan-gonder-btn" style="flex:1;" onclick="meydanSonucPaylas()"><svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg> Sonucu Paylaş</button>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:14px;">
+            <button class="restart-btn" onclick="oyunuGercektenBaslat(seciliKategori)"><svg class="icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Baştan Başla</button>
             <button onclick="anaMenuyeDon()">Ana Menüye Dön</button>
         </div>
         <div class="ad-slot" id="gameover-ad-slot" style="margin-top:20px;">
@@ -2178,6 +2385,274 @@ body.modal-open { animation-play-state: paused; }
         let zamanDonduruldu = false;
         let buOyundaJokerKullanildiMi = false;
 
+        // ===== MEYDAN OKUMA MODU =====
+        // Backend olmadığı için meydan okuma, URL'e kodlanan bir "seed" ile çalışır:
+        // Aynı seed + aynı kategori + aynı soru havuzu => her iki cihazda da AYNI 12 soru, AYNI sırayla gelir.
+        // Böylece arkadaşınla tam olarak aynı soruları cevaplayıp skorlarınızı adil şekilde kıyaslayabilirsiniz.
+        const MEYDAN_ANAHTAR = 'mugolyoner_meydan_sonuclar';
+        let meydanAktif = false;          // şu an bir meydan okuma oyunu mu oynanıyor?
+        let meydanSeed = null;            // paylaşılan/alınan seed
+        let meydanKategori = null;
+        let meydanGonderenAdi = null;     // meydan okuyanın adı (URL'den geldiyse)
+        let meydanGonderenSkor = null;    // meydan okuyanın ulaştığı seviye/ödülü (URL'den geldiyse)
+        let meydanSoruSirasi = [];        // bu seed için önceden hesaplanmış soru dizisi
+
+        // Basit, deterministik string->sayı hash (mulberry32 tohumlama için)
+        function _meydanHashUret(str) {
+            let h = 1779033703 ^ str.length;
+            for (let i = 0; i < str.length; i++) {
+                h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+                h = (h << 13) | (h >>> 19);
+            }
+            return function() {
+                h = Math.imul(h ^ (h >>> 16), 2246822507);
+                h = Math.imul(h ^ (h >>> 13), 3266489909);
+                h ^= h >>> 16;
+                return h >>> 0;
+            };
+        }
+        // Seed'e bağlı deterministik "rastgele" sayı üretici (0-1 arası)
+        function _meydanRngOlustur(seedStr) {
+            let seedFn = _meydanHashUret(seedStr);
+            let a = seedFn();
+            return function() {
+                a |= 0; a = (a + 0x6D2B79F5) | 0;
+                let t = Math.imul(a ^ (a >>> 15), 1 | a);
+                t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+        }
+        function _meydanRastgeleKod(uzunluk) {
+            let alfabe = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // karışıklık yaratan karakterler (0,O,1,I) çıkarıldı
+            let sonuc = '';
+            for (let i = 0; i < uzunluk; i++) sonuc += alfabe[Math.floor(Math.random() * alfabe.length)];
+            return sonuc;
+        }
+        // Verilen seed + kategoriye göre 12 soruluk deterministik diziyi üretir (Fisher-Yates, seed'li RNG ile)
+        function meydanSoruDizisiUret(seed, kategori) {
+            if (!window.tumSorular || window.tumSorular.length === 0) return [];
+            let havuz = kategori === 'Karışık' ? window.tumSorular.slice() : window.tumSorular.filter(s => s.kategori === kategori);
+            let rng = _meydanRngOlustur(seed + '::' + kategori);
+            // Fisher-Yates karıştırma (deterministik)
+            for (let i = havuz.length - 1; i > 0; i--) {
+                let j = Math.floor(rng() * (i + 1));
+                [havuz[i], havuz[j]] = [havuz[j], havuz[i]];
+            }
+            return havuz.slice(0, 12);
+        }
+        function meydanSonuclariYukle() {
+            try { return JSON.parse(localStorage.getItem(MEYDAN_ANAHTAR)) || {}; } catch(e) { return {}; }
+        }
+        function meydanSonucKaydet(seed, veri) {
+            let tum = meydanSonuclariYukle();
+            tum[seed] = veri;
+            try { localStorage.setItem(MEYDAN_ANAHTAR, JSON.stringify(tum)); } catch(e) {}
+        }
+
+        // --- Modal aç/kapat ---
+        function meydanOkumaModaliniAc(onSeciliKategori) {
+            sesCal('tiklama');
+            let secim = document.getElementById('meydan-kategori-secim');
+            if (secim && window.tumSorular && window.tumSorular.length) {
+                let kategoriler = [...new Set(window.tumSorular.map(s => s.kategori))];
+                secim.innerHTML = `<option value="Karışık">Karışık</option>` +
+                    kategoriler.map(k => `<option value="${k}">${kategoriEmojiGetir(k)} ${k}</option>`).join('');
+                if (onSeciliKategori && kategoriler.includes(onSeciliKategori)) secim.value = onSeciliKategori;
+            }
+            document.getElementById('meydan-sonuc-kart').classList.remove('show');
+            meydanGecmisiRenderla();
+            // Kategori seçilerek açıldıysa doğrudan "Oluştur" sekmesini göster
+            meydanSekmeSec('meydan-panel-olustur');
+            document.getElementById('meydan-modal').style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
+        // Kategori ön-bilgi ekranındaki "Bu Kategoride Meydan Oku" butonu için sarmalayıcı
+        function meydanOkumaModaliniAcKategoriIle() {
+            meydanOkumaModaliniAc(_katistatistikBekleyenKategori);
+        }
+        function meydanOkumaModaliniKapat() {
+            sesCal('tiklama');
+            document.getElementById('meydan-modal').style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+        function meydanSekmeSec(panelId) {
+            sesCal('tiklama');
+            document.querySelectorAll('.meydan-sekme-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-panel') === panelId));
+            document.querySelectorAll('.meydan-panel').forEach(p => p.classList.toggle('active', p.id === panelId));
+            if (panelId === 'meydan-panel-gecmis') meydanGecmisiRenderla();
+        }
+
+        // --- Meydan okuma linki oluşturma ---
+        function meydanOkumaOlustur() {
+            let kategori = document.getElementById('meydan-kategori-secim').value || 'Karışık';
+            let adInput = document.getElementById('meydan-gonderen-adi');
+            let ad = (adInput.value || '').trim() || 'Bir Arkadaşın';
+            if (!window.tumSorular || window.tumSorular.length === 0) { alert('Sorular henüz yüklenmedi, birazdan tekrar deneyin.'); return; }
+
+            let seed = _meydanRastgeleKod(6);
+            let diziKontrol = meydanSoruDizisiUret(seed, kategori);
+            if (diziKontrol.length < 3) { alert('Bu kategoride yeterli soru yok, başka bir kategori seçin.'); return; }
+
+            sesCal('dogru');
+            let url = new URL(window.location.href);
+            url.search = ''; url.hash = '';
+            url.searchParams.set('meydan', seed);
+            url.searchParams.set('kat', kategori);
+            url.searchParams.set('ad', ad);
+
+            let linkAlani = document.getElementById('meydan-link-alani');
+            linkAlani.value = url.toString();
+            document.getElementById('meydan-sonuc-kart').classList.add('show');
+
+            // Kendi tarafımızda da bu seed'i "gönderdiğim meydan okuma" olarak geçmişe kaydedelim (sonuç henüz yok)
+            let tum = meydanSonuclariYukle();
+            if (!tum[seed]) {
+                meydanSonucKaydet(seed, { kategori, gonderenAdi: ad, rol: 'gonderen', tarih: Date.now(), benimSonuc: null });
+            }
+        }
+        function meydanLinkKopyala() {
+            let linkAlani = document.getElementById('meydan-link-alani');
+            linkAlani.select(); linkAlani.setSelectionRange(0, 99999);
+            try {
+                navigator.clipboard.writeText(linkAlani.value);
+                sesCal('dogru');
+                alert('Link kopyalandı! Şimdi arkadaşına gönderebilirsin.');
+            } catch(e) {
+                document.execCommand('copy');
+            }
+        }
+        function meydanLinkPaylas() {
+            sesCal('tiklama');
+            let link = document.getElementById('meydan-link-alani').value;
+            let mesaj = `Sana meydan okuyorum! MuGöl BİLGİN'de aynı soruları cevaplayıp skorumuzu kıyaslayalım:\n${link}`;
+            if (navigator.share) {
+                navigator.share({ title: 'MuGöl BİLGİN - Meydan Okuma', text: mesaj }).catch(() => {});
+            } else {
+                window.open('https://wa.me/?text=' + encodeURIComponent(mesaj), '_blank');
+            }
+        }
+
+        // --- Gelen meydan okuma linkini kontrol et (sayfa açılışında çağrılır) ---
+        function meydanLinkKontrolEt() {
+            try {
+                let params = new URLSearchParams(window.location.search);
+                let seed = params.get('meydan');
+                if (!seed) return;
+                let kategori = params.get('kat') || 'Karışık';
+                let gonderenAdi = params.get('ad') || 'Bir Arkadaşın';
+
+                meydanSeed = seed; meydanKategori = kategori; meydanGonderenAdi = gonderenAdi;
+
+                let tum = meydanSonuclariYukle();
+                let kayit = tum[seed];
+                let gonderenSkorMetni = 'Bilinmiyor';
+                if (kayit && kayit.gonderenSonuc) gonderenSkorMetni = kayit.gonderenSonuc.oduMetni;
+
+                document.getElementById('meydan-davet-gonderen').innerText = `${gonderenAdi} seni meydan okumaya çağırıyor!`;
+                document.getElementById('meydan-davet-detay').innerText = `Kategori: ${kategoriEmojiGetir(kategori)} ${kategori}`;
+                document.getElementById('meydan-davet-modal').style.display = 'flex';
+                document.body.classList.add('modal-open');
+
+                // URL'i temizle ki sayfa yenilenince tekrar tetiklenmesin
+                window.history.replaceState({}, '', window.location.pathname);
+            } catch(e) {}
+        }
+        function meydanDavetiReddet() {
+            sesCal('tiklama');
+            document.getElementById('meydan-davet-modal').style.display = 'none';
+            document.body.classList.remove('modal-open');
+            meydanSeed = null; meydanKategori = null; meydanGonderenAdi = null;
+        }
+        function meydanDavetiKabulEt() {
+            sesCal('dogru');
+            document.getElementById('meydan-davet-modal').style.display = 'none';
+            document.body.classList.remove('modal-open');
+            if (!meydanSeed || !meydanKategori) return;
+            meydanAktif = true;
+            meydanSoruSirasi = meydanSoruDizisiUret(meydanSeed, meydanKategori);
+            oyunuGercektenBaslat(meydanKategori);
+        }
+
+        // --- Geçmiş listesi ---
+        function meydanGecmisiRenderla() {
+            let liste = document.getElementById('meydan-gecmis-liste');
+            if (!liste) return;
+            let tum = meydanSonuclariYukle();
+            let anahtarlar = Object.keys(tum).sort((a, b) => (tum[b].tarih || 0) - (tum[a].tarih || 0));
+            if (anahtarlar.length === 0) {
+                liste.innerHTML = `<p class="meydan-bos-mesaj">Henüz bir meydan okuma sonucun yok.<br>Bir tane oluştur veya aldığın bir meydan okuma linkini aç!</p>`;
+                return;
+            }
+            liste.innerHTML = anahtarlar.map(seed => {
+                let kayit = tum[seed];
+                let benim = kayit.benimSonuc ? kayit.benimSonuc.oduMetni : null;
+                let rakip = kayit.rol === 'gonderen' ? (kayit.gonderenSonuc ? null : null) : (kayit.gonderenSonuc ? kayit.gonderenSonuc.oduMetni : null);
+                let durum;
+                if (kayit.rol === 'gonderen') {
+                    durum = benim ? `Sen: ${benim}` : 'Henüz oynamadın';
+                } else {
+                    durum = benim ? `Sen: ${benim} · ${kayit.gonderenAdi || 'Rakip'}: ${rakip || '?'}` : `${kayit.gonderenAdi || 'Rakip'} meydan okudu`;
+                }
+                return `
+                    <div class="meydan-gecmis-item">
+                        <div class="meydan-gecmis-sol">
+                            <span class="meydan-gecmis-kat">${kategoriEmojiGetir(kayit.kategori)} ${kayit.kategori}</span>
+                            <span class="meydan-gecmis-alt">${durum}</span>
+                        </div>
+                        <span class="meydan-gecmis-skor">${benim ? '<svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- Oyun sonunda meydan okuma sonucunu kaydet ve karşılaştırma göster ---
+        function meydanOyunSonuIsle(kazanilanOdulStr, eklenecekMiktar) {
+            if (!meydanAktif || !meydanSeed) return;
+            let tum = meydanSonuclariYukle();
+            let kayit = tum[meydanSeed] || { kategori: meydanKategori, gonderenAdi: meydanGonderenAdi, tarih: Date.now(), rol: 'alan' };
+            kayit.rol = kayit.rol || 'alan';
+            let benimSonuc = { oduMetni: kazanilanOdulStr, miktar: eklenecekMiktar, tarih: Date.now() };
+
+            let vsKart = document.getElementById('meydan-vs-kart');
+            let senAd = 'Sen', rakipAd = meydanGonderenAdi || 'Rakip', rakipMiktar = null;
+
+            if (kayit.rol === 'gonderen') {
+                kayit.gonderenSonuc = benimSonuc; kayit.benimSonuc = benimSonuc;
+            } else {
+                kayit.benimSonuc = benimSonuc;
+                rakipMiktar = kayit.gonderenSonuc ? kayit.gonderenSonuc.miktar : null;
+            }
+            meydanSonucKaydet(meydanSeed, kayit);
+
+            document.getElementById('meydan-vs-sen-ad').innerText = senAd;
+            document.getElementById('meydan-vs-sen-skor').innerText = kazanilanOdulStr;
+            document.getElementById('meydan-vs-rakip-ad').innerText = rakipAd;
+
+            if (rakipMiktar === null) {
+                document.getElementById('meydan-vs-rakip-skor').innerText = 'Henüz oynamadı';
+                document.getElementById('meydan-vs-sonuc').innerText = 'Rakibin oynayınca sonucu burada görebilirsin.';
+                document.getElementById('meydan-vs-sonuc').className = 'meydan-vs-sonuc berabere';
+            } else {
+                let kayitliRakipOdul = kayit.gonderenSonuc.oduMetni;
+                document.getElementById('meydan-vs-rakip-skor').innerText = kayitliRakipOdul;
+                let sonucEl = document.getElementById('meydan-vs-sonuc');
+                if (eklenecekMiktar > rakipMiktar) { sonucEl.innerText = 'Kazandın!'; sonucEl.className = 'meydan-vs-sonuc kazandin'; }
+                else if (eklenecekMiktar < rakipMiktar) { sonucEl.innerText = 'Bu sefer rakibin önde.'; sonucEl.className = 'meydan-vs-sonuc kaybettin'; }
+                else { sonucEl.innerText = 'Berabere!'; sonucEl.className = 'meydan-vs-sonuc berabere'; }
+            }
+            vsKart.classList.add('show');
+        }
+        function meydanSonucPaylas() {
+            sesCal('tiklama');
+            let senSkor = document.getElementById('meydan-vs-sen-skor').innerText;
+            let mesaj = `MuGöl BİLGİN meydan okumasında ${senSkor} kazandım! Sıra sende, beni geçebilir misin?`;
+            if (navigator.share) {
+                navigator.share({ title: 'MuGöl BİLGİN - Meydan Okuma Sonucu', text: mesaj }).catch(() => {});
+            } else {
+                window.open('https://wa.me/?text=' + encodeURIComponent(mesaj), '_blank');
+            }
+        }
+
         // ===== İSTATİSTİK SİSTEMİ =====
         const ISTATISTIK_ANAHTAR = 'mugolyoner_istatistik';
         function istatistikVarsayilan() {
@@ -2245,7 +2720,7 @@ body.modal-open { animation-play-state: paused; }
             let gövde = document.getElementById('hatalar-body');
             let temizleBtn = document.getElementById('hatalar-temizle-btn');
             if (!hatalarim.length) {
-                gövde.innerHTML = `<div class="hatalar-bos">Henüz yanlış cevapladığın bir soru yok. 🎉</div>`;
+                gövde.innerHTML = `<div class="hatalar-bos">Henüz yanlış cevapladığın bir soru yok. <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg></div>`;
                 if (temizleBtn) temizleBtn.style.display = 'none';
             } else {
                 if (temizleBtn) temizleBtn.style.display = '';
@@ -2256,10 +2731,10 @@ body.modal-open { animation-play-state: paused; }
                     let dogruMetin = (h.secenekler && h.dogruCevap) ? h.secenekler[h.dogruCevap] : '-';
                     return `
                         <div class="hata-item">
-                            <div class="hata-meta"><span>📂 ${h.kategori || '-'} · Soru ${h.seviye || '-'}/12</span><span>${tarihStr}</span></div>
+                            <div class="hata-meta"><span><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> ${h.kategori || '-'} · Soru ${h.seviye || '-'}/12</span><span>${tarihStr}</span></div>
                             <div class="hata-soru">${h.soru || ''}</div>
-                            <div class="hata-cevap-satir">❌ Senin cevabın: <span class="hata-yanlis">${h.verilenCevap || '-'}) ${verilenMetin}</span></div>
-                            <div class="hata-cevap-satir">✅ Doğru cevap: <span class="hata-dogru">${h.dogruCevap || '-'}) ${dogruMetin}</span></div>
+                            <div class="hata-cevap-satir"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Senin cevabın: <span class="hata-yanlis">${h.verilenCevap || '-'}) ${verilenMetin}</span></div>
+                            <div class="hata-cevap-satir"><svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Doğru cevap: <span class="hata-dogru">${h.dogruCevap || '-'}) ${dogruMetin}</span></div>
                         </div>
                     `;
                 }).join('');
@@ -2333,7 +2808,7 @@ body.modal-open { animation-play-state: paused; }
             let gosterilenSayi = istatistik.streakGuncel || 0;
             if (istatistik.streakSonTarih && gunFarki(istatistik.streakSonTarih, bugun) > 1) gosterilenSayi = 0; // seri kırılmış, henüz kaydedilmedi
             return `<div class="streak-banner">
-                <span class="streak-fire">🔥</span>
+                <span class="streak-fire"><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2c-1 3-4 4-4 8a4 4 0 0 0 8 0c0-1-.5-2-1-2.5.5 2-1 3-1.5 1.5C13 7 12 5 12 2z"/><path d="M8 14a4 4 0 0 0 8 0c0-2-1-3-2-4 .3 2-1.2 2.5-1.5 1-.3 1.5-1.8 1-1.5-1-1 1-3 2-3 4z"/></svg></span>
                 <div>
                     <div class="streak-text">${gosterilenSayi} günlük seri</div>
                     <div class="streak-sub">En uzun serin: ${istatistik.streakEnUzun} gün</div>
@@ -2351,7 +2826,7 @@ body.modal-open { animation-play-state: paused; }
             { tip: 'bos',    deger: 0,     etiket: 'Boş Turu', renk: '#5a5470' },
             { tip: 'joker',  deger: 'dondur', etiket: 'Zaman Dondur', renk: '#ff8a3d' },
             { tip: 'para',   deger: 5000,  etiket: '5.000 TL', renk: '#17b978' },
-            { tip: 'buyuk',  deger: 10000, etiket: '🎉 10.000 TL', renk: '#e0b400' },
+            { tip: 'buyuk',  deger: 10000, etiket: '10.000 TL', renk: '#e0b400' },
         ];
         let carkCevriliyor = false;
         let carkKazananIndex = 0;
@@ -2404,7 +2879,7 @@ body.modal-open { animation-play-state: paused; }
                 text.setAttribute('y', pos.y.toFixed(2));
                 text.setAttribute('transform', `rotate(${donusAcisi.toFixed(2)} ${pos.x.toFixed(2)} ${pos.y.toFixed(2)})`);
 
-                // Uzun etiketleri iki satıra böl (örn. "🎉 10.000 TL" -> "🎉 10.000" / "TL")
+                // Uzun etiketleri iki satıra böl (örn. "10.000 TL" -> "10.000" / "TL")
                 let kelimeler = d.etiket.split(' ');
                 let satirlar;
                 if (kelimeler.length > 2) {
@@ -2454,7 +2929,7 @@ body.modal-open { animation-play-state: paused; }
             let subText = document.getElementById('wheel-sub-text');
             if (carkBugunCevrildiMi()) {
                 spinBtn.disabled = true;
-                spinBtn.innerText = 'Bugün Çevrildi ✓';
+                spinBtn.innerText = 'Bugün Çevrildi';
                 subText.innerText = 'Yarın tekrar gelip çevirebilirsin!';
             } else {
                 spinBtn.disabled = false;
@@ -2501,42 +2976,42 @@ body.modal-open { animation-play-state: paused; }
             konfetiPatlat();
             let sonucEl = document.getElementById('wheel-result');
             let spinBtn = document.getElementById('wheel-spin-btn');
-            spinBtn.innerText = 'Bugün Çevrildi ✓';
+            spinBtn.innerText = 'Bugün Çevrildi';
 
             if (dilim.tip === 'para' || dilim.tip === 'buyuk') {
                 kasaGuncelle(dilim.deger);
-                sonucEl.innerHTML = `🎉 Tebrikler! <br>Kasanıza <b>+${dilim.deger.toLocaleString('tr-TR')} TL</b> eklendi!`;
+                sonucEl.innerHTML = `<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg> Tebrikler! <br>Kasanıza <b>+${dilim.deger.toLocaleString('tr-TR')} TL</b> eklendi!`;
             } else if (dilim.tip === 'joker') {
                 if (jokersUsed[dilim.deger] === false) {
                     // zaten sahipse eşdeğer TL karşılığını ver
                     let karsilikTL = JOKER_PRICES[dilim.deger] || 1000;
                     kasaGuncelle(karsilikTL);
-                    sonucEl.innerHTML = `🎉 ${dilim.etiket} zaten sende! <br>Karşılığında <b>+${karsilikTL.toLocaleString('tr-TR')} TL</b> kazandın!`;
+                    sonucEl.innerHTML = `<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg> ${dilim.etiket} zaten sende! <br>Karşılığında <b>+${karsilikTL.toLocaleString('tr-TR')} TL</b> kazandın!`;
                 } else {
                     jokersUsed[dilim.deger] = false;
                     jokerButonlariniGuncelle();
-                    sonucEl.innerHTML = `🎉 Tebrikler! <br><b>${dilim.etiket}</b> jokeri hesabına eklendi!`;
+                    sonucEl.innerHTML = `<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg> Tebrikler! <br><b>${dilim.etiket}</b> jokeri hesabına eklendi!`;
                 }
             } else {
-                sonucEl.innerHTML = `😅 Bu sefer boş geldi. <br>Yarın tekrar dene!`;
+                sonucEl.innerHTML = `Bu sefer boş geldi. <br>Yarın tekrar dene!`;
             }
             sonucEl.style.display = 'block';
         }
 
         // ===== ROZET (BAŞARIM) SİSTEMİ =====
         const ROZET_TANIMLARI = [
-            { key: 'ilk_oyun',        icon: '🎮', ad: 'İlk Adım',        aciklama: 'İlk oyununu oyna',              kosul: s => s.toplamOyun >= 1 },
-            { key: 'ilk_milyoner',    icon: '👑', ad: 'Milyoner',        aciklama: '1.000.000 TL kazan',            kosul: s => s.milyonerSayisi >= 1 },
-            { key: 'uc_milyoner',     icon: '💎', ad: 'Seri Milyoner',   aciklama: '3 kez milyoner ol',              kosul: s => s.milyonerSayisi >= 3 },
-            { key: 'jokersiz',        icon: '🧠', ad: 'Saf Zeka',        aciklama: 'Joker kullanmadan milyoner ol',  kosul: s => s.jokersizMilyonerSayisi >= 1 },
-            { key: 'on_oyun',         icon: '🎯', ad: 'Kararlı',         aciklama: '10 oyun tamamla',                kosul: s => s.toplamOyun >= 10 },
-            { key: 'elli_oyun',       icon: '🏆', ad: 'Efsane',          aciklama: '50 oyun tamamla',                kosul: s => s.toplamOyun >= 50 },
-            { key: 'yuz_dogru',       icon: '✅', ad: 'Bilgi Küpü',      aciklama: '100 doğru cevap ver',            kosul: s => s.toplamDogru >= 100 },
-            { key: 'tum_jokerler',    icon: '🃏', ad: 'Joker Ustası',    aciklama: 'Tüm joker türlerini kullan',     kosul: s => Object.values(s.jokerKullanim).every(v => v > 0) },
-            { key: 'streak_3',        icon: '🔥', ad: 'Ateşli Başlangıç', aciklama: '3 gün üst üste oyna',           kosul: s => s.streakEnUzun >= 3 },
-            { key: 'streak_7',        icon: '🌟', ad: 'Haftalık Seri',   aciklama: '7 gün üst üste oyna',            kosul: s => s.streakEnUzun >= 7 },
-            { key: 'streak_30',       icon: '🏅', ad: 'Efsanevi Seri',   aciklama: '30 gün üst üste oyna',           kosul: s => s.streakEnUzun >= 30 },
-            { key: 'kategori_ustasi', icon: '📚', ad: 'Kategori Ustası', aciklama: 'Bir kategoride 5 kez oyna',      kosul: s => Object.values(s.kategoriSayaci || {}).some(v => v >= 5) },
+            { key: 'ilk_oyun',        icon: '<svg class="icon" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="10" rx="4"/><line x1="7" y1="13" x2="7" y2="13.01"/><line x1="11" y1="13" x2="11" y2="13.01"/><circle cx="17" cy="12" r="1"/><circle cx="19" cy="14" r="1"/></svg>', ad: 'İlk Adım',        aciklama: 'İlk oyununu oyna',              kosul: s => s.toplamOyun >= 1 },
+            { key: 'ilk_milyoner',    icon: '<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M2 20h20L20 8l-5 4-3-7-3 7-5-4-2 12z"/></svg>', ad: 'Milyoner',        aciklama: '1.000.000 TL kazan',            kosul: s => s.milyonerSayisi >= 1 },
+            { key: 'uc_milyoner',     icon: '<svg class="icon" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 21L8.5 9M12 21L15.5 9M6 3l2.5 6M18 3l-2.5 6"/></svg>', ad: 'Seri Milyoner',   aciklama: '3 kez milyoner ol',              kosul: s => s.milyonerSayisi >= 3 },
+            { key: 'jokersiz',        icon: '<svg class="icon" viewBox="0 0 24 24"><path d="M9.5 2A5.5 5.5 0 0 0 4 7.5c0 1.9.9 3.2 2 4.2 1 .9 1.5 1.6 1.5 2.8V17h9v-2.5c0-1.2.5-1.9 1.5-2.8 1.1-1 2-2.3 2-4.2A5.5 5.5 0 0 0 14.5 2h-5z"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="10" y1="17" x2="10" y2="21"/><line x1="14" y1="17" x2="14" y2="21"/></svg>', ad: 'Saf Zeka',        aciklama: 'Joker kullanmadan milyoner ol',  kosul: s => s.jokersizMilyonerSayisi >= 1 },
+            { key: 'on_oyun',         icon: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>', ad: 'Kararlı',         aciklama: '10 oyun tamamla',                kosul: s => s.toplamOyun >= 10 },
+            { key: 'elli_oyun',       icon: '<svg class="icon" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a1 1 0 0 0-1 1c0 3 2 5 4 5M17 5h3a1 1 0 0 1 1 1c0 3-2 5-4 5"/></svg>', ad: 'Efsane',          aciklama: '50 oyun tamamla',                kosul: s => s.toplamOyun >= 50 },
+            { key: 'yuz_dogru',       icon: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>', ad: 'Bilgi Küpü',      aciklama: '100 doğru cevap ver',            kosul: s => s.toplamDogru >= 100 },
+            { key: 'tum_jokerler',    icon: '<svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 7h.01M16 17h.01M15 7l-6 10"/></svg>', ad: 'Joker Ustası',    aciklama: 'Tüm joker türlerini kullan',     kosul: s => Object.values(s.jokerKullanim).every(v => v > 0) },
+            { key: 'streak_3',        icon: '<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2c-1 3-4 4-4 8a4 4 0 0 0 8 0c0-1-.5-2-1-2.5.5 2-1 3-1.5 1.5C13 7 12 5 12 2z"/><path d="M8 14a4 4 0 0 0 8 0c0-2-1-3-2-4 .3 2-1.2 2.5-1.5 1-.3 1.5-1.8 1-1.5-1-1 1-3 2-3 4z"/></svg>', ad: 'Ateşli Başlangıç', aciklama: '3 gün üst üste oyna',           kosul: s => s.streakEnUzun >= 3 },
+            { key: 'streak_7',        icon: '<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 16.9 6.1 20l1.2-6.5-4.8-4.6L9.1 8z"/></svg>', ad: 'Haftalık Seri',   aciklama: '7 gün üst üste oyna',            kosul: s => s.streakEnUzun >= 7 },
+            { key: 'streak_30',       icon: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L6 22l6-3 6 3-2.5-8.5"/></svg>', ad: 'Efsanevi Seri',   aciklama: '30 gün üst üste oyna',           kosul: s => s.streakEnUzun >= 30 },
+            { key: 'kategori_ustasi', icon: '<svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>', ad: 'Kategori Ustası', aciklama: 'Bir kategoride 5 kez oyna',      kosul: s => Object.values(s.kategoriSayaci || {}).some(v => v >= 5) },
         ];
         function yeniRozetleriKontrolEt() {
             let yeniKazanilan = [];
@@ -2569,7 +3044,7 @@ body.modal-open { animation-play-state: paused; }
                 return `<div class="badge-item ${acik ? 'unlocked' : ''}">
                     <span class="badge-icon">${r.icon}</span>
                     <span class="badge-name">${r.ad}</span>
-                    <span class="badge-desc">${acik ? r.aciklama : '🔒 Kilitli'}</span>
+                    <span class="badge-desc">${acik ? r.aciklama : '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Kilitli'}</span>
                 </div>`;
             }).join('');
             document.getElementById('badges-body').innerHTML = gridHtml;
@@ -2632,15 +3107,15 @@ body.modal-open { animation-play-state: paused; }
             let jk = istatistik.jokerKullanim;
             let toplamJoker = (jk['50']||0) + (jk['degistir']||0) + (jk['cift']||0) + (jk['seyirci']||0) + (jk['dondur']||0);
             document.getElementById('stats-body').innerHTML = `
-                <p>🎮 <strong>Toplam Oynanan Oyun:</strong> ${istatistik.toplamOyun}</p>
-                <p>👑 <strong>Milyoner Olma Sayısı:</strong> ${istatistik.milyonerSayisi}</p>
-                <p>🏔️ <strong>En Yüksek Ulaşılan Seviye:</strong> ${istatistik.enYuksekSeviye}/12</p>
-                <p>✅ <strong>Doğru Cevap:</strong> ${istatistik.toplamDogru}</p>
-                <p>❌ <strong>Yanlış Cevap:</strong> ${istatistik.toplamYanlis}</p>
-                <p>🎯 <strong>Başarı Oranı:</strong> %${basariOrani}</p>
-                <p>⭐ <strong>En Çok Oynanan Kategori:</strong> ${enCokOynananKategori()}</p>
-                <p>🃏 <strong>Kullanılan Joker Sayısı:</strong> ${toplamJoker}</p>
-                <p style="padding-left:14px; opacity:0.85; font-size:0.95rem;">✂️ %50: ${jk['50']||0} &nbsp;|&nbsp; 🔄 Değiştir: ${jk['degistir']||0} &nbsp;|&nbsp; ✌️ Çift: ${jk['cift']||0}<br>👥 Seyirci: ${jk['seyirci']||0} &nbsp;|&nbsp; ❄️ Dondur: ${jk['dondur']||0}</p>
+                <p><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="10" rx="4"/><line x1="7" y1="13" x2="7" y2="13.01"/><line x1="11" y1="13" x2="11" y2="13.01"/><circle cx="17" cy="12" r="1"/><circle cx="19" cy="14" r="1"/></svg> <strong>Toplam Oynanan Oyun:</strong> ${istatistik.toplamOyun}</p>
+                <p><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M2 20h20L20 8l-5 4-3-7-3 7-5-4-2 12z"/></svg> <strong>Milyoner Olma Sayısı:</strong> ${istatistik.milyonerSayisi}</p>
+                <p><svg class="icon" viewBox="0 0 24 24"><path d="M8 21l4-14 4 14M6 21h12"/><path d="M12 3l9 8h-4v6H7v-6H3z"/></svg> <strong>En Yüksek Ulaşılan Seviye:</strong> ${istatistik.enYuksekSeviye}/12</p>
+                <p><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> <strong>Doğru Cevap:</strong> ${istatistik.toplamDogru}</p>
+                <p><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> <strong>Yanlış Cevap:</strong> ${istatistik.toplamYanlis}</p>
+                <p><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> <strong>Başarı Oranı:</strong> %${basariOrani}</p>
+                <p><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 16.9 6.1 20l1.2-6.5-4.8-4.6L9.1 8z"/></svg> <strong>En Çok Oynanan Kategori:</strong> ${enCokOynananKategori()}</p>
+                <p><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 7h.01M16 17h.01M15 7l-6 10"/></svg> <strong>Kullanılan Joker Sayısı:</strong> ${toplamJoker}</p>
+                <p style="padding-left:14px; opacity:0.85; font-size:0.95rem;"><svg class="icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg> %50: ${jk['50']||0} &nbsp;|&nbsp; <svg class="icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Değiştir: ${jk['degistir']||0} &nbsp;|&nbsp; <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Çift: ${jk['cift']||0}<br><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Seyirci: ${jk['seyirci']||0} &nbsp;|&nbsp; <svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5l-5-3-5 3M17 19l-5 3-5-3M2 12h20"/></svg> Dondur: ${jk['dondur']||0}</p>
             `;
             document.getElementById('stats-modal').style.display = 'flex';
             document.body.classList.add('modal-open');
@@ -2657,7 +3132,7 @@ body.modal-open { animation-play-state: paused; }
             let formatli = kasaParasi.toLocaleString('tr-TR') + " TL";
             
             let mLabel = document.getElementById('kasa-main-label'); if(mLabel) mLabel.innerText = formatli;
-            let gBtn = document.getElementById('kasa-game'); if(gBtn) gBtn.innerText = "💰 " + formatli;
+            let gBtn = document.getElementById('kasa-game'); if(gBtn) gBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M15 9.2c0-1.2-1.3-2.2-3-2.2s-3 .9-3 2.1c0 3 6 1.4 6 4.4 0 1.2-1.3 2.1-3 2.1s-3-1-3-2.2"/></svg> ' + formatli;
         }
 
         const YEDEK_SECRET = "MuGolyoner_Ozel_Sifre_2024";
@@ -2678,10 +3153,10 @@ body.modal-open { animation-play-state: paused; }
                 let icerik = "window.MUGOL_BILGIN_YEDEK = " + JSON.stringify(paket) + ";";
                 let blob = new Blob([icerik], { type: "application/javascript" }); let url = window.URL.createObjectURL(blob);
                 let a = document.createElement("a"); a.href = url; a.download = "mugol-bilgin-verisi.js"; document.body.appendChild(a); a.click(); a.remove(); window.URL.revokeObjectURL(url);
-                setTimeout(() => { alert("✅ Kasa, istatistik ve rozet verileriniz indirildi!"); }, 400);
+                setTimeout(() => { alert("Kasa, istatistik ve rozet verileriniz indirildi!"); }, 400);
             } catch (err) {
                 sesCal('yanlis');
-                alert("❌ Veriler indirilirken bir hata oluştu: " + err.message);
+                alert("Veriler indirilirken bir hata oluştu: " + err.message);
                 console.error('kasaIndir hata:', err);
             }
         }
@@ -2692,12 +3167,12 @@ body.modal-open { animation-play-state: paused; }
                 try {
                     let icerikMetni = e.target.result;
                     let paket = _yedekPaketiCoz(icerikMetni);
-                    if (!paket) { sesCal('yanlis'); alert("❌ HATA: Geçersiz dosya formatı."); event.target.value = ""; return; }
+                    if (!paket) { sesCal('yanlis'); alert("HATA: Geçersiz dosya formatı."); event.target.value = ""; return; }
 
                     let veri = paket.veri;
                     let checkHash = _guvenliBtoa(JSON.stringify(veri) + YEDEK_SECRET);
                     if (paket.guvenlik !== checkHash || typeof veri.miktar !== "number") {
-                        sesCal('yanlis'); alert("❌ HATA: Yedek dosyası bozuk!"); event.target.value = ""; return;
+                        sesCal('yanlis'); alert("HATA: Yedek dosyası bozuk!"); event.target.value = ""; return;
                     }
 
                     sesCal('dogru');
@@ -2707,11 +3182,11 @@ body.modal-open { animation-play-state: paused; }
                         istatistik = Object.assign(varsayilan, veri.istatistik, { jokerKullanim: Object.assign(varsayilan.jokerKullanim, veri.istatistik.jokerKullanim || {}) });
                         istatistikKaydet();
                     }
-                    alert("✅ Veriler yüklendi!\nKasanız: " + kasaParasi.toLocaleString('tr-TR') + " TL\nRozetler: " + (istatistik.acilmisRozetler ? istatistik.acilmisRozetler.length : 0) + " / " + ROZET_TANIMLARI.length);
+                    alert("Veriler yüklendi!\nKasanız: " + kasaParasi.toLocaleString('tr-TR') + " TL\nRozetler: " + (istatistik.acilmisRozetler ? istatistik.acilmisRozetler.length : 0) + " / " + ROZET_TANIMLARI.length);
                     karsilamaMesajiniKapat();
                     let verilerModalEl = document.getElementById('veriler-modal');
                     if (verilerModalEl && verilerModalEl.classList.contains('open')) verilerModaliniKapat();
-                } catch (err) { sesCal('yanlis'); alert("❌ HATA: Geçersiz dosya formatı."); }
+                } catch (err) { sesCal('yanlis'); alert("HATA: Geçersiz dosya formatı."); }
                 event.target.value = "";
             }; reader.readAsText(file);
         }
@@ -2746,9 +3221,9 @@ body.modal-open { animation-play-state: paused; }
         }
 
         function jokerButonlariniGuncelle() {
-            setJokerButtonState('50', 'btn-joker-50', '%50 Joker'); setJokerButtonState('degistir', 'btn-joker-degistir', '🔄 Değiştir');
-            setJokerButtonState('cift', 'btn-joker-cift', 'x2 Cevap'); setJokerButtonState('seyirci', 'btn-joker-seyirci', '👥 Seyirci');
-            setJokerButtonState('dondur', 'btn-joker-dondur', '❄️ Dondur');
+            setJokerButtonState('50', 'btn-joker-50', '%50 Joker'); setJokerButtonState('degistir', 'btn-joker-degistir', 'Değiştir');
+            setJokerButtonState('cift', 'btn-joker-cift', 'x2 Cevap'); setJokerButtonState('seyirci', 'btn-joker-seyirci', 'Seyirci');
+            setJokerButtonState('dondur', 'btn-joker-dondur', 'Dondur');
         }
 
         let sorulmusSorular = [];
@@ -2759,8 +3234,8 @@ body.modal-open { animation-play-state: paused; }
 
         function toggleSound() {
             sesAcik = !sesAcik;
-            document.getElementById('sound-toggle-main').innerText = sesAcik ? "🔊 Ses Açık" : "🔇 Ses Kapalı";
-            document.getElementById('sound-toggle-game').innerText = sesAcik ? "🔊" : "🔇";
+            document.getElementById('sound-toggle-main').innerHTML = sesAcik ? '<svg class="icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Ses Açık' : '<svg class="icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg> Ses Kapalı';
+            document.getElementById('sound-toggle-game').innerHTML = sesAcik ? '<svg class="icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>' : '<svg class="icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
         }
 
         /* ============ SESLİ OKUMA (Text-to-Speech) ============ */
@@ -2883,7 +3358,7 @@ body.modal-open { animation-play-state: paused; }
             otoOkumaAcik = !otoOkumaAcik;
             try { localStorage.setItem('mugolyoner_oto_okuma', otoOkumaAcik ? '1' : '0'); } catch(e) {}
             let btn = document.getElementById('tts-toggle-main');
-            if (btn) btn.innerText = otoOkumaAcik ? "🎙️ Otomatik Okuma Açık" : "🎙️ Otomatik Okuma Kapalı";
+            if (btn) btn.innerHTML = otoOkumaAcik ? '<svg class="icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Otomatik Okuma Açık' : '<svg class="icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Otomatik Okuma Kapalı';
             if (otoOkumaAcik && aktifSoru) metniOku(aktifSoruyuMetneCevir());
             else sesliOkumayiDurdur();
         }
@@ -2947,8 +3422,8 @@ body.modal-open { animation-play-state: paused; }
             sesliKomutAcik = !sesliKomutAcik;
             try { localStorage.setItem('mugolyoner_sesli_komut', sesliKomutAcik ? '1' : '0'); } catch(e) {}
             let btn = document.getElementById('voice-toggle-main');
-            if (btn) btn.innerText = sesliKomutAcik ? "🎤 Sesli Cevap Açık" : "🎤 Sesli Cevap Kapalı";
-            if (!sesTanimaDestekli && sesliKomutAcik) { alert("Cihazınız/tarayıcınız sesli komutu desteklemiyor."); sesliKomutAcik = false; try { localStorage.setItem('mugolyoner_sesli_komut', '0'); } catch(e) {} if (btn) btn.innerText = "🎤 Sesli Cevap Kapalı"; return; }
+            if (btn) btn.innerHTML = sesliKomutAcik ? '<svg class="icon" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg> Sesli Cevap Açık' : '<svg class="icon" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg> Sesli Cevap Kapalı';
+            if (!sesTanimaDestekli && sesliKomutAcik) { alert("Cihazınız/tarayıcınız sesli komutu desteklemiyor."); sesliKomutAcik = false; try { localStorage.setItem('mugolyoner_sesli_komut', '0'); } catch(e) {} if (btn) btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg> Sesli Cevap Kapalı'; return; }
             let screenGameEl = document.getElementById('screen-game');
             let oyunEkraniAcikMi = screenGameEl && screenGameEl.classList.contains('active');
             if (sesliKomutAcik && oyunEkraniAcikMi) sesliKomutDinlemeyeBasla();
@@ -3024,7 +3499,7 @@ body.modal-open { animation-play-state: paused; }
                 });
             });
         }
-        function ayarlariAc() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "flex"; document.body.classList.add('modal-open'); let ttsBtn = document.getElementById('tts-toggle-main'); if (ttsBtn) ttsBtn.innerText = otoOkumaAcik ? "🎙️ Otomatik Okuma Açık" : "🎙️ Otomatik Okuma Kapalı"; let voiceBtn = document.getElementById('voice-toggle-main'); if (voiceBtn) voiceBtn.innerText = sesliKomutAcik ? "🎤 Sesli Cevap Açık" : "🎤 Sesli Cevap Kapalı"; gorunumModuBaslat(); }
+        function ayarlariAc() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "flex"; document.body.classList.add('modal-open'); let ttsBtn = document.getElementById('tts-toggle-main'); if (ttsBtn) ttsBtn.innerHTML = otoOkumaAcik ? '<svg class="icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Otomatik Okuma Açık' : '<svg class="icon" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Otomatik Okuma Kapalı'; let voiceBtn = document.getElementById('voice-toggle-main'); if (voiceBtn) voiceBtn.innerHTML = sesliKomutAcik ? '<svg class="icon" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg> Sesli Cevap Açık' : '<svg class="icon" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg> Sesli Cevap Kapalı'; gorunumModuBaslat(); }
         function ayarlariKapat() { sesCal('tiklama'); document.getElementById("settings-modal").style.display = "none"; document.body.classList.remove('modal-open'); }
 
         // ===== REKLAM YARDIMCI FONKSİYONU =====
@@ -3187,7 +3662,7 @@ body.modal-open { animation-play-state: paused; }
             { baslik: '🔬 Bilim & Doğa', anahtar: ['bilim', 'fizik', 'kimya', 'biyoloji', 'astronomi', 'doğa', 'canlı', 'teknoloji', 'sağlık', 'psikoloji', 'hayvan', 'bitki'] },
             { baslik: '🌍 Dünyamız', anahtar: ['coğrafya', 'başkent', 'önemli yerler', 'ülke'] },
             { baslik: '🎬 Sanat & Eğlence', anahtar: ['sinema', 'müzik', 'sanat', 'moda', 'animasyon', 'çizgi roman', 'oyun', 'replik'] },
-            { baslik: '⚽ Spor & Yaşam', anahtar: ['spor', 'futbol', 'basketbol', 'voleybol', 'gastronomi', 'lezzet', 'ekonomi', 'hukuk', 'siyaset', 'mimari', 'felsefe', 'din', 'genel kültür'] },
+            { baslik: '⚽ Spor', anahtar: ['spor', 'futbol', 'basketbol', 'voleybol'] },
             { baslik: '🚗 Ulaşım & Merak', anahtar: ['araba', 'uçak', 'gemi', 'tren', 'bilmece'] },
         ];
         function kategoriGrubunuBul(kat) {
@@ -3255,8 +3730,64 @@ body.modal-open { animation-play-state: paused; }
             kategoriOneriGuncelle(kategoriler);
         }
 
+        // ===== KATEGORİ ARAMA =====
+        function kategoriAramaFiltrele(sorgu) {
+            let clearBtn = document.getElementById('category-search-clear');
+            let emptyMsg = document.getElementById('category-search-empty');
+            let temizSorgu = (sorgu || '').trim().toLocaleLowerCase('tr-TR');
+            if (clearBtn) clearBtn.style.display = temizSorgu ? 'flex' : 'none';
+
+            let butonlar = Array.from(document.querySelectorAll('#category-buttons-wrap .category-btn, #category-buttons-wrap .kat-liste-grup'));
+            if (!temizSorgu) {
+                document.querySelectorAll('.category-btn, .kat-liste-grup').forEach(el => el.classList.remove('search-hidden'));
+                document.querySelectorAll('.ad-slot').forEach(el => el.style.removeProperty('display'));
+                if (emptyMsg) emptyMsg.style.display = 'none';
+                return;
+            }
+
+            let gorunumModu = 'izgara';
+            try { gorunumModu = localStorage.getItem('mugolyoner_gorunum_modu') || 'izgara'; } catch(e) {}
+
+            if (gorunumModu === 'liste') {
+                // Liste (gruplu) görünümde: her grup içindeki kartları filtrele, boşalan grubu gizle
+                let hicbirEslesme = true;
+                document.querySelectorAll('.kat-liste-grup').forEach(grup => {
+                    let grupEslesti = false;
+                    grup.querySelectorAll('.category-btn').forEach(btn => {
+                        let ad = (btn.querySelector('.cat-text')?.textContent || '').toLocaleLowerCase('tr-TR');
+                        let eslesir = ad.includes(temizSorgu);
+                        btn.classList.toggle('search-hidden', !eslesir);
+                        if (eslesir) grupEslesti = true;
+                    });
+                    grup.classList.toggle('search-hidden', !grupEslesti);
+                    if (grupEslesti) hicbirEslesme = false;
+                });
+                if (emptyMsg) emptyMsg.style.display = hicbirEslesme ? 'block' : 'none';
+            } else {
+                // Izgara görünümde: "Karışık" hariç her kartı ada göre filtrele, reklamları da gizle
+                let hicbirEslesme = true;
+                document.querySelectorAll('#category-buttons-wrap .category-btn').forEach(btn => {
+                    if (btn.classList.contains('btn-mixed')) return; // Karışık her zaman görünür kalsın
+                    let ad = (btn.querySelector('.cat-text')?.textContent || '').toLocaleLowerCase('tr-TR');
+                    let eslesir = ad.includes(temizSorgu);
+                    btn.classList.toggle('search-hidden', !eslesir);
+                    if (eslesir) hicbirEslesme = false;
+                });
+                document.querySelectorAll('#category-buttons-wrap .ad-slot').forEach(el => { el.style.display = 'none'; });
+                if (emptyMsg) emptyMsg.style.display = hicbirEslesme ? 'block' : 'none';
+            }
+        }
+        function kategoriAramaTemizle() {
+            let input = document.getElementById('category-search-input');
+            if (input) input.value = '';
+            kategoriAramaFiltrele('');
+            sesCal('tiklama');
+        }
+
         function kategorileriYukle() {
             const wrap = document.getElementById("category-buttons-wrap"); wrap.innerHTML = "";
+            let aramaInput = document.getElementById('category-search-input');
+            let aramaAktifSorgu = aramaInput ? aramaInput.value : '';
             if(!window.tumSorular || window.tumSorular.length === 0) { wrap.innerHTML = "<p>Sorular yüklenemedi!</p>"; return; }
 
             let gorunumModu = 'izgara';
@@ -3361,6 +3892,9 @@ body.modal-open { animation-play-state: paused; }
             document.querySelectorAll('.ad-slot').forEach((slot, i) => {
                 setTimeout(() => reklamGosterVeyaGizle(slot), i * 600);
             });
+
+            // Liste yeniden oluşturulduğu için, önceden yazılmış arama sorgusu varsa tekrar uygula
+            if (aramaAktifSorgu) kategoriAramaFiltrele(aramaAktifSorgu);
         }
 
         // ===== SANA ÖZEL KATEGORİ ÖNERİSİ =====
@@ -3411,6 +3945,8 @@ body.modal-open { animation-play-state: paused; }
         let _katistatistikBekleyenKategori = null;
         function oyunuBaslat(kategori) {
             sesCal('tiklama');
+            // Kategori kartından normal başlatma her zaman meydan okuma modunu iptal eder
+            meydanAktif = false; meydanSeed = null; meydanKategori = null; meydanGonderenAdi = null; meydanSoruSirasi = [];
             _katistatistikBekleyenKategori = kategori;
 
             let emoji = kategoriEmojiGetir(kategori);
@@ -3420,21 +3956,21 @@ body.modal-open { animation-play-state: paused; }
 
             let soruSayisi = kategoriSoruSayisiGetir(kategori);
             document.getElementById('cat-info-meta').innerHTML =
-                `<span>📚 ${soruSayisi} soru havuzu</span><span>🎯 Oyunda 12 soru sorulacak</span>`;
+                `<span><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> ${soruSayisi} soru havuzu</span><span><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Oyunda 12 soru sorulacak</span>`;
 
             let kd = (istatistik.kategoriDetay && istatistik.kategoriDetay[kategori]) || { oyun: 0, dogru: 0, yanlis: 0, enYuksekSeviye: 0, milyoner: 0 };
             let toplamCevap = kd.dogru + kd.yanlis;
             let basariOrani = toplamCevap > 0 ? Math.round((kd.dogru / toplamCevap) * 100) : 0;
             if (kd.oyun === 0) {
-                document.getElementById('cat-stats-body').innerHTML = `<p style="text-align:center; opacity:0.85;">Bu kategoride henüz oynamadın. 🎯<br>İlk oyununu oynamaya hazır mısın?</p>`;
+                document.getElementById('cat-stats-body').innerHTML = `<p style="text-align:center; opacity:0.85;">Bu kategoride henüz oynamadın. <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><br>İlk oyununu oynamaya hazır mısın?</p>`;
             } else {
                 document.getElementById('cat-stats-body').innerHTML = `
-                    <p>🎮 <strong>Oynanan Oyun:</strong> ${kd.oyun}</p>
-                    <p>👑 <strong>Milyoner Olma Sayısı:</strong> ${kd.milyoner}</p>
-                    <p>🏔️ <strong>En Yüksek Ulaşılan Seviye:</strong> ${kd.enYuksekSeviye}/12</p>
-                    <p>✅ <strong>Doğru Cevap:</strong> ${kd.dogru}</p>
-                    <p>❌ <strong>Yanlış Cevap:</strong> ${kd.yanlis}</p>
-                    <p>🎯 <strong>Başarı Oranı:</strong> %${basariOrani}</p>
+                    <p><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="10" rx="4"/><line x1="7" y1="13" x2="7" y2="13.01"/><line x1="11" y1="13" x2="11" y2="13.01"/><circle cx="17" cy="12" r="1"/><circle cx="19" cy="14" r="1"/></svg> <strong>Oynanan Oyun:</strong> ${kd.oyun}</p>
+                    <p><svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M2 20h20L20 8l-5 4-3-7-3 7-5-4-2 12z"/></svg> <strong>Milyoner Olma Sayısı:</strong> ${kd.milyoner}</p>
+                    <p><svg class="icon" viewBox="0 0 24 24"><path d="M8 21l4-14 4 14M6 21h12"/><path d="M12 3l9 8h-4v6H7v-6H3z"/></svg> <strong>En Yüksek Ulaşılan Seviye:</strong> ${kd.enYuksekSeviye}/12</p>
+                    <p><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> <strong>Doğru Cevap:</strong> ${kd.dogru}</p>
+                    <p><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> <strong>Yanlış Cevap:</strong> ${kd.yanlis}</p>
+                    <p><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> <strong>Başarı Oranı:</strong> %${basariOrani}</p>
                 `;
             }
 
@@ -3465,6 +4001,21 @@ body.modal-open { animation-play-state: paused; }
             document.getElementById("game-over").style.display = "none";
             let mainGameEl2 = document.getElementById('main-game'); if (mainGameEl2) mainGameEl2.style.display = '';
             let bottomBarEl2 = document.querySelector('.game-bottom-bar'); if (bottomBarEl2) bottomBarEl2.style.display = '';
+
+            // Meydan okuma modu aktifse soru sırası zaten deterministik olarak hazırlanmıştır;
+            // önceden görülmüş/kaydedilmiş soru filtresi bu oyunda devre dışı bırakılır ki
+            // her iki taraf da TAM AYNI 12 soruyu görsün.
+            let rakipBanner = document.getElementById('meydan-rakip-banner');
+            if (meydanAktif) {
+                if (!meydanSoruSirasi || meydanSoruSirasi.length === 0) meydanSoruSirasi = meydanSoruDizisiUret(meydanSeed, meydanKategori);
+                if (rakipBanner) {
+                    document.getElementById('meydan-rakip-metin').innerText = `${meydanGonderenAdi || 'Bir arkadaşın'} ile meydan okuma modundasın — aynı sorular!`;
+                    rakipBanner.style.display = 'flex';
+                }
+            } else if (rakipBanner) {
+                rakipBanner.style.display = 'none';
+            }
+
             odulAgaciniOlustur(); soruyuYukle(); sesliKomutDinlemeyeBasla();
         }
 
@@ -3476,6 +4027,10 @@ body.modal-open { animation-play-state: paused; }
             let bottomBarEl3 = document.querySelector('.game-bottom-bar'); if (bottomBarEl3) bottomBarEl3.style.display = '';
             jokersUsed = { '50': false, 'degistir': false, 'cift': false, 'seyirci': false, 'dondur': false }; jokerButonlariniGuncelle();
             kasaGuncelle(0); sesliKomutDinlemeyiDurdur();
+            // Ana menüye dönüldüğünde meydan okuma oturumu sona erer (rozet de gizlenir)
+            meydanAktif = false; meydanSeed = null; meydanKategori = null; meydanGonderenAdi = null; meydanSoruSirasi = [];
+            let rakipBanner2 = document.getElementById('meydan-rakip-banner'); if (rakipBanner2) rakipBanner2.style.display = 'none';
+            let vsKart2 = document.getElementById('meydan-vs-kart'); if (vsKart2) vsKart2.classList.remove('show');
         }
 
         function odulAgaciniOlustur() {
@@ -3524,14 +4079,22 @@ body.modal-open { animation-play-state: paused; }
             let aktifOdulUI = document.getElementById(`prize-${suankiSeviye}`);
             if(aktifOdulUI) { aktifOdulUI.classList.add('active'); if (window.innerWidth < 768) aktifOdulUI.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }); }
 
-            let havuz = window.tumSorular; if (seciliKategori !== "Karışık") { havuz = window.tumSorular.filter(s => s.kategori === seciliKategori); }
-            let sorulmamislar = havuz.filter(s => !sorulmusSorular.includes(s.soru));
-            if (sorulmamislar.length === 0) { 
-                let havuzSorulari = havuz.map(s => s.soru); sorulmusSorular = sorulmusSorular.filter(q => !havuzSorulari.includes(q)); kaydetSorulmus(); sorulmamislar = havuz; 
+            let yeniSoru;
+            if (meydanAktif && meydanSoruSirasi && meydanSoruSirasi.length > 0) {
+                // Meydan okuma modu: deterministik sıradan al (seviye 1 => index 0, vb.)
+                // Bu sayede meydan okuyan ve kabul eden TAM AYNI sorulara, AYNI sırayla maruz kalır.
+                let index = Math.min(suankiSeviye - 1, meydanSoruSirasi.length - 1);
+                yeniSoru = meydanSoruSirasi[index];
+            } else {
+                let havuz = window.tumSorular; if (seciliKategori !== "Karışık") { havuz = window.tumSorular.filter(s => s.kategori === seciliKategori); }
+                let sorulmamislar = havuz.filter(s => !sorulmusSorular.includes(s.soru));
+                if (sorulmamislar.length === 0) {
+                    let havuzSorulari = havuz.map(s => s.soru); sorulmusSorular = sorulmusSorular.filter(q => !havuzSorulari.includes(q)); kaydetSorulmus(); sorulmamislar = havuz;
+                }
+                yeniSoru = sorulmamislar[Math.floor(Math.random() * sorulmamislar.length)];
+                sorulmusSorular.push(yeniSoru.soru); kaydetSorulmus();
             }
-
-            let yeniSoru = sorulmamislar[Math.floor(Math.random() * sorulmamislar.length)];
-            sorulmusSorular.push(yeniSoru.soru); kaydetSorulmus(); aktifSoru = yeniSoru;
+            aktifSoru = yeniSoru;
 
             document.getElementById('q-text-span').innerText = aktifSoru.soru; document.querySelector('#btn-A .text').innerText = aktifSoru.secenekler.A;
             document.querySelector('#btn-B .text').innerText = aktifSoru.secenekler.B; document.querySelector('#btn-C .text').innerText = aktifSoru.secenekler.C;
@@ -3604,7 +4167,7 @@ body.modal-open { animation-play-state: paused; }
             timerEl.classList.add('timer-frozen');
             if (btnDondur) btnDondur.classList.add('joker-active');
             let overlay = document.createElement('span');
-            overlay.className = 'freeze-overlay'; overlay.id = 'freeze-overlay-el'; overlay.innerText = '❄️';
+            overlay.className = 'freeze-overlay'; overlay.id = 'freeze-overlay-el'; overlay.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5l-5-3-5 3M17 19l-5 3-5-3M2 12h20"/><path d="M4.5 6.5l3.5 3.5M19.5 6.5l-3.5 3.5M4.5 17.5l3.5-3.5M19.5 17.5l-3.5-3.5"/></svg>';
             timerEl.appendChild(overlay);
 
             let donmaSuresi = 10;
@@ -3662,10 +4225,14 @@ body.modal-open { animation-play-state: paused; }
 
         function pariltiPatlat(hedefEl) {
             if (!hedefEl) return;
-            let semboller = ['✦', '✧', '⭐'];
+            let semboller = [
+                '<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/></svg>',
+                '<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l1.2 4.2L18 8l-4.8 1.8L12 14l-1.2-4.2L6 8l4.8-1.8z"/></svg>',
+                '<svg class="icon icon-fill" viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 16.9 6.1 20l1.2-6.5-4.8-4.6L9.1 8z"/></svg>'
+            ];
             for (let i = 0; i < 6; i++) {
                 let s = document.createElement('span'); s.className = 'sparkle-piece';
-                s.innerText = semboller[Math.floor(Math.random() * semboller.length)];
+                s.innerHTML = semboller[Math.floor(Math.random() * semboller.length)];
                 s.style.left = (Math.random() * 90) + '%'; s.style.top = (Math.random() * 80) + '%';
                 s.style.color = '#ffd166';
                 s.style.animationDelay = (Math.random() * 0.2) + 's';
@@ -3703,6 +4270,9 @@ body.modal-open { animation-play-state: paused; }
             let eklenecekMiktar = parseInt(kazanilanOdulStr.replace(/[^0-9]/g, '')) || 0;
             if (eklenecekMiktar > 0) { kasaGuncelle(eklenecekMiktar); document.getElementById('kasa-eklenen').innerText = `Kasanıza Eklendi: +${eklenecekMiktar.toLocaleString('tr-TR')} TL`; } 
             else { document.getElementById('kasa-eklenen').innerText = ""; }
+
+            // Meydan okuma modundaysak sonucu kaydet ve rakip karşılaştırma kartını göster
+            meydanOyunSonuIsle(kazanilanOdulStr, eklenecekMiktar);
 
             // Oyun sonu reklamı: her seferinde yeniden tetiklenmesi için önceki ins'i temizleyip yeniden oluştur
             let gameOverAdSlot = document.getElementById('gameover-ad-slot');
@@ -3977,16 +4547,16 @@ body.modal-open { animation-play-state: paused; }
 
         // ===== MAĞAZA FONKSİYONLARI =====
         const SHOP_JOKERLER = [
-            { key: '50',        icon: '✂️', ad: '%50 Joker',   aciklama: 'İki yanlış şıkkı eler',    fiyat: JOKER_PRICES['50'] },
-            { key: 'degistir',  icon: '🔄', ad: 'Değiştir',    aciklama: 'Soruyu tamamen değiştirir', fiyat: JOKER_PRICES['degistir'] },
-            { key: 'cift',      icon: '✌️', ad: 'Çift Cevap',  aciklama: 'İki cevap hakkı kazanır',  fiyat: JOKER_PRICES['cift'] },
-            { key: 'seyirci',   icon: '👥', ad: 'Seyirci',     aciklama: 'Seyirci oylaması yapar',   fiyat: JOKER_PRICES['seyirci'] },
-            { key: 'dondur',    icon: '❄️', ad: 'Zaman Dondur', aciklama: 'Süreyi 10 saniye durdurur', fiyat: JOKER_PRICES['dondur'] },
+            { key: '50',        icon: '<svg class="icon" viewBox="0 0 24 24" style="width:1.6rem;height:1.6rem;"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>', ad: '%50 Joker',   aciklama: 'İki yanlış şıkkı eler',    fiyat: JOKER_PRICES['50'] },
+            { key: 'degistir',  icon: '<svg class="icon" viewBox="0 0 24 24" style="width:1.6rem;height:1.6rem;"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>', ad: 'Değiştir',    aciklama: 'Soruyu tamamen değiştirir', fiyat: JOKER_PRICES['degistir'] },
+            { key: 'cift',      icon: '<svg class="icon" viewBox="0 0 24 24" style="width:1.6rem;height:1.6rem;"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>', ad: 'Çift Cevap',  aciklama: 'İki cevap hakkı kazanır',  fiyat: JOKER_PRICES['cift'] },
+            { key: 'seyirci',   icon: '<svg class="icon" viewBox="0 0 24 24" style="width:1.6rem;height:1.6rem;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', ad: 'Seyirci',     aciklama: 'Seyirci oylaması yapar',   fiyat: JOKER_PRICES['seyirci'] },
+            { key: 'dondur',    icon: '<svg class="icon" viewBox="0 0 24 24" style="width:1.6rem;height:1.6rem;"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5l-5-3-5 3M17 19l-5 3-5-3M2 12h20"/><path d="M4.5 6.5l3.5 3.5M19.5 6.5l-3.5 3.5M4.5 17.5l3.5-3.5M19.5 17.5l-3.5-3.5"/></svg>', ad: 'Zaman Dondur', aciklama: 'Süreyi 10 saniye durdurur', fiyat: JOKER_PRICES['dondur'] },
         ];
 
         function magazayiAc() {
             sesCal('tiklama');
-            document.getElementById('shop-kasa-goster').innerText = '💰 Kasanız: ' + kasaParasi.toLocaleString('tr-TR') + ' TL';
+            document.getElementById('shop-kasa-goster').innerHTML = '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M15 9.2c0-1.2-1.3-2.2-3-2.2s-3 .9-3 2.1c0 3 6 1.4 6 4.4 0 1.2-1.3 2.1-3 2.1s-3-1-3-2.2"/></svg> Kasanız: ' + kasaParasi.toLocaleString('tr-TR') + ' TL';
             let container = document.getElementById('shop-items-container');
             container.innerHTML = '';
             SHOP_JOKERLER.forEach(j => {
@@ -3994,12 +4564,12 @@ body.modal-open { animation-play-state: paused; }
                 let item = document.createElement('div');
                 item.className = 'shop-item';
                 item.innerHTML = `
-                    <span style="font-size:1.6rem;">${j.icon}</span>
+                    <span>${j.icon}</span>
                     <div class="shop-item-info">
                         <span class="shop-item-name">${j.ad}</span>
                         <span class="shop-item-desc">${j.aciklama}</span>
                         <span class="shop-item-status ${sahip ? 'status-owned' : 'status-available'}">
-                            ${sahip ? '✅ Zaten Var' : '🛒 Satın Al'}
+                            ${sahip ? '<svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Zaten Var' : '<svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Satın Al'}
                         </span>
                     </div>
                     <button class="shop-buy-btn" id="shop-btn-${j.key}"
@@ -4020,14 +4590,14 @@ body.modal-open { animation-play-state: paused; }
             if (jokersUsed[key] === false) { alert('Bu jokere zaten sahipsiniz!'); return; }
             if (kasaParasi < joker.fiyat) {
                 sesCal('yanlis');
-                alert('❌ Yeterli bakiyeniz yok!\nGerekli: ' + joker.fiyat.toLocaleString('tr-TR') + ' TL\nKasanız: ' + kasaParasi.toLocaleString('tr-TR') + ' TL');
+                alert('Yeterli bakiyeniz yok!\nGerekli: ' + joker.fiyat.toLocaleString('tr-TR') + ' TL\nKasanız: ' + kasaParasi.toLocaleString('tr-TR') + ' TL');
                 return;
             }
             sesCal('dogru');
             kasaGuncelle(-joker.fiyat);
             jokersUsed[key] = false; // false = joker var (kullanılmadı)
             jokerButonlariniGuncelle();
-            alert('✅ ' + joker.ad + ' jokeriniz satın alındı!');
+            alert(joker.ad + ' jokeriniz satın alındı!');
             magazayiAc(); // modalı yenile
         }
 
@@ -4113,7 +4683,7 @@ body.modal-open { animation-play-state: paused; }
         window.addEventListener('online', ceviriDurumGuncelle);
         window.addEventListener('offline', ceviriDurumGuncelle);
 
-        window.onload = () => { setTimeout(() => { kategorileriYukle(); sutunSayisiBaslat(); gorunumModuBaslat(); }, 300); kasaGuncelle(0); appTemaBaslat(); karsilamaMesajiniKontrolEt(); gunlukCarkBanneriniGuncelle(); setTimeout(() => { if (!carkBugunCevrildiMi()) gunlukCarkAc(); }, 900); hizliOynaKontrolEt(); ceviriDurumGuncelle(); };
+        window.onload = () => { setTimeout(() => { kategorileriYukle(); sutunSayisiBaslat(); gorunumModuBaslat(); }, 300); kasaGuncelle(0); appTemaBaslat(); karsilamaMesajiniKontrolEt(); gunlukCarkBanneriniGuncelle(); meydanLinkKontrolEt(); setTimeout(() => { if (!carkBugunCevrildiMi() && !document.getElementById('meydan-davet-modal').style.display.includes('flex')) gunlukCarkAc(); }, 900); hizliOynaKontrolEt(); ceviriDurumGuncelle(); };
 
         // ===== KATEGORİ SÜTUN SAYISI =====
         function sutunSayisiAyarla(sayi, kaydet) {
