@@ -134,6 +134,34 @@
             position: relative;
         }
 
+        .header-quick-icons {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            display: flex;
+            gap: 8px;
+            z-index: 2;
+        }
+        .header-quick-icon-btn {
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            background: rgba(20,9,31,0.55);
+            border: 1px solid rgba(255,255,255,0.35);
+            color: #ffffff;
+            cursor: pointer;
+            font-family: inherit;
+            padding: 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .header-quick-icon-btn .icon { width: 1.2em; height: 1.2em; }
+        .header-quick-icon-btn:hover { transform: translateY(-2px); }
+        .header-quick-icon-btn:active { transform: scale(0.94); }
+        #daily-wheel-btn.header-quick-icon-btn { color: var(--app-accent, #ffd166); }
+        #daily-wheel-btn.header-quick-icon-btn .icon { animation: dwbSpinHint 3.5s ease-in-out infinite; }
+        #daily-wheel-btn.header-quick-icon-btn.done { opacity: 0.55; filter: grayscale(0.4); }
+        .header-quick-icon-oneri { color: var(--app-success, #17b978); }
+
         .logo-title-row {
             display: flex;
             align-items: center;
@@ -200,42 +228,7 @@
         }
         .welcome-banner-btn:active { transform: scale(0.96); }
 
-        /* --- HIZLI EYLEMLER SATIRI: Günlük Çark + Sana Özel, yan yana tek satır --- */
-        .quick-actions-row { display: flex; gap: 10px; margin: 6px 0 18px; }
-        .quick-action-card {
-            flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; text-align: left;
-            border-radius: 16px; padding: 11px 12px;
-            cursor: pointer; color: var(--app-text, #ffffff); font-family: inherit; border: 1px solid transparent;
-            animation: slideUpFade 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .quick-action-card:hover { transform: translateY(-2px); }
-        .quick-action-card:active { transform: scale(0.98); }
-        .qac-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .qac-text { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-        .qac-title { font-weight: 900; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .qac-sub { font-size: 0.66rem; color: var(--app-text-soft, rgba(255,255,255,0.75)); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        #daily-wheel-btn {
-            background: linear-gradient(135deg, color-mix(in oklab, var(--app-primary, #7c5cff) 20%, var(--app-surface, #1a0b3d)), color-mix(in oklab, var(--app-accent2, #ff8a3d) 16%, var(--app-surface, #1a0b3d)));
-            border-color: color-mix(in oklab, var(--app-accent, #ffd166) 45%, transparent);
-        }
-        #daily-wheel-btn:hover { box-shadow: 0 8px 20px rgba(255,138,61,0.3); }
-        #daily-wheel-btn.done { opacity: 0.55; filter: grayscale(0.4); }
-        .qac-icon { animation: dwbSpinHint 3.5s ease-in-out infinite; }
         @keyframes dwbSpinHint { 0%, 80%, 100% { transform: rotate(0deg); } 85% { transform: rotate(-12deg); } 90% { transform: rotate(12deg); } 95% { transform: rotate(-6deg); } }
-        #daily-wheel-btn .qac-title { color: var(--app-primary-dark, #ffd166); }
-        html:not([data-app-tema]) #daily-wheel-btn .qac-title,
-        html[data-app-tema="lacivert"] #daily-wheel-btn .qac-title,
-        html[data-app-tema="aurora"] #daily-wheel-btn .qac-title { color: var(--app-accent, #ffd166); }
-
-        .qac-oneri {
-            background: linear-gradient(135deg, color-mix(in oklab, var(--app-success, #17b978) 22%, var(--app-surface, #1a0b3d)), color-mix(in oklab, var(--app-primary, #7c5cff) 16%, var(--app-surface, #1a0b3d)));
-            border-color: color-mix(in oklab, var(--app-success, #17b978) 45%, transparent);
-        }
-        .qac-oneri:hover { box-shadow: 0 8px 20px rgba(23,185,120,0.3); }
-        .qac-oneri .qac-title { color: var(--app-success, #17b978); }
-
 
         .wheel-modal-content { max-width: 360px; }
         .wheel-sub-text { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin: 4px 0 18px; }
@@ -1718,6 +1711,14 @@ body.modal-open { animation-play-state: paused; }
     <div id="start-screen" class="screen active">
         <div class="glass-card">
             <div class="home-header-band">
+                <div class="header-quick-icons">
+                    <button id="daily-wheel-btn" class="header-quick-icon-btn" onclick="gunlukCarkAc()" aria-label="Günlük Bonus Çarkı">
+                        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v7.5M12 14.5V22M2 12h7.5M14.5 12H22M4.9 4.9l5.3 5.3M13.8 13.8l5.3 5.3M19.1 4.9l-5.3 5.3M10.2 13.8l-5.3 5.3"/></svg>
+                    </button>
+                    <div id="kategori-oneri-kart" class="header-quick-icon-btn header-quick-icon-oneri" style="display:none;" onclick="oneriKategoriyleBasla()" aria-label="Sana Özel">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>
+                    </div>
+                </div>
                 <div class="logo-title-row">
                     <img src="logo.png" alt="MuGöl BİLGİN Logo" class="logo-img">
                     <h1 class="logo-title">MuGöl BİLGİN</h1>
@@ -1732,22 +1733,6 @@ body.modal-open { animation-play-state: paused; }
                     <span class="welcome-banner-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-9.33-5"/><path d="M2 12l1.6-1.6a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 0 2.8 0l1.2-1.2a2 2 0 0 1 2.8 0L14 12"/><path d="M2 16l1.6-1.6a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 0 2.8 0l1.2-1.2a2 2 0 0 1 2.8 0L14 16"/><path d="M2 20l1.6-1.6a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 0 2.8 0l1.2-1.2a2 2 0 0 1 2.8 0"/></svg></span>
                     <p class="welcome-banner-text">Hoş geldin! Daha önce oynadıysan kasa, istatistik ve rozet verilerini geri yükleyebilirsin.</p>
                     <button class="welcome-banner-btn" onclick="document.getElementById('kasa-upload').click()"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Verilerimi Yükle</button>
-                </div>
-                <div class="quick-actions-row">
-                    <button id="daily-wheel-btn" class="quick-action-card" onclick="gunlukCarkAc()">
-                        <span class="qac-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v7.5M12 14.5V22M2 12h7.5M14.5 12H22M4.9 4.9l5.3 5.3M13.8 13.8l5.3 5.3M19.1 4.9l-5.3 5.3M10.2 13.8l-5.3 5.3"/></svg></span>
-                        <div class="qac-text">
-                            <span class="qac-title" id="daily-wheel-title">Günlük Çark</span>
-                            <span class="qac-sub" id="daily-wheel-sub">Dokun ve kazan!</span>
-                        </div>
-                    </button>
-                    <div id="kategori-oneri-kart" class="quick-action-card qac-oneri" style="display:none;" onclick="oneriKategoriyleBasla()">
-                        <span class="qac-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></span>
-                        <div class="qac-text">
-                            <span class="qac-title">Sana Özel</span>
-                            <span class="qac-sub" id="kategori-oneri-metin"></span>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="category-section-header">
@@ -2213,6 +2198,8 @@ body.modal-open { animation-play-state: paused; }
     <script>_kategoriDosyaKaydet('yazim-yanlislari');</script>
     <script src="sorular/futbol.js"></script>
     <script>_kategoriDosyaKaydet('futbol');</script>
+    <script src="sorular/basketbol.js"></script>
+    <script>_kategoriDosyaKaydet('basketbol');</script>
     <!-- YENİ BİR KATEGORİ EKLERSENİZ BURAYA YAZIN. Örnek: <script src="sorular/arabalar.js"></script><script>_kategoriDosyaKaydet('arabalar');</script> -->
 
     <script>
@@ -3156,7 +3143,7 @@ body.modal-open { animation-play-state: paused; }
             "Oyunlar": "🎮", "Animasyon": "🎥", "Çizgi Roman": "💥", "Şiir": "✍️",
             "Dil": "🗣️", "Kimya": "⚗️", "Fizik": "⚛️", "Biyoloji": "🧬", "Geleneklerimiz": "🪔",
             "İstanbul'a Dair": "🕌", "Osmanlı Tarihi": "🗡️", "Cümleyi Tamamla": "✏️", "Selçuklu Tarihi": "🏹",
-            "Futbol": "⚽"
+            "Futbol": "⚽", "Basketbol": "🏀"
         };
         const fallbackEmojiler = ["🎯","🌟","💡","🔑","🎪","🏆","🎭","🧪","🌈","🎲","💎","🔮"];
         function kategoriEmojiGetir(kat) {
@@ -3216,6 +3203,7 @@ body.modal-open { animation-play-state: paused; }
             "Bitkiler": "Ağaçlar, çiçekler ve doğadaki bitki türleri.",
             "Selçuklu Tarihi": "Büyük Selçuklu ve Anadolu Selçuklu devletlerinden sorular.",
             "Futbol": "Dünya Kupası, efsane futbolcular ve futbol tarihinden sorular.",
+            "Basketbol": "Milli takım, EuroLeague, NBA ve basketbol tarihinden sorular.",
             "Karışık": "Tüm kategorilerden rastgele karma sorular."
         };
         function kategoriAciklamaGetir(kat) {
@@ -3236,9 +3224,9 @@ body.modal-open { animation-play-state: paused; }
             { baslik: '🗣️ Türkçemiz', anahtar: ['edebiyat', 'türkçe', 'söz', 'şiir', 'dil', 'cümle', 'sözlük', 'lügat', 'yazım'] },
             { baslik: '🔬 Bilim & Doğa', anahtar: ['bilim', 'fizik', 'kimya', 'biyoloji', 'astronomi', 'doğa', 'canlı', 'teknoloji', 'sağlık', 'psikoloji', 'hayvan', 'bitki'] },
             { baslik: '🌍 Dünyamız', anahtar: ['coğrafya', 'başkent', 'önemli yerler', 'ülke'] },
-            { baslik: '🎬 Sanat & Eğlence', anahtar: ['sinema', 'müzik', 'sanat', 'moda', 'animasyon', 'çizgi roman', 'oyun', 'replik'] },
+            { baslik: '🎬 Sanat & Eğlence', anahtar: ['sinema', 'müzik', 'sanat', 'moda', 'animasyon', 'çizgi roman', 'oyun', 'replik', 'bilmece'] },
             { baslik: '⚽ Spor', anahtar: ['spor', 'futbol', 'basketbol', 'voleybol'] },
-            { baslik: '🚗 Ulaşım & Merak', anahtar: ['araba', 'uçak', 'gemi', 'tren', 'bilmece'] },
+            { baslik: '🚗 Ulaşım & Merak', anahtar: ['araba', 'uçak', 'gemi', 'tren'] },
         ];
         function kategoriGrubunuBul(kat) {
             let k = kat.toLocaleLowerCase('tr-TR');
@@ -3473,7 +3461,7 @@ body.modal-open { animation-play-state: paused; }
         }
 
         // ===== SANA ÖZEL KATEGORİ ÖNERİSİ =====
-        const KATEGORI_ONERI_MIN_OYUN = 2; // rastgele tek oyunla öneri yapılmasın diye eşik
+        const KATEGORI_ONERI_MIN_OYUN = 1; // rastgele tek oyunla öneri yapılmasın diye eşik
         let onerilenKategori = null;
         function kategoriOneriGuncelle(mevcutKategoriler) {
             let kart = document.getElementById('kategori-oneri-kart');
@@ -3507,6 +3495,7 @@ body.modal-open { animation-play-state: paused; }
             else if (kategori === "Tarih") gradient = "linear-gradient(-45deg, #331a00, #5c2e00, #8b4513, #1a0d00)";
             else if (kategori === "Spor") gradient = "linear-gradient(-45deg, #002200, #004d00, #001a00, #000000)";
             else if (kategori === "Futbol") gradient = "linear-gradient(-45deg, #001a00, #0d5c1e, #002b0a, #000000)";
+            else if (kategori === "Basketbol") gradient = "linear-gradient(-45deg, #331a00, #995c00, #4d2600, #000000)";
             else if (kategori === "Coğrafya") gradient = "linear-gradient(-45deg, #002626, #004d4d, #001a1a, #000000)";
             else if (kategori === "Sinema / TV") gradient = "linear-gradient(-45deg, #330000, #660000, #1a0000, #000000)";
             else if (kategori === "Din / İslamiyet") gradient = "linear-gradient(-45deg, #002b18, #004d2c, #001a0f, #000000)"; 
