@@ -2204,6 +2204,8 @@ body.modal-open { animation-play-state: paused; }
     <script>_kategoriDosyaKaydet('futbol');</script>
     <script src="sorular/basketbol.js"></script>
     <script>_kategoriDosyaKaydet('basketbol');</script>
+    <script src="sorular/kurtulus-savasi.js"></script>
+    <script>_kategoriDosyaKaydet('kurtulus-savasi');</script>
     <!-- YENİ BİR KATEGORİ EKLERSENİZ BURAYA YAZIN. Örnek: <script src="sorular/arabalar.js"></script><script>_kategoriDosyaKaydet('arabalar');</script> -->
 
     <script>
@@ -3147,7 +3149,7 @@ body.modal-open { animation-play-state: paused; }
             "Oyunlar": "🎮", "Animasyon": "🎥", "Çizgi Roman": "💥", "Şiir": "✍️",
             "Dil": "🗣️", "Kimya": "⚗️", "Fizik": "⚛️", "Biyoloji": "🧬", "Geleneklerimiz": "🪔",
             "İstanbul'a Dair": "🕌", "Osmanlı Tarihi": "🗡️", "Cümleyi Tamamla": "✏️", "Selçuklu Tarihi": "🏹",
-            "Futbol": "⚽", "Basketbol": "🏀"
+            "Futbol": "⚽", "Basketbol": "🏀", "Kurtuluş Savaşı": "🎖️"
         };
         const fallbackEmojiler = ["🎯","🌟","💡","🔑","🎪","🏆","🎭","🧪","🌈","🎲","💎","🔮"];
         function kategoriEmojiGetir(kat) {
@@ -3208,6 +3210,7 @@ body.modal-open { animation-play-state: paused; }
             "Selçuklu Tarihi": "Büyük Selçuklu ve Anadolu Selçuklu devletlerinden sorular.",
             "Futbol": "Dünya Kupası, efsane futbolcular ve futbol tarihinden sorular.",
             "Basketbol": "Milli takım, EuroLeague, NBA ve basketbol tarihinden sorular.",
+            "Kurtuluş Savaşı": "1919-1923 arası Milli Mücadele, cepheler ve Cumhuriyet'in kuruluşu.",
             "Karışık": "Tüm kategorilerden rastgele karma sorular."
         };
         function kategoriAciklamaGetir(kat) {
@@ -3224,7 +3227,7 @@ body.modal-open { animation-play-state: paused; }
         // başlığıyla birlikte yatay kaydırmalı bir sırada gösterilir.
         const KATEGORI_GRUP_KURALLARI = [
             { baslik: '🇹🇷 Türkiye\'de', anahtar: ['önemli yerler türkiye', 'istanbul', 'yöresel lezzet', 'gelenek', 'iller', 'il bilgisi', 'meşhur'] },
-            { baslik: '📜 Zaman Yolculuğu', anahtar: ['tarih', 'osmanlı', 'cumhuriyet', 'mitoloji', 'selçuklu'] },
+            { baslik: '📜 Zaman Yolculuğu', anahtar: ['tarih', 'osmanlı', 'cumhuriyet', 'mitoloji', 'selçuklu', 'kurtuluş savaşı'] },
             { baslik: '🗣️ Türkçemiz', anahtar: ['edebiyat', 'türkçe', 'söz', 'şiir', 'dil', 'cümle', 'sözlük', 'lügat', 'yazım'] },
             { baslik: '🔬 Bilim & Doğa', anahtar: ['bilim', 'fizik', 'kimya', 'biyoloji', 'astronomi', 'doğa', 'canlı', 'teknoloji', 'sağlık', 'psikoloji', 'hayvan', 'bitki'] },
             { baslik: '🌍 Dünyamız', anahtar: ['coğrafya', 'başkent', 'önemli yerler', 'ülke'] },
